@@ -8,7 +8,7 @@ interface Props{}
 
 const Authentication: React.FC<Props> = () => {
     return(
-        <>
+        <div className={`flex justify-between`}>
             <Switch>
             <Route path="/login" exact>
                 <LogIn />
@@ -18,7 +18,7 @@ const Authentication: React.FC<Props> = () => {
             </Route>
             </Switch>
             <AuthHeroSection />
-        </>
+        </div>
     )
 };
 

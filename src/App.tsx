@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AppContainer from "./Components/AppContainer";
 import Authentication from "./Components/Authentication";
 import SignIn from "./Components/SignIn";
@@ -10,14 +10,17 @@ const App: React.FC<Props> = () => {
     return(
       <BrowserRouter>
         <Switch>
+          <Route path="/" exact>
+            <Redirect to="/signin"></Redirect>
+          </Route>
           <Route path={["/login", "/signin"]} exact>
             <Authentication />
           </Route>
-          <Route path="/home" exact>
+          <Route path={["/home", "/lecture"]} exact>
             <AppContainer />
           </Route>
           <Route>
-            <SignIn />
+            <Redirect to="/signin"></Redirect>
           </Route>
         </Switch>
       </BrowserRouter>        
