@@ -11,16 +11,16 @@ const App: React.FC<Props> = () => {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/signin"></Redirect>
+            <Redirect to="/login"></Redirect>
           </Route>
-          <Route path={["/login", "/signin"]} exact>
+          <Route path={["/login", "/signup"]} exact>
             <Authentication />
           </Route>
           <Route path={["/home", "/lecture"]} exact>
             <AppContainer />
           </Route>
           <Route>
-            <Redirect to="/signin"></Redirect>
+            <Redirect to="/login"></Redirect>
           </Route>
         </Switch>
       </BrowserRouter>        

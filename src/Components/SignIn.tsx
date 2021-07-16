@@ -5,11 +5,9 @@ interface Props{}
 
 const SignIn: React.FC<Props> = () => {
     return(
-        <>
-           <h1>this is signin page</h1>   
-           <h1 className={`mt-4`}><span>Already have a account..</span><Link to="/login" className={`text-green-700`}>Click here</Link> </h1>      
-      
-        </>
+        <div className={`w-1/2 lg:w-full`}>
+            this is signin page
+        </div>
     )
 };
 
