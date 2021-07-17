@@ -1,11 +1,16 @@
 import React from "react";
 import { useState } from "react";
+import { FaLock, FaSpinner, } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import * as yup from "yup"
+import {  useFormik } from "formik"
+import Input from "./Input"
+import { IoMdMail } from "react-icons/io";
 
 interface Props{}
 
 const LogIn: React.FC<Props> = () => {
-    const [userData, setUserData] = useState({email: "", password: ""});
+    /* const [userData, setUserData] = useState({email: "", password: ""});
     const userDataHandeler = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setUserData({...userData, [e.target.name]: e.target.value})
     }
@@ -31,14 +36,28 @@ const LogIn: React.FC<Props> = () => {
         }else if(userData.password.length < 8){
             passwordError = "Password must contain at least 8 character"
         }
-    }
+    }*/
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: yup.object().shape({
+            email: yup.string().required().email(),
+            password: yup.string().required().min(8)
+        }),
+        onSubmit: () =>{
+            window.location.pathname = "/home"
+        }
+    });
+
     return(
-        <div className={`w-1/2 lg:w-full lg:static relative`}>
-            <div className={`absolute max-w-xl transform top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2`}>
-                <h1 className={`text-4xl mb-2`}>
+        <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center items-center`}>
+            <div className={`max-w-md`}>
+                <h1 className={`text-4xl mb-4`}>
                     <span>Log In to </span>
                     <span className={`font-semibold text-primary-main`}>CORK</span>
                 </h1>
@@ -46,46 +65,35 @@ const LogIn: React.FC<Props> = () => {
                     <span>New Here? </span>
                     <Link to="/signup" className={`text-primary-main underline`}>Create an account</Link>
                 </p>
-                <form onSubmit={(e) =>{
-                        e.preventDefault()
-                        if((emailError || passwordError)){
-                            return
-                        }
-                        window.location.pathname = "/home"
-                    }}>
-                    {/* user name */}
-                    <div className={`pt-3 pb-7 mb-6 relative`}>
-                        <label htmlFor="" className={`sr-only`}>Enter your Username</label>
-                        <input 
-                            className={`w-full pl-9 pb-2 border-b border-gray-200 focus:outline-none focus:border-primary-main`} 
-                            type="email" 
-                            name="email"
-                            autoComplete="email"
-                            placeholder="Enter Your E-mail"
-                            value={userData.email}
-                            onChange={userDataHandeler}
-                            onBlur={blurHandler}
-                        />
-                        <div className={`absolute bottom-0 text-red-600 left-9`}>{emailError}</div>
-                    </div>
-                    
-                    {/* password */}
-                    <div className={`pt-3 pb-7 mb-6 relative`}>
-                        <label htmlFor="" className={`sr-only`}>Enter your password</label>
-                        <input 
-                            className={`w-full pl-9 pb-2 border-b border-gray-200 focus:outline-none focus:border-primary-main`} 
-                            type={(isPasswordVisible ? "text":"password")} 
-                            name="password"
-                            autoComplete="current-password"
-                            placeholder="Password" 
-                            value={userData.password}
-                            onChange={userDataHandeler}
-                            onBlur={blurHandler}
-                        />
-                        <div className={`absolute bottom-0 text-red-600 left-9`}>{passwordError}</div>
-                    </div>
+
+                <form onSubmit={formik.handleSubmit}>
+                    <Input 
+                        type="email"
+                        autoComplete="email"
+                        placeholder="Enter Your E-mail"
+                        required
+                        {...formik.getFieldProps("email")}
+                        touched={formik.touched.email}
+                        error={formik.errors.email}
+                        className="mb-6"
+                    >
+                        <IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>
+                    </Input>
+                    <Input 
+                        type="password"
+                        autoComplete="current-password"
+                        placeholder="password"
+                        required
+                        {...formik.getFieldProps("password")}
+                        touched={formik.touched.password}
+                        error={formik.errors.password}
+                        className="mb-6"
+                    >
+                        <FaLock className={`w-5 h-5 text-primary-main`}></FaLock>
+                    </Input>
+
                     <div className={`flex justify-between items-center vsm:flex-col vsm:items-start`}>
-                        <div className={`flex text-sm items-baseline justify-start mr-40`}>
+                        <div className={`flex text-sm items-baseline justify-start`}>
                             <p className={`mr-2 min-w-max vsm:mb-8`}>Show Password</p>
                             <label htmlFor="">
                                 <input type="checkbox" onClick={() =>{setIsPasswordVisible(!isPasswordVisible)}}/>
@@ -100,6 +108,10 @@ const LogIn: React.FC<Props> = () => {
                         </button>
                     </div>
                 </form>
+
+            </div>
+            <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black bg-opacity-70 flex items-center justify-around ${formik.isSubmitting ? "block":"hidden"}`}>
+                <FaSpinner className={`w-8 h-8 text-white animate-spin`}></FaSpinner> 
             </div>
         </div>
     )
@@ -107,6 +119,6 @@ const LogIn: React.FC<Props> = () => {
 
 LogIn.defaultProps = {
     
-}
+};
 
-export default React.memo(LogIn);
+export default React.memo(LogIn)

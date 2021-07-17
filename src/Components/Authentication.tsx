@@ -6,10 +6,11 @@ import SignIn from "./SignIn";
 import {FaSpinner} from "react-icons/fa"
 import { useState } from "react";
 
-interface Props{}
+interface Props{
+
+}
 
 const Authentication: React.FC<Props> = () => {
-    /* const [hidden, setHidden] = useState(true) */
     return(
         <>
             <div className={`flex justify-between`}>
@@ -23,9 +24,6 @@ const Authentication: React.FC<Props> = () => {
                 </Switch>
                 <AuthHeroSection />
             </div>
-            {/* <div className={`absolute w-full h-screen bg-black bg-opacity-40 flex items-center justify-around ${(hidden ? "hidden":"block")}`}>
-                <FaSpinner className={` w-16 h-16 animate-spin`}></FaSpinner>
-            </div> */}
         </>
     )
 };

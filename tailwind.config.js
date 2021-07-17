@@ -28,6 +28,10 @@ module.exports = {
         '8xl': '90rem'
       },
 
+      minWidth: {
+        '5': '20rem'
+       },
+
       backgroundImage: theme => ({
         'authHero': "url('/src/img/shield-1086703_960_720.webp')",
        }),
