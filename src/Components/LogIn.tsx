@@ -80,7 +80,7 @@ const LogIn: React.FC<Props> = () => {
                         <IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>
                     </Input>
                     <Input 
-                        type="password"
+                        type={(isPasswordVisible ? "text":"password")}
                         autoComplete="current-password"
                         placeholder="password"
                         required

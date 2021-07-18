@@ -64,7 +64,7 @@ const SignIn: React.FC<Props> = () => {
                         <IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>
                     </Input>
                     <Input 
-                        type="password"
+                        type={(isPasswordVisible ? "text":"password")}
                         placeholder="Password"
                         autoComplete="new-password"
                         required
@@ -89,7 +89,7 @@ const SignIn: React.FC<Props> = () => {
                         <div className={`flex text-sm items-baseline justify-start`}>
                             <p className={`mr-2 min-w-max vsm:mb-8`}>Show Password</p>
                             <label htmlFor="">
-                                <input onClick={() =>{setIsPasswordVisible(!isPasswordVisible)}}/>
+                                <input type="checkbox" onClick={() =>{setIsPasswordVisible(!isPasswordVisible)}}/>
                                 <span></span>
                             </label>
                         </div>
