@@ -4,7 +4,7 @@ import { FaLock, FaSpinner, } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import * as yup from "yup"
 import {  useFormik } from "formik"
-import Input from "./Input"
+import Input from "./Input/Input"
 import { IoMdMail } from "react-icons/io";
 
 interface Props{}
@@ -50,7 +50,9 @@ const LogIn: React.FC<Props> = () => {
             password: yup.string().required().min(8)
         }),
         onSubmit: () =>{
-            window.location.pathname = "/home"
+            setTimeout(() =>{
+                window.location.pathname = "/home"
+            }, 2000)
         }
     });
 
@@ -76,9 +78,8 @@ const LogIn: React.FC<Props> = () => {
                         touched={formik.touched.email}
                         error={formik.errors.email}
                         className="mb-6"
-                    >
-                        <IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>
-                    </Input>
+                        Icon={<IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>}
+                    />
                     <Input 
                         type={(isPasswordVisible ? "text":"password")}
                         autoComplete="current-password"
@@ -88,9 +89,8 @@ const LogIn: React.FC<Props> = () => {
                         touched={formik.touched.password}
                         error={formik.errors.password}
                         className="mb-6"
-                    >
-                        <FaLock className={`w-5 h-5 text-primary-main`}></FaLock>
-                    </Input>
+                        Icon={<FaLock className={`w-5 h-5 text-primary-main`}></FaLock>}
+                    />
 
                     <div className={`flex justify-between items-center vsm:flex-col vsm:items-start`}>
                         <div className={`flex text-sm items-baseline justify-start`}>
@@ -110,7 +110,7 @@ const LogIn: React.FC<Props> = () => {
                 </form>
 
             </div>
-            <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black bg-opacity-70 flex items-center justify-around ${formik.isSubmitting ? "block":"hidden"}`}>
+            <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black-dark bg-opacity-70 flex items-center justify-around ${formik.isSubmitting ? "block":"hidden"}`}>
                 <FaSpinner className={`w-8 h-8 text-white animate-spin`}></FaSpinner> 
             </div>
         </div>

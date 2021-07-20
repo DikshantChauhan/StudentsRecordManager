@@ -2,13 +2,13 @@ import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AppContainer from "./Components/AppContainer";
 import Authentication from "./Components/Authentication";
-import SignIn from "./Components/SignIn";
 
 interface Props{}
 
 const App: React.FC<Props> = () => {
     return(
-      <BrowserRouter>
+      <div className={`font-sans`}>
+        <BrowserRouter>
         <Switch>
           <Route path="/" exact>
             <Redirect to="/login"></Redirect>
@@ -23,7 +23,8 @@ const App: React.FC<Props> = () => {
             <Redirect to="/login"></Redirect>
           </Route>
         </Switch>
-      </BrowserRouter>        
+      </BrowserRouter> 
+      </div>       
     );
 };
 

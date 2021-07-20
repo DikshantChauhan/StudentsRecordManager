@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup"
-import Input from "./Input";
+import Input from "./Input/Input";
 import {IoMdMail} from "react-icons/io"
 import { FaLock, FaSpinner, FaUserAlt } from "react-icons/fa";
 
@@ -23,7 +23,9 @@ const SignIn: React.FC<Props> = () => {
             checkbox: yup.boolean().required()
         }), 
         onSubmit: () =>{
-            window.location.pathname = "/home"
+            setTimeout(() =>{
+                window.location.pathname = "/home"
+            }, 2000)
         }
     })
 
@@ -48,9 +50,8 @@ const SignIn: React.FC<Props> = () => {
                         touched={formik.touched.username}
                         error={formik.errors.username}
                         className="mb-6"
-                    >
-                        <FaUserAlt className={`w-5 h-5 text-primary-main`}></FaUserAlt>
-                    </Input>
+                        Icon={<FaUserAlt className={`w-5 h-5 text-primary-main`}></FaUserAlt>}
+                    />
                     <Input 
                         type="email"
                         placeholder="Enter your e-mail"
@@ -60,9 +61,8 @@ const SignIn: React.FC<Props> = () => {
                         touched={formik.touched.email}
                         error={formik.errors.email}
                         className="mb-6"
-                    >
-                        <IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>
-                    </Input>
+                        Icon={<IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>}
+                    />
                     <Input 
                         type={(isPasswordVisible ? "text":"password")}
                         placeholder="Password"
@@ -72,9 +72,8 @@ const SignIn: React.FC<Props> = () => {
                         touched={formik.touched.password}
                         error={formik.errors.password}
                         className="mb-6"
-                    >
-                        <FaLock className={`w-5 h-5 text-primary-main`}></FaLock>
-                    </Input>
+                        Icon={<FaLock className={`w-5 h-5 text-primary-main`}></FaLock>}
+                    />
 
                     <div className={`flex items-center flex-row-reverse justify-end mb-8`}>
                         <p className={`ml-2`}><span>I agree to the</span> <span className={`text-primary-main underline`}>terms and conditions</span></p>
@@ -102,7 +101,7 @@ const SignIn: React.FC<Props> = () => {
                     </div>
                 </form>
             </div>
-            <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black bg-opacity-70 flex items-center justify-around ${formik.isSubmitting ? "block":"hidden"}`}>
+            <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black-dark bg-opacity-70 flex items-center justify-around ${formik.isSubmitting ? "block":"hidden"}`}>
                 <FaSpinner className={`w-8 h-8 text-white animate-spin`}></FaSpinner> 
             </div>
         </div>

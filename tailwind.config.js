@@ -17,10 +17,20 @@ module.exports = {
       primary: {
         'main': '#4361ee'
       },
-      black: colors.black,
+      black: {
+        'dark': colors.black,
+        'light': '#0e1726'
+      },
       white: colors.white,
       gray: colors.gray,
       red: colors.red,
+      green: colors.green,
+      yellow: colors.yellow,
+      blue: colors.blue,
+    },
+
+    fontFamily: {
+      'sans': ['Nunito', 'sans-serif']
     },
 
     extend: {
