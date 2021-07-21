@@ -3,12 +3,12 @@ import { useState } from "react";
 import { MdCancel } from "react-icons/all"
 
 interface Props{
-    theme?: "Primary" | "Info" | "Warning" | "Success" | "ErrorRed" | "ErrorBlack"
-    childrenn: string;
+    theme: "Primary" | "Info" | "Warning" | "Success" | "ErrorRed" | "ErrorBlack"
+    children: string;
     className?: string;
 }
 
-const Alert: React.FC<Props> = ({childrenn, className, theme}) => {
+const Alert: React.FC<Props> = ({children, className, theme}) => {
     let themeClass: string;
     if(theme === "ErrorBlack"){
         themeClass = "text-gray-600 bg-gray-300";
@@ -33,15 +33,13 @@ const Alert: React.FC<Props> = ({childrenn, className, theme}) => {
 
     return(
         <div className={`flex p-4 rounded-md justify-between font-medium ${className} ${themeClass!} ${isHidden ? "hidden":""}`}>
-            <p className={`text-sm mr-4`}>{childrenn}</p>
+            <p className={`text-sm mr-4`}>{children}</p>
             <button type="button" onClick={() =>{setIsHidden(true)}}><MdCancel className={`w-6 h-6`}></MdCancel></button>        
         </div>
     )
 };
 
 Alert.defaultProps = {
-    theme: "ErrorRed",
-    childrenn: "Error! Lorem Ipsum is simply dummy text of the printing."
 }
 
 export default React.memo(Alert);

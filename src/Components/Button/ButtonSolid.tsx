@@ -1,12 +1,12 @@
 import React from "react";
 
 interface Props{
-    childrenn: string;
+    children: string;
     theme: "blue" | "black" | "red";
     className?: string
 }
 
-const ButtonSolid: React.FC<Props> = ({childrenn, theme, className}) => {
+const ButtonSolid: React.FC<Props> = ({children, theme, className}) => {
     let themeClass: string;
     if(theme === "blue"){
         themeClass = "bg-primary-main"
@@ -20,14 +20,12 @@ const ButtonSolid: React.FC<Props> = ({childrenn, theme, className}) => {
 
     return(
         <button className={`px-6 py-2 text-white rounded-md min-w-max ${themeClass!} ${className}`}>
-            {childrenn}  
+            {children}  
         </button>
     )
 };
 
 ButtonSolid.defaultProps = {
-    theme: "blue",
-    childrenn: "Button"
 };
 
 export default React.memo(ButtonSolid);

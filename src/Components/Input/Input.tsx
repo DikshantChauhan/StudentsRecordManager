@@ -1,5 +1,4 @@
 import React from "react";
-import { IoMdMail } from "react-icons/io";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement>{
    className?: string;
@@ -22,8 +21,8 @@ const Input: React.FC<Props> = ({className, Icon, touched, error, ...rest}) => {
 };
 
 Input.defaultProps = {
-    placeholder: "Username",
-    Icon: <IoMdMail className={`w-5 h-5 text-primary-main`}></IoMdMail>,
+    
 }
 
 export default React.memo(Input);
+

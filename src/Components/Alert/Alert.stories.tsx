@@ -1,5 +1,3 @@
-// Button.stories.ts | Button.stories.tsx
-
 import "../../index.css"
 
 import { Meta } from '@storybook/react';
@@ -16,3 +14,8 @@ export const main = (args: any) => {
         <Alert {...args}></Alert>
     )
 };
+
+main.args = {
+  theme: "ErrorRed",
+  children: "Error! Lorem Ipsum is simply dummy text of the printing.",
+}

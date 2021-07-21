@@ -1,5 +1,4 @@
 import React from "react";
-import imgage from "../../img/profile-12.jpg"
 
 interface Props{
     img: string;
@@ -27,8 +26,6 @@ const AvatarOffline: React.FC<Props> = ({img, theme, className}) => {
 };
 
 AvatarOffline.defaultProps = {
-    img: imgage,
-    theme: "medium"
 }
 
 export default React.memo(AvatarOffline);

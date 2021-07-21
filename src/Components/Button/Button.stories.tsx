@@ -12,3 +12,13 @@ export default {
 
 export const outline = (args: any) => <Button {...args}></Button>;
 export const solid = (args: any) => <ButtonSolid {...args}></ButtonSolid>;
+
+
+outline.args = {
+  theme: "blue",
+  children: "Button",
+}
+solid.args = {
+  theme: "blue",
+  children: "Button",
+}

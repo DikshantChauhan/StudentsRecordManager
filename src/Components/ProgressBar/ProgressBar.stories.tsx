@@ -10,3 +10,8 @@ export default {
 } as Meta;
 
 export const main = (args: any) => <ProgressBar {...args}></ProgressBar>;
+
+main.args = {
+  theme: "primary",
+  progress: "50"
+}

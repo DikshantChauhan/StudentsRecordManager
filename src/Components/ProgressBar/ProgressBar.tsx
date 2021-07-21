@@ -27,7 +27,7 @@ const ProgressBar: React.FC<Props> = ({progress, className, theme}) => {
 };
 
 ProgressBar.defaultProps = {
-    theme: "primary",
+    
 }
 
 export default React.memo(ProgressBar);

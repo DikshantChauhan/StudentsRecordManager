@@ -1,6 +1,5 @@
 import React from "react";
 import { IoMdRadioButtonOff } from "react-icons/io";
-import imgage from "../../img/profile-12.jpg"
 
 interface Props{
     img: string;
@@ -29,8 +28,6 @@ const AvatarOnline: React.FC<Props> = ({img, theme, className}) => {
 };
 
 AvatarOnline.defaultProps = {
-    img: imgage,
-    theme: "medium"
 }
 
 export default React.memo(AvatarOnline);
