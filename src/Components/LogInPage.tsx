@@ -1,61 +1,79 @@
-import { useFormik } from "formik";
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { FaLock, FaSpinner, } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import * as yup from "yup"
-import Input from "./Input/Input";
-import {IoMdMail} from "react-icons/io"
-import { FaLock, FaSpinner, FaUserAlt } from "react-icons/fa";
+import {  useFormik } from "formik"
+import Input from "./Input/Input"
+import { IoMdMail } from "react-icons/io";
+import { Login } from "./Login";
 
 interface Props{}
 
-const SignIn: React.FC<Props> = () => {
-    const formik = useFormik({
-        initialValues: {
-            username: "",
-            email: "",
-            password: "",
-            checkbox: false
-        },
-        validationSchema: yup.object().shape({
-            username: yup.string().required().min(4),
-            email: yup.string().required().email(),
-            password: yup.string().required().min(8),
-            checkbox: yup.boolean().required()
-        }), 
-        onSubmit: () =>{
-            setTimeout(() =>{
-                window.location.pathname = "/home"
-            }, 2000)
+const LogIn: React.FC<Props> = () => {
+    /* const [userData, setUserData] = useState({email: "", password: ""});
+    const userDataHandeler = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        setUserData({...userData, [e.target.name]: e.target.value})
+    }
+
+    const [blur, setBlur] = useState({email: false, password: false})
+    const blurHandler = (e: React.FocusEvent<HTMLInputElement>) =>{
+        setBlur({...blur, [e.target.name]: true})
+    }
+
+    let emailError = ""
+    if(blur.email === true){
+        if(userData.email === ""){
+            emailError = "E-mail field can not be empty"
+        }else if(!(userData.email.endsWith("@gmail.com"))){
+            emailError = "E-mail must ends with @gmail.com"
         }
-    })
+    }
+
+    let passwordError = ""
+    if(blur.password === true){
+        if(userData.password === ""){
+            passwordError = "Password field can not be empty"
+        }else if(userData.password.length < 8){
+            passwordError = "Password must contain at least 8 character"
+        }
+    }*/
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: yup.object().shape({
+            email: yup.string().required().email(),
+            password: yup.string().required().min(8)
+        }),
+        onSubmit: (data) =>{
+            Login(data).then(() =>{
+                window.location.pathname = "/home"
+            })
+        }
+    });
 
     return(
         <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center items-center`}>
             <div className={`max-w-md`}>
-                <h1 className={`text-4xl mb-4`}>Get started with a free account</h1>
+                <h1 className={`text-4xl mb-4`}>
+                    <span>Log In to </span>
+                    <span className={`font-semibold text-primary-main`}>CORK</span>
+                </h1>
                 <p className={`text-sm mb-12`}>
-                    <span>Already have an account? </span>
-                    <Link to="/login" className={`text-primary-main underline`}>Log in</Link>
+                    <span>New Here? </span>
+                    <Link to="/signup" className={`text-primary-main underline`}>Create an account</Link>
                 </p>
 
                 <form onSubmit={formik.handleSubmit}>
                     <Input 
-                        type="text"
-                        placeholder="Username"
-                        autoComplete="username"
-                        required
-                        {...formik.getFieldProps("username")}
-                        touched={formik.touched.username}
-                        error={formik.errors.username}
-                        className="mb-6"
-                        Icon={FaUserAlt}
-                    />
-                    <Input 
                         type="email"
-                        placeholder="Enter your e-mail"
                         autoComplete="email"
+                        placeholder="Enter Your E-mail"
                         required
                         {...formik.getFieldProps("email")}
                         touched={formik.touched.email}
@@ -65,8 +83,8 @@ const SignIn: React.FC<Props> = () => {
                     />
                     <Input 
                         type={(isPasswordVisible ? "text":"password")}
-                        placeholder="Password"
-                        autoComplete="new-password"
+                        autoComplete="current-password"
+                        placeholder="password"
                         required
                         {...formik.getFieldProps("password")}
                         touched={formik.touched.password}
@@ -74,15 +92,6 @@ const SignIn: React.FC<Props> = () => {
                         className="mb-6"
                         Icon={FaLock}
                     />
-
-                    <div className={`flex items-center flex-row-reverse justify-end mb-8`}>
-                        <p className={`ml-2`}><span>I agree to the</span> <span className={`text-primary-main underline`}>terms and conditions</span></p>
-                        <input 
-                            type="checkbox"
-                            required
-                            {...formik.getFieldProps("checkbox")}
-                        />                    
-                    </div>
 
                     <div className={`flex justify-between items-center vsm:flex-col vsm:items-start`}>
                         <div className={`flex text-sm items-baseline justify-start`}>
@@ -96,20 +105,21 @@ const SignIn: React.FC<Props> = () => {
                             className={`text-sm min-w-max text-white shadow-button bg-primary-main py-2 px-5 rounded-md`} 
                             type="submit"
                         >
-                            Get Started!
+                            Log In
                         </button>
                     </div>
                 </form>
+
             </div>
-            <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black-dark bg-opacity-70 flex items-center justify-around ${formik.isSubmitting ? "block":"hidden"}`}>
+            {formik.isSubmitting && <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black-dark bg-opacity-70 flex items-center justify-around`}>
                 <FaSpinner className={`w-8 h-8 text-white animate-spin`}></FaSpinner> 
-            </div>
+            </div>}
         </div>
     )
 };
 
-SignIn.defaultProps = {
+LogIn.defaultProps = {
     
-}
+};
 
-export default React.memo(SignIn);
+export default React.memo(LogIn)

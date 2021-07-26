@@ -1,23 +1,33 @@
 import "../../index.css";
 import { Meta } from '@storybook/react';
 
-import Avatar from './AvatarOnline';
-import AvatarOffline from './AvatarOffline';
-import image from "../../img/profile-12.jpg"
+import Avatar from './Avatar';
+import image1 from "../../img/profile-12.jpg"
+import image2 from "../../img/shield-1086703_960_720.webp"
 
 export default {
-  component: AvatarOffline,
-  title: 'Components/Avatar',
+  component: Avatar,
+  title: 'Components/Avatars',
+  argTypes: {
+    variant: {
+        options: ["default", "online", "offline"],
+        control: { type: "inline-radio" }
+    },
+    theme: {
+      options: ["large", "medium", "small", "varySmall"],
+      control: { type: "inline-radio"}
+    },
+    img: {
+      options: [image1, image2],
+      control: { type: "select"}
+    }
+  }
 } as Meta;
 
-export const online = (args: any) => <Avatar {...args}></Avatar>;
-export const offline = (args: any) => <AvatarOffline {...args}></AvatarOffline>;
+export const avatar_ = (args: any) => <Avatar {...args}></Avatar>;
 
-offline.args ={
+avatar_.args ={
   theme: "large",
-  img: image,
-}
-online.args ={
-  theme: "large",
-  img: image,
-}
+  variant: "default",
+  img: image1,
+};

@@ -2,16 +2,18 @@ import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AppContainer from "./Components/AppContainer";
 import Authentication from "./Components/Authentication";
+import { LS_LOGIN_TOKEN } from "./Components/Login";
 
 interface Props{}
 
 const App: React.FC<Props> = () => {
+  const token = localStorage.getItem(LS_LOGIN_TOKEN)
     return(
       <div className={`font-sans`}>
         <BrowserRouter>
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/login"></Redirect>
+            {token ? <Redirect to="/home"></Redirect>:<Redirect to="/login"></Redirect>}
           </Route>
           <Route path={["/login", "/signup"]} exact>
             <Authentication />

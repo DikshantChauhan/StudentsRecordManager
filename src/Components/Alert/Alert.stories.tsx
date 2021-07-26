@@ -7,6 +7,11 @@ import Alert from './Alert';
 export default {
   component: Alert,
   title: 'Components/PopUp',
+  argTypes: {
+    theme: {
+      control: {type: "inline-radio"}
+    }
+  }
 } as Meta;
 
 export const main = (args: any) => {

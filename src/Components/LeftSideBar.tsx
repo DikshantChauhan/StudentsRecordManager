@@ -4,11 +4,12 @@ import { BiChevronDown } from "react-icons/bi";
 
 interface Props{
     children: any[];
+    className?: string
 }
 
-const LeftSideBar: React.FC<Props> = ({children}) => {
+const LeftSideBar: React.FC<Props> = ({children, className}) => {
     return(
-        <nav className={`border-r-2 border-gray-300 h-screen px-6 pt-5`}>
+        <nav className={`border-r-2 border-gray-300 px-6 pt-5 ${className}`}>
             {children.map((item, index: number) =>{
 
                 const handelMenu = (e: any) =>{

@@ -8,6 +8,12 @@ import ButtonSolid from './ButtonSolid';
 export default {
   component: Button,
   title: 'Components/Button',
+  argTypes: {
+    theme: {
+      control: {type: "inline-radio"},
+      options: ["blue", "black", "red"]
+    }
+  }
 } as Meta;
 
 export const outline = (args: any) => <Button {...args}></Button>;

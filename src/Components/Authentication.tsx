@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AuthHeroSection from "./AuthHeroSection";
-import LogIn from "./LogIn";
+import LogIn from "./LogInPage";
 import SignIn from "./SignIn";
 import {FaSpinner} from "react-icons/fa"
 import { useState } from "react";
