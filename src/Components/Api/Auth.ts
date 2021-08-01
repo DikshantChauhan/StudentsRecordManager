@@ -2,17 +2,17 @@ import axios from "axios";
 import { User } from "../Models/User";
 import { LS_LOGIN_TOKEN } from "./Base";
 
-interface LoginData{
-    email: string
-    password: string
-}
-
 interface LoginResponse {
     data: {
         is_2fa_enabled: boolean;
     };
     token: string,
     user: User,
+}
+
+export interface LoginData{
+    email: string
+    password: string
 }
 
 export const Login = (data: LoginData) => {

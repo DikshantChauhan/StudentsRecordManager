@@ -6,14 +6,15 @@ import * as yup from "yup"
 import {  useFormik } from "formik"
 import Input from "../Input/Input"
 import { IoMdMail } from "react-icons/io";
-import { useContext } from "react";
-import AppContext from "../../App.context";
 import { Login } from "../Api/Auth";
+import { useDispatch } from "react-redux";
 
 interface Props{
 }
 
 const LogIn: React.FC<Props> = () => {
+
+
     /* const [userData, setUserData] = useState({email: "", password: ""});
     const userDataHandeler = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setUserData({...userData, [e.target.name]: e.target.value})
@@ -42,10 +43,9 @@ const LogIn: React.FC<Props> = () => {
         }
     }*/
 
-    const { setUser } = useContext(AppContext)
-
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     let history = useHistory()
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -58,7 +58,7 @@ const LogIn: React.FC<Props> = () => {
         }),
         onSubmit: (data) =>{
             Login(data).then((u) =>{
-                setUser(u)
+                dispatch({type: "me/login", payload: u})
                 history.push("/home")
             })
         }

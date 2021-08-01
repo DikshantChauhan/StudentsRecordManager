@@ -11,7 +11,7 @@ export interface AppState {
 const initialState: AppState ={
     me: undefined,
     groups: [],
-    isSideBarOpen: true
+    isSideBarOpen: true,
 }
 
 const reducer: Reducer<AppState> = (currentState = initialState, dispatchedAction: AnyAction) =>{
