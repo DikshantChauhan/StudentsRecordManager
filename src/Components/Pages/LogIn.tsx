@@ -1,14 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { FaLock, FaSpinner, } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup"
 import {  useFormik } from "formik"
-import Input from "./Input/Input"
+import Input from "../Input/Input"
 import { IoMdMail } from "react-icons/io";
-import { Login } from "./Login";
+import { useContext } from "react";
+import AppContext from "../../App.context";
+import { Login } from "../Api/Auth";
 
-interface Props{}
+interface Props{
+}
 
 const LogIn: React.FC<Props> = () => {
     /* const [userData, setUserData] = useState({email: "", password: ""});
@@ -39,7 +42,10 @@ const LogIn: React.FC<Props> = () => {
         }
     }*/
 
+    const { setUser } = useContext(AppContext)
+
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+    let history = useHistory()
 
     const formik = useFormik({
         initialValues: {
@@ -51,14 +57,15 @@ const LogIn: React.FC<Props> = () => {
             password: yup.string().required().min(8)
         }),
         onSubmit: (data) =>{
-            Login(data).then(() =>{
-                window.location.pathname = "/home"
+            Login(data).then((u) =>{
+                setUser(u)
+                history.push("/home")
             })
         }
     });
 
     return(
-        <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center items-center`}>
+        <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center items-center bg-white`}>
             <div className={`max-w-md`}>
                 <h1 className={`text-4xl mb-4`}>
                     <span>Log In to </span>

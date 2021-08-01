@@ -1,12 +1,12 @@
 import React from "react";
 
-interface Props{
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     children: string;
     theme: "blue" | "black" | "red";
     className?: string
 }
 
-const ButtonSolid: React.FC<Props> = ({children, theme, className}) => {
+const ButtonSolid: React.FC<Props> = ({children, theme, className, ...rest}) => {
     let themeClass: string;
     if(theme === "blue"){
         themeClass = "bg-primary-main"
@@ -19,7 +19,7 @@ const ButtonSolid: React.FC<Props> = ({children, theme, className}) => {
     }
 
     return(
-        <button className={`px-6 py-2 text-white rounded-md min-w-max ${themeClass!} ${className}`}>
+        <button className={`px-6 py-2 text-white rounded-md min-w-max ${themeClass!} ${className}`} {...rest}>
             {children}  
         </button>
     )

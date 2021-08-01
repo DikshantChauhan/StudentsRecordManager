@@ -60,3 +60,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+//Generate URL of the current state. Generate code for an 'Edit Button' which will redirect to the current state

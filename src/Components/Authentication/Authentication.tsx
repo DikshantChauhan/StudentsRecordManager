@@ -1,13 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AuthHeroSection from "./AuthHeroSection";
-import LogIn from "./LogInPage";
-import SignIn from "./SignIn";
-import {FaSpinner} from "react-icons/fa"
-import { useState } from "react";
+import LogIn from "../Pages/LogIn";
+import SignIn from "../Models/SignIn";
 
 interface Props{
-
 }
 
 const Authentication: React.FC<Props> = () => {

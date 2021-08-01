@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup"
-import Input from "./Input/Input";
+import Input from "../Input/Input";
 import {IoMdMail} from "react-icons/io"
 import { FaLock, FaSpinner, FaUserAlt } from "react-icons/fa";
 
@@ -32,7 +32,7 @@ const SignIn: React.FC<Props> = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
     return(
-        <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center items-center`}>
+        <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center bg-white items-center`}>
             <div className={`max-w-md`}>
                 <h1 className={`text-4xl mb-4`}>Get started with a free account</h1>
                 <p className={`text-sm mb-12`}>

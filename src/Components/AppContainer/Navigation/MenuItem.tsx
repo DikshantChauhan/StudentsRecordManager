@@ -1,14 +1,17 @@
 import React from "react";
+import { BsDot } from "react-icons/bs";
 
 interface Props{
     title: JSX.Element | string;
-    children?: any;
+    children?: any[];
     icon: any
 }
 
-const MenuItem: React.FC<Props> = ({title, children, icon}) => {
+const MenuItem: React.FC<Props> = ({children, title, icon}) => {
     return(
-        <></>
+        <>
+           
+        </>
     )
 };
 
