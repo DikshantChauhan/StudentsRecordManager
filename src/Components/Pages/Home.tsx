@@ -1,25 +1,26 @@
 import React from "react";
-import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AvatarOnline from "../Avatar/Avatar"
 import image from "../../img/profile-12.jpg"
 import { fetchGroups } from "../Api/Groups";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../store";
-import { Group } from "../Models/Group";
+import { useAppSelector } from "../../store";
+import { groupsAction } from "../../actions/groups.action";
 
 interface Props{
 }
 
 const Home: React.FC<Props> = () => {
-    const users = useSelector<AppState, Group[]>((state) => state.groups)
-    const dispatch = useDispatch()
-    const [searchKey, setSearchKey] = useState("")
+    const searchKey = useAppSelector((state) => state.groups.query)
+    const groups = useAppSelector((state) => {
+        const groupsIds = state.groups.queryMap[state.groups.query] || []
+        const groups = groupsIds.map((id) => state.groups.groups[id])
+        return groups
+    })
 
     useEffect(() =>{
         fetchGroups({ status: "all-groups", query: searchKey }).then((response) =>{
-            dispatch({type: "groups", payload: response})
+            groupsAction.queryFinished(response)
         })
     }, [searchKey])
 
@@ -29,9 +30,9 @@ const Home: React.FC<Props> = () => {
                 className={`w-full mt-4 text-black-dark p-4 max-w-4xl mx-auto mb-8 sticky top-32 z-10 border rounded-xl block hover:bg-gray-200`}
                 type="text" 
                 placeholder="Search..." 
-                onChange={(e) =>{setSearchKey(e.target.value)}}
+                onChange={(e) =>{groupsAction.query(e.target.value)}}
             />  
-            {users.map((item, index) =>{
+            {groups.map((item, index) =>{
                 let stripClass = ""
                 if(index % 2 === 0){
                     stripClass = "bg-gray-800 text-gray-200"

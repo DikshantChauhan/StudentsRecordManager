@@ -2,20 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiChevronDown } from "react-icons/bi";
-import { useContext } from "react";
-import AppContainerContext from "./AppContainer.context";
+import { uiAction } from "../../actions/ui.actions";
+import { useAppSelector } from "../../store";
 
 interface Props{
 }
 
 const SubHeader: React.FC<Props> = () => {
-    const { state, setState } = useContext(AppContainerContext)
-
+    const currentState = useAppSelector((state) => state.ui.isSideBarOpen)
     return(
         <div className={`bg-white`}>
             <ul className={`py-2 px-6 flex justify-between items-center max-w-8xl mx-auto relative`}>
                 <li>
-                    <button onClick={() =>{setState(!state)}}>
+                    <button onClick={() =>{uiAction.isSidebarOpen(!currentState)}}>
                         <GiHamburgerMenu className={`w-5 h-5 text-black-dark`} />
                     </button>
                 </li>

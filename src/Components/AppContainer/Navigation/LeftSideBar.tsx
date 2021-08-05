@@ -8,7 +8,6 @@ interface Props{
 }
 
 const LeftSideBar: React.FC<Props> = ({children, className}) => {
-    console.log("rendering")
     return(
         <nav className={`px-6 pt-5 ${className}`}>
             {children.map((item, index: number) =>{
@@ -23,10 +22,12 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                         myArr[index].classList.add('subMenuIsOpen')
                     }
 
-                    if(myArr[index].classList.contains('subMenuIsOpen')){
+                    if(myArr[index].classList.contains('subMenuIsOpen')){ 
+                        myArr[index].children[1].style.display = "flex"
                         myArr[index].style.marginBottom = "calc(3rem * "+length+")"
                     }else{
                         myArr[index].style.marginBottom = "0px"
+                        myArr[index].children[1].style.display = "none"
                     }
 
                     if(myArr[index].classList.contains('subMenuIsOpen')){
@@ -35,13 +36,12 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                         myArr[index].children[1].children[0].style.top = "0"
                     }
                     
-                    
-                    
                     myArr.splice(index, 1)
                     myArr.map((item: any) =>{
                         item.classList.remove("subMenuIsOpen")
                         item.style.marginBottom = "0px"
                         item.children[1].children[0].style.top = "0"
+                        item.children[1].style.display = "none"
                     })
                 }
                 
@@ -52,7 +52,7 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                         <span className={`flex-1 text-left text-sm tracking-wide`}>{item?.props.title}</span>
                         <BiChevronDown />
                     </button>
-                    <div className={`absolute flex flex-col h-40 rounded-lg w-full bottom-0 transform translate-y-full left-0 right-0`}>
+                    <div style={{display: "none"}} className={`absolute flex flex-col rounded-lg w-full bottom-0 transform translate-y-full left-0 right-0`}>
                         <div className={`absolute top-0 left-0 right-0 bottom-0 bg-gray-200 transform transition-all duration-300`}></div>
                         {item?.props.children.map((item: any, i: number) => {
                             

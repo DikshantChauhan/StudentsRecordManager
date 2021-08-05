@@ -8,6 +8,8 @@ import Input from "../Input/Input"
 import { IoMdMail } from "react-icons/io";
 import { Login } from "../Api/Auth";
 import { useDispatch } from "react-redux";
+import { actionKey } from "../../store";
+import { authAction } from "../../actions/auth.action";
 
 interface Props{
 }
@@ -45,7 +47,6 @@ const LogIn: React.FC<Props> = () => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     let history = useHistory()
-    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -58,7 +59,7 @@ const LogIn: React.FC<Props> = () => {
         }),
         onSubmit: (data) =>{
             Login(data).then((u) =>{
-                dispatch({type: "me/login", payload: u})
+                authAction.login(u)
                 history.push("/home")
             })
         }

@@ -1,28 +1,27 @@
-import { Group } from "./Components/Models/Group";
-import { User } from "./Components/Models/User";
-import { AnyAction, createStore, Reducer } from "redux"
+import {  combineReducers, createStore } from "redux"
+import { AuthReducer } from "./reducer/auth.reducer";
+import { usersReducer } from "./reducer/users.reducer";
+import { groupsReducer } from "./reducer/groups.reducer";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { uiReducer } from "./reducer/ui.reducer";
 
-export interface AppState {
-    me?: User
-    groups: Group[]
-    isSideBarOpen: boolean 
+export const actionKey = {
+    ME_LOGIN: "me/login",
+    GROUP_QUERY: "groups/query",
+    GROUPS_QUERY_FINISHED: "groups/query_finished",
+    IS_SIDEBAR_OPEN: "ui/isSideBarOpen",
+    IS_SIDEBAR_SUBMENU_OPEN: "ui/isSideBarSubMenuOpen",
 }
 
-const initialState: AppState ={
-    me: undefined,
-    groups: [],
-    isSideBarOpen: true,
-}
-
-const reducer: Reducer<AppState> = (currentState = initialState, dispatchedAction: AnyAction) =>{
-    switch(dispatchedAction.type){
-        case 'me/login':
-            return {...currentState, me: dispatchedAction.payload};
-        case 'groups':
-            return {...currentState, groups: dispatchedAction.payload};
-        default: 
-            return currentState
-    }
-}
+const reducer = combineReducers({
+   auth: AuthReducer,
+   users: usersReducer,
+   groups: groupsReducer, 
+   ui: uiReducer,
+})
 
 export const store = createStore(reducer)
+
+type newtype = ReturnType<typeof reducer>
+
+export const useAppSelector: TypedUseSelectorHook<newtype> = useSelector;

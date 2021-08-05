@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { me } from "./Components/Api/Auth";
 import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "./store";
-import { User } from "./Components/Models/User";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "./store";
+import { authAction } from "./actions/auth.action";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )
@@ -16,8 +16,9 @@ interface Props{
 const App: React.FC<Props> = () => {
   const token = localStorage.getItem(LS_LOGIN_TOKEN)
 
-  const user = useSelector<AppState, User | undefined>((state) => state.me)
-  const dispatch = useDispatch()
+  const user = useAppSelector((state) => {
+    return state.auth.id && state.users.byId[state.auth.id]
+  })
 
   /* const [user, setUser] = useState<User>() */
   useEffect(() => {
@@ -25,7 +26,7 @@ const App: React.FC<Props> = () => {
       return;
     }
 
-    me().then(u => dispatch({type: "me/login", payload: u}));
+    me().then(u => authAction.login(u))
   }, [])
 
   /* const data = useMemo(() =>{

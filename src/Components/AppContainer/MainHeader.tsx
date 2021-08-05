@@ -1,16 +1,15 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RiSearchLine } from "react-icons/ri";
 import { Link, useHistory } from "react-router-dom";
-import AppContext from "../../App.context";
 import logoImage from "../../img/logo.svg"
 import Avatar from "../Avatar/Avatar";
 import { logout } from "../Api/Auth";
 import { useSelector } from "react-redux";
-import { AppState } from "../../store";
 import { User } from "../Models/User";
+import { useAppSelector } from "../../store";
 
 
 
@@ -21,7 +20,7 @@ const MainHeader: React.FC<Props> = () => {
     const [isDisabled, setIsDisabled] = useState(false)
     let history = useHistory()
 
-    const user = useSelector<AppState, User | undefined>((state) => state.me)
+    const user = useAppSelector((state) => state.users.byId[state.auth.id!])
 
     const handelProfileDropdown = () =>{
         setProfileDropDwonIsOpen(true)

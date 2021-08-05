@@ -2,17 +2,13 @@ import { useFormik } from "formik";
 import React from "react";
 import * as yup from "yup"
 import ButtonSolid from "../Button/ButtonSolid";
-import AppContext from "../../App.context";
-import { useContext } from "react";
 import InputLabeled from "../Input/InputLabeled";
-import { useSelector } from "react-redux";
-import { User } from "../Models/User";
-import { AppState } from "../../store";
+import { useAppSelector } from "../../store";
 
 interface Props{}
 
 const ProfilePage: React.FC<Props> = () => {
-    const user = useSelector<AppState, User | undefined>((state) => state.me)
+    const user = useAppSelector((state) => state.users.byId[state.auth.id!])
 
     const formik = useFormik({
         initialValues: {
