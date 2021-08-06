@@ -4,11 +4,12 @@ import * as yup from "yup"
 import ButtonSolid from "../Button/ButtonSolid";
 import InputLabeled from "../Input/InputLabeled";
 import { useAppSelector } from "../../store";
+import { meSelector } from "../../selector/auth.selector";
 
 interface Props{}
 
 const ProfilePage: React.FC<Props> = () => {
-    const user = useAppSelector((state) => state.users.byId[state.auth.id!])
+    const user = useAppSelector(meSelector)
 
     const formik = useFormik({
         initialValues: {

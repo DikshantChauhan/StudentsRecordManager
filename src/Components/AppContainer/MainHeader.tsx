@@ -10,6 +10,7 @@ import { logout } from "../Api/Auth";
 import { useSelector } from "react-redux";
 import { User } from "../Models/User";
 import { useAppSelector } from "../../store";
+import { meSelector } from "../../selector/auth.selector";
 
 
 
@@ -20,7 +21,7 @@ const MainHeader: React.FC<Props> = () => {
     const [isDisabled, setIsDisabled] = useState(false)
     let history = useHistory()
 
-    const user = useAppSelector((state) => state.users.byId[state.auth.id!])
+    const user = useAppSelector(meSelector)
 
     const handelProfileDropdown = () =>{
         setProfileDropDwonIsOpen(true)

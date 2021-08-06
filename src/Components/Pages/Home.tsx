@@ -6,17 +6,14 @@ import image from "../../img/profile-12.jpg"
 import { fetchGroups } from "../Api/Groups";
 import { useAppSelector } from "../../store";
 import { groupsAction } from "../../actions/groups.action";
+import { groupQuerySelector, groupsByQuerySelector } from "../../selector/groups.selector";
 
 interface Props{
 }
 
 const Home: React.FC<Props> = () => {
-    const searchKey = useAppSelector((state) => state.groups.query)
-    const groups = useAppSelector((state) => {
-        const groupsIds = state.groups.queryMap[state.groups.query] || []
-        const groups = groupsIds.map((id) => state.groups.groups[id])
-        return groups
-    })
+    const searchKey = useAppSelector(groupQuerySelector)
+    const groups = useAppSelector(groupsByQuerySelector)
 
     useEffect(() =>{
         fetchGroups({ status: "all-groups", query: searchKey }).then((response) =>{

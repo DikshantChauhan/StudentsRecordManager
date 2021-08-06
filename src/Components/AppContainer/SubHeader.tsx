@@ -5,8 +5,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { uiAction } from "../../actions/ui.actions";
 import { useAppSelector } from "../../store";
 
-interface Props{
-}
+interface Props{}
 
 const SubHeader: React.FC<Props> = () => {
     const currentState = useAppSelector((state) => state.ui.isSideBarOpen)

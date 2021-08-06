@@ -22,6 +22,7 @@ const reducer = combineReducers({
 
 export const store = createStore(reducer)
 
-type newtype = ReturnType<typeof reducer>
+export type AppState = ReturnType<typeof reducer>
 
-export const useAppSelector: TypedUseSelectorHook<newtype> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
+

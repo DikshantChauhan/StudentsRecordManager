@@ -6,6 +6,7 @@ import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "./store";
 import { authAction } from "./actions/auth.action";
+import { meSelector } from "./selector/auth.selector";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )
@@ -16,11 +17,8 @@ interface Props{
 const App: React.FC<Props> = () => {
   const token = localStorage.getItem(LS_LOGIN_TOKEN)
 
-  const user = useAppSelector((state) => {
-    return state.auth.id && state.users.byId[state.auth.id]
-  })
+  const user = useAppSelector(meSelector)
 
-  /* const [user, setUser] = useState<User>() */
   useEffect(() => {
     if (!token || user) {
       return;
