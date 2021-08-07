@@ -17,7 +17,7 @@ interface Props{
 const App: React.FC<Props> = () => {
   const token = localStorage.getItem(LS_LOGIN_TOKEN)
 
-  const user = useAppSelector(meSelector)
+  const user = useAppSelector(meSelector);
 
   useEffect(() => {
     if (!token || user) {

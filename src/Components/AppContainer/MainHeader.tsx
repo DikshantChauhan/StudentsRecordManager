@@ -21,7 +21,7 @@ const MainHeader: React.FC<Props> = () => {
     const [isDisabled, setIsDisabled] = useState(false)
     let history = useHistory()
 
-    const user = useAppSelector(meSelector)
+    const user = useAppSelector(meSelector);
 
     const handelProfileDropdown = () =>{
         setProfileDropDwonIsOpen(true)

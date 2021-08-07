@@ -12,7 +12,7 @@ interface Props{
 }
 
 const Home: React.FC<Props> = () => {
-    const searchKey = useAppSelector(groupQuerySelector)
+    const searchKey = useAppSelector(groupQuerySelector);
     const groups = useAppSelector(groupsByQuerySelector)
 
     useEffect(() =>{

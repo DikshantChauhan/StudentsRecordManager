@@ -16,4 +16,4 @@ export const meSelector = createSelector(
 
         return user
     }
-)
+);

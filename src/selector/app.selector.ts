@@ -14,4 +14,4 @@ export const groupsSelector = (state: AppState) =>{
 
 export const uiSelector = (state: AppState) =>{
     return state.ui
-}
+};

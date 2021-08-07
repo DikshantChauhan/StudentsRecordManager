@@ -31,4 +31,4 @@ export const groupsByQuerySelector = createSelector(
         })
         return groups
     }
-)
+);

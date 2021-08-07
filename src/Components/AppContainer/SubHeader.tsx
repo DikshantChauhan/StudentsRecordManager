@@ -4,11 +4,13 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BiChevronDown } from "react-icons/bi";
 import { uiAction } from "../../actions/ui.actions";
 import { useAppSelector } from "../../store";
+import { uiSelector } from "../../selector/app.selector";
+import { isSidebarOpenSelector } from "../../selector/ui.selector";
 
 interface Props{}
 
 const SubHeader: React.FC<Props> = () => {
-    const currentState = useAppSelector((state) => state.ui.isSideBarOpen)
+    const currentState = useAppSelector(isSidebarOpenSelector);
     return(
         <div className={`bg-white`}>
             <ul className={`py-2 px-6 flex justify-between items-center max-w-8xl mx-auto relative`}>
