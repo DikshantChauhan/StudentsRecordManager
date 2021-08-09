@@ -11,7 +11,15 @@ export const groupQueryMapSelector = (state: AppState) =>{
 }
 
 export const groupsByIdsSelector = (state: AppState) =>{
-    return groupsSelector(state).groups
+    return groupsSelector(state).byIds
+}
+
+export const groupSearchedIdSelector = (state: AppState) =>{
+    return groupsSelector(state).searchedId
+}
+
+export const groupByIdSelector = (state: AppState) =>{
+    return groupsByIdsSelector(state)[groupSearchedIdSelector(state)!]
 }
 
 /* export const groupsByQuerySelector = (state: AppState) =>{
@@ -21,6 +29,7 @@ export const groupsByIdsSelector = (state: AppState) =>{
     })
     return groups
 } */
+
 
 export const groupsByQuerySelector = createSelector(
     [groupQueryMapSelector, groupQuerySelector, groupsByIdsSelector],
