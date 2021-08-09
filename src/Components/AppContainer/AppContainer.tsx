@@ -1,20 +1,19 @@
-import React, { Fragment, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 import Home from "../Pages/Home";
 import Lecture from "../Pages/Lecture";
 import Header from "./Header";
 import ProfilePage from "../Pages/ProfilePage";
-import { User } from "../Models/User";
 import LeftSideBar from "./Navigation/LeftSideBar";
 import MenuItem from "./Navigation/MenuItem";
 import { FiHome } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
-import { useDispatch } from "react-redux";
-import { actionKey, useAppSelector } from "../../store";
+import { useAppSelector } from "../../store";
 import { uiAction } from "../../actions/ui.actions";
+import Groups from "../Pages/Groups";
+import Group from "../Pages/Group";
 
 interface Props{
-    user: User
 }
 
 const AppContainer: React.FC<Props> = () => {
@@ -41,8 +40,9 @@ const AppContainer: React.FC<Props> = () => {
             >
             <LeftSideBar className={`lg:pt-6 pt-36 pb-6`}>
                 <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
-                    <h1>CHILDREN</h1>
-                    <h1>hello</h1>
+                    <Link to="/groups">Groups</Link>
+                    <Link to="/profile">Profile</Link>
+                    <Link to="/lecture">Lecture</Link>
                 </MenuItem>
                 <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
                     <h1>CHILDREN</h1>
@@ -85,15 +85,21 @@ const AppContainer: React.FC<Props> = () => {
                 <div className={`h-screen`}></div>
             </Transition>
             <Switch>
-                <div className={`px-3 transition-all flex-1`}>
+                <div className={`px-3 pt-32 transition-all flex-1`}>
                     <Route path="/home">
                         <Home/>      
+                    </Route>
+                    <Route path="/group/:id">
+                        <Group />
+                    </Route>
+                    <Route path="/profile">
+                        <ProfilePage />
                     </Route>
                     <Route path="/lecture">
                         <Lecture />
                     </Route>
-                    <Route path="/profile">
-                        <ProfilePage />
+                    <Route path="/groups">
+                        <Groups />
                     </Route>
                 </div>
             </Switch>
