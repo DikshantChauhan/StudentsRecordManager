@@ -16,10 +16,26 @@ const groupQueryFinished = (groups: Group[]) =>{
     }
 }
 
+const groupSearchById = (id: number) =>{
+    return {
+        type: actionKey.Group_SEARCH_BY_ID,
+        payload: id,
+    }
+}
+
+const groupSearchByIdFinished = (group: Group) =>{
+    return {
+        type: actionKey.GROUP_SEARCH_BY_ID_FINISHED,
+        payload: group,
+    }
+}
+
 export const groupsAction = bindActionCreators(
     {
         query: groupQuery,
         queryFinished: groupQueryFinished,
+        searchedId: groupSearchById,
+        SearchByIdFinished: groupSearchByIdFinished,
     },
     store.dispatch
 )
