@@ -6,9 +6,8 @@ interface Props{}
 const Lecture: React.FC<Props> = () => {
     return(
         <div>
-           <h1>This is lecture page</h1> 
-           <h1><Link to="/home" className={`text-green-700`}>back to home</Link> </h1>      
-        
+            <h1>this is lecture page</h1>
+           <Link to="/home" className={`text-green-700`}>back to Home</Link>     
         </div>
     )
 };
