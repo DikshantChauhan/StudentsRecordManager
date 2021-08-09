@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from "redux";
 import { actionKey } from "../store";
 
-export interface AuthState {
+export interface AuthState{
     id?: number
 }
 
