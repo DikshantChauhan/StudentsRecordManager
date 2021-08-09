@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { me } from "./Components/Api/Auth";
 import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
-import { useDispatch } from "react-redux";
 import { useAppSelector } from "./store";
 import { authAction } from "./actions/auth.action";
 import { meSelector } from "./selector/auth.selector";
@@ -48,9 +47,9 @@ const App: React.FC<Props> = () => {
               <Suspense fallback={<div>Loading....</div>}><AuthenticationLazy /></Suspense>
             }
           </Route>
-          <Route path={["/home", "/lecture", "/profile"]} exact>
+          <Route path={["/home", "/lecture", "/group/:id", "/profile", "/groups"]} exact>
             {user ? 
-              <Suspense fallback={<div>Loading....</div>}><AppContainerLazy user={user}/></Suspense>:
+              <Suspense fallback={<div>Loading....</div>}><AppContainerLazy /></Suspense>:
               <Redirect to="/login"></Redirect>
             }
           </Route>
