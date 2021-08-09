@@ -35,3 +35,10 @@ export const me = () => {
     const url = "https://api-dev.domecompass.com/me"
     return axios.get<MeResposne>(url).then( response => response.data.data );
 };
+
+export const meUpdate = (data: any) =>{
+    const url = "https://api-dev.domecompass.com/me"
+    return axios.put(url, data).then((response) =>{
+        return response
+    })
+}
