@@ -11,6 +11,8 @@ export const actionKey = {
     GROUPS_QUERY_FINISHED: "groups/query_finished",
     IS_SIDEBAR_OPEN: "ui/isSideBarOpen",
     IS_SIDEBAR_SUBMENU_OPEN: "ui/isSideBarSubMenuOpen",
+    Group_SEARCH_BY_ID: "group/search",
+    GROUP_SEARCH_BY_ID_FINISHED: "group/search_finished"
 }
 
 const reducer = combineReducers({
