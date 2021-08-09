@@ -7,11 +7,9 @@ import { Link, useHistory } from "react-router-dom";
 import logoImage from "../../img/logo.svg"
 import Avatar from "../Avatar/Avatar";
 import { logout } from "../Api/Auth";
-import { useSelector } from "react-redux";
-import { User } from "../Models/User";
 import { useAppSelector } from "../../store";
 import { meSelector } from "../../selector/auth.selector";
-
+import image from "../../img/profile-12.jpg";
 
 
 interface Props{}
@@ -21,7 +19,7 @@ const MainHeader: React.FC<Props> = () => {
     const [isDisabled, setIsDisabled] = useState(false)
     let history = useHistory()
 
-    const user = useAppSelector(meSelector);
+    const user = useAppSelector(meSelector)
 
     const handelProfileDropdown = () =>{
         setProfileDropDwonIsOpen(true)
@@ -55,7 +53,7 @@ const MainHeader: React.FC<Props> = () => {
                     </li>
                     <li className={`ml-4`}>
                         <button onClick={handelProfileDropdown} disabled={isDisabled}>
-                            <Avatar img={user?.profile_pic_url!} theme="small" variant="default"></Avatar>
+                            <Avatar img={image} theme="small" variant="default"></Avatar>
                         </button>
                         <Transition.Root 
                             show={profileDropDwonIsOpen}

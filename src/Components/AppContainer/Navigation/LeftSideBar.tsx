@@ -37,7 +37,7 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                     }
                     
                     myArr.splice(index, 1)
-                    myArr.map((item: any) =>{
+                    myArr.forEach((item: any) =>{
                         item.classList.remove("subMenuIsOpen")
                         item.style.marginBottom = "0px"
                         item.children[1].children[0].style.top = "0"
@@ -54,7 +54,7 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                     </button>
                     <div style={{display: "none"}} className={`absolute flex flex-col rounded-lg w-full bottom-0 transform translate-y-full left-0 right-0`}>
                         <div className={`absolute top-0 left-0 right-0 bottom-0 bg-gray-200 transform transition-all duration-300`}></div>
-                        {item?.props.children.map((item: any, i: number) => {
+                        {item?.props.children.map((item: any) => {
                             
                             return(
                             <button className="flex pl-8 py-3 items-center text-gray-500 hover:text-primary-main">
