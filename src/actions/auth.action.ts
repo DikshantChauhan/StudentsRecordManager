@@ -9,8 +9,16 @@ const meLoginAction = (user: User) =>{
     }
 }
 
+const meFetchingAction = (user: User) =>{
+    return {
+        type: actionKey.ME_FETCHED,
+        payload: user,
+    }
+}
+
 export const authAction = bindActionCreators(
     {
         login: meLoginAction,
+        fetching: meFetchingAction,
     }, 
     store.dispatch)

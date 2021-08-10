@@ -18,6 +18,13 @@ export const groupSearchedIdSelector = (state: AppState) =>{
     return groupsSelector(state).searchedId
 }
 
+export const groupsFetchingSelector = (state: AppState) =>{
+    //multiple req
+    /* return groupsSelector(state).loading[groupsSelector(state).query] */
+
+    return groupsSelector(state).loading
+}
+
 export const groupByIdSelector = (state: AppState) =>{
     return groupsByIdsSelector(state)[groupSearchedIdSelector(state)!]
 }

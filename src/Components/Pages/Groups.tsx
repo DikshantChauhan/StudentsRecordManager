@@ -1,11 +1,32 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { groupsAction } from "../../actions/groups.action";
-import { groupQuerySelector, groupsByQuerySelector } from "../../selector/groups.selector";
+import { groupQuerySelector, groupsByQuerySelector, groupsFetchingSelector } from "../../selector/groups.selector";
 import { useAppSelector } from "../../store";
-import { fetchGroups } from "../Api/Groups";
+import { fetchGroups } from "../../middlewares/groups.middlewares";
 import image from "../../img/profile-12.jpg";
 import AvatarOnline from "../Avatar/Avatar"
+import { FaSpinner } from "react-icons/fa";
+
+/* let canceler: Canceler | undefined
+
+export const fetchGroups = (query: string) =>{
+    const currentQuery = query
+    groupsAction.query(currentQuery)
+
+    canceler && canceler();
+
+    const { cancel, token } = axios.CancelToken.source()
+
+    canceler = cancel
+
+    groupsAction.groupsFetching(true)
+    fetchGroupsAPI({ status: "all-groups", query: query  }, token)
+    .then((groups) =>{
+        groups && groupsAction.queryFinished(groups)
+        groupsAction.groupsFetching(false)
+        canceler = undefined
+    })} */
 
 
 interface Props{}
@@ -15,11 +36,7 @@ const Groups: React.FC<Props> = () => {
     const groups = useAppSelector(groupsByQuerySelector)
     const history = useHistory()
 
-    useEffect(() =>{
-        fetchGroups({ status: "all-groups", query: searchKey }).then((response) =>{
-            groupsAction.queryFinished(response)
-        })
-    }, [searchKey])
+    const isFetching = useAppSelector(groupsFetchingSelector)
 
     return(
         <div className={`w-full`}>
@@ -27,9 +44,10 @@ const Groups: React.FC<Props> = () => {
                 className={`w-full mt-2 text-black-dark p-4 max-w-4xl mx-auto mb-8 sticky top-32 z-10 border rounded-xl block hover:bg-gray-200`}
                 type="text" 
                 placeholder="Search..." 
-                onChange={(e) =>{groupsAction.query(e.target.value)}}
+                onChange={(e) =>{fetchGroups(e.target.value)}}
                 value={searchKey}
             />  
+            {isFetching && <FaSpinner className={`animate-spin`}></FaSpinner>}
             {groups.map((item, index) =>{
                 let stripClass = ""
                 if(index % 2 === 0){

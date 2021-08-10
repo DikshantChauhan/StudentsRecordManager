@@ -15,6 +15,7 @@ export const usersReducer: Reducer<UsersState> =
     (currentState = initialValue, dispatchedAction: AnyAction) =>{
         switch(dispatchedAction.type){
             case actionKey.ME_LOGIN:
+            case actionKey.ME_FETCHED:
                 const newState = 
                     normalizeOne(currentState, dispatchedAction.payload) as UsersState
                 return {

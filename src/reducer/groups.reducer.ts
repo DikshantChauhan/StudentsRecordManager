@@ -8,6 +8,8 @@ export interface GroupsState extends EntityState<Group>{
     query: string;
     queryMap: { [query: string]: number[] }
     searchedId?: number
+    /* loading: { [query: string]: boolean } */
+    loading: boolean
 }
 
 const initialValue: GroupsState = {
@@ -15,6 +17,9 @@ const initialValue: GroupsState = {
     byIds: {},
     queryMap: {},
     searchedId: undefined,
+    //multiple reqs..
+    /* loading: {}, */
+    loading: false,
 }
 
 export const groupsReducer: Reducer<GroupsState> = 
@@ -44,7 +49,18 @@ export const groupsReducer: Reducer<GroupsState> =
                 }
                 return { ...currentState, byIds: {...currentState.byIds, [group.id]: group} }
 
-            default:
+            case actionKey.GROUPS_LOADING:
+                return { ...currentState, loading: dispatchedAction.payload }
+                //multiple reqs..
+               /*  return { 
+                    ...currentState, 
+                    loading: { 
+                        ...currentState.loading, 
+                        [currentState.query]: dispatchedAction.payload,
+                        },
+                    } */
+            
+                default:
                 return currentState;
         }
     }

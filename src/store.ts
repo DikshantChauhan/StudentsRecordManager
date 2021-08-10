@@ -12,7 +12,9 @@ export const actionKey = {
     IS_SIDEBAR_OPEN: "ui/isSideBarOpen",
     IS_SIDEBAR_SUBMENU_OPEN: "ui/isSideBarSubMenuOpen",
     Group_SEARCH_BY_ID: "group/search",
-    GROUP_SEARCH_BY_ID_FINISHED: "group/search_finished"
+    GROUP_SEARCH_BY_ID_FINISHED: "group/search_finished",
+    ME_FETCHED: "me/fetched",
+    GROUPS_LOADING: "groups/loading",
 }
 
 const reducer = combineReducers({

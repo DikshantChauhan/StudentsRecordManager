@@ -16,6 +16,13 @@ const groupQueryFinished = (groups: Group[]) =>{
     }
 }
 
+const groupsLoading = (bool: boolean) =>{
+    return {
+        type: actionKey.GROUPS_LOADING,
+        payload: bool,
+    }
+}
+
 const groupSearchById = (id: number) =>{
     return {
         type: actionKey.Group_SEARCH_BY_ID,
@@ -36,6 +43,7 @@ export const groupsAction = bindActionCreators(
         queryFinished: groupQueryFinished,
         searchedId: groupSearchById,
         SearchByIdFinished: groupSearchByIdFinished,
+        groupsFetching: groupsLoading,
     },
     store.dispatch
 )

@@ -1,10 +1,9 @@
 import React, { Suspense } from "react";
 import { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { me } from "./Components/Api/Auth";
+import { me } from "./middlewares/auth.middlewares";
 import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
 import { useAppSelector } from "./store";
-import { authAction } from "./actions/auth.action";
 import { meSelector } from "./selector/auth.selector";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
@@ -23,7 +22,7 @@ const App: React.FC<Props> = () => {
       return;
     }
 
-    me().then(u => authAction.login(u))
+    me();
   }, [])
 
   /* const data = useMemo(() =>{

@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { CancelToken } from "axios"
 import { Group } from "../Models/Group"
 
 interface GroupRequest {
@@ -12,7 +12,16 @@ interface GroupRequest {
     data: Group[]
 } */
 
-export const fetchGroups = (data: GroupRequest) =>{
+export const fetchGroups = (data: GroupRequest, token?: CancelToken) =>{
+    return axios.get("https://api-dev.domecompass.com/groups", 
+    { params: data, cancelToken: token })
+    .then((response) =>{
+        return response.data.data
+    }).catch((error) =>{
+        console.error(error)
+    })
+}
+/* export const fetchGroups = (data: GroupRequest) =>{
     return axios.get("https://api-dev.domecompass.com/groups", 
     { params: data })
     .then((response) =>{
@@ -20,7 +29,7 @@ export const fetchGroups = (data: GroupRequest) =>{
     }).catch((error) =>{
         console.error(error)
     })
-}
+} */
 
 export const fetchGroup = (id: number) =>{
     return axios.get(`https://api-dev.domecompass.com/groups/${id}`)
