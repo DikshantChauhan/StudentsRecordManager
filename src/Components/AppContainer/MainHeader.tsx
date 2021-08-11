@@ -53,7 +53,7 @@ const MainHeader: React.FC<Props> = () => {
                     </li>
                     <li className={`ml-4`}>
                         <button onClick={handelProfileDropdown} disabled={isDisabled}>
-                            <Avatar img={image} theme="small" variant="default"></Avatar>
+                            <Avatar img={user?.profile_pic_url!} theme="small" variant="default"></Avatar>
                         </button>
                         <Transition.Root 
                             show={profileDropDwonIsOpen}
