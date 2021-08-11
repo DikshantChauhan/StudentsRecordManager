@@ -1,5 +1,5 @@
 import axios, { Canceler } from "axios"
-import { groupsAction } from "../actions/groups.action"
+import { groupsAction } from "../actions/groups.bindAction"
 import {fetchGroups as fetchGroupsAPI} from "../Components/Api/Groups"
 import { groupQueryMapSelector, groupsFetchingSelector } from "../selector/groups.selector"
 import { store } from "../store"
@@ -22,9 +22,11 @@ export const fetchGroups = (query: string) =>{
         groups && groupsAction.queryFinished(groups)
         groupsAction.groupsFetching(false)
         canceler = undefined
-    })
+    })    
+}
 
-    //if req in progress, dont resend the same req
+
+//if req in progress, dont resend the same req
     /* groupsAction.query(query)
 
     const isFetching = groupsFetchingSelector(store.getState())
@@ -55,5 +57,3 @@ export const fetchGroups = (query: string) =>{
             groupsAction.groupsFetching(false)
         })
     } */
-    
-}

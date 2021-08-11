@@ -27,7 +27,7 @@ export const groupsReducer: Reducer<GroupsState> =
         switch(dispatchedAction.type){
 
             case actionKey.GROUP_QUERY:
-                return {...currentState, query: dispatchedAction.payload};
+                return {...currentState, query: dispatchedAction.payload, loading: true};
             
             case actionKey.GROUPS_QUERY_FINISHED:
                 const groups: Group[] = dispatchedAction.payload;
@@ -37,7 +37,9 @@ export const groupsReducer: Reducer<GroupsState> =
 
                 return {
                     ...newState,
-                    queryMap: {...currentState.queryMap, [currentState.query]: ids}};
+                    queryMap: {...currentState.queryMap, [currentState.query]: ids },
+                    loading: false
+                };
 
             case actionKey.Group_SEARCH_BY_ID:
                 return { ...currentState, searchedId: dispatchedAction.payload }
@@ -49,8 +51,8 @@ export const groupsReducer: Reducer<GroupsState> =
                 }
                 return { ...currentState, byIds: {...currentState.byIds, [group.id]: group} }
 
-            case actionKey.GROUPS_LOADING:
-                return { ...currentState, loading: dispatchedAction.payload }
+            /* case actionKey.GROUPS_LOADING:
+                return { ...currentState, loading: dispatchedAction.payload } */
                 //multiple reqs..
                /*  return { 
                     ...currentState, 

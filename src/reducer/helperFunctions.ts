@@ -9,7 +9,7 @@ export const normalizeMany = (state: EntityState, arr: Entity[]) =>{
         return { ...pre, [curr.id]: curr }
     }, {})
 
-    return { ...state, byIds: {...state.byIds ,...normalizedArr}}
+    return { ...state, byIds: {...state.byIds ,...normalizedArr},}
 }
 
 export const normalizeOne = (state: EntityState, entity: Entity) =>{

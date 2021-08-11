@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { groupsAction } from "../../actions/groups.action";
+import { groupsAction } from "../../actions/groups.bindAction";
 import { groupByIdSelector, groupSearchedIdSelector } from "../../selector/groups.selector";
 import { useAppSelector } from "../../store";
 import { fetchGroup } from "../Api/Groups";
