@@ -1,7 +1,10 @@
 import { AnyAction, Reducer } from "redux";
 import { EntityState } from "../../Components/Models/Entity";
 import { Group } from "../../Components/Models/Group";
-import { FETCH_ONE_GROUP_FINISHED, GROUPS_QUERY_FINISHED, GROUP_QUERY, Group_SEARCH_BY_ID } from "../actionKey";
+import { GROUP_FETCHED, 
+    GROUPS_BY_QUERY_FETCHED, 
+    GROUPS_CURRENT_QUERY, 
+    Group_BY_ID } from "../actionKey";
 import { normalizeMany } from "./helperFunctions";
 
 export interface GroupsState extends EntityState<Group>{
@@ -26,10 +29,10 @@ export const groupsReducer: Reducer<GroupsState> =
     (currentState = initialValue, dispatchedAction: AnyAction) =>{
         switch(dispatchedAction.type){
 
-            case GROUP_QUERY:
+            case GROUPS_CURRENT_QUERY:
                 return {...currentState, query: dispatchedAction.payload, loading: true};
             
-            case GROUPS_QUERY_FINISHED:
+            case GROUPS_BY_QUERY_FETCHED:
                 const groups: Group[] = dispatchedAction.payload;
 
                 const newState = normalizeMany(currentState ,groups) as GroupsState
@@ -41,10 +44,10 @@ export const groupsReducer: Reducer<GroupsState> =
                     loading: false
                 };
 
-            case Group_SEARCH_BY_ID:
+            case Group_BY_ID:
                 return { ...currentState, searchedId: dispatchedAction.payload }
 
-            case FETCH_ONE_GROUP_FINISHED:
+            case GROUP_FETCHED:
                 const group: Group = dispatchedAction.payload
                 if(group === undefined) {
                     return currentState

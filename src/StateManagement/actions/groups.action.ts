@@ -1,16 +1,21 @@
 import { Group } from "../../Components/Models/Group";
-import { FETCH_ONE_GROUP, FETCH_ONE_GROUP_FINISHED, GROUPS_LOADING, GROUPS_QUERY_FINISHED, GROUP_QUERY, Group_SEARCH_BY_ID } from "../actionKey";
+import { GROUP_FETCHING, 
+    GROUP_FETCHED, 
+    GROUPS_LOADING, 
+    GROUPS_BY_QUERY_FETCHED, 
+    GROUPS_CURRENT_QUERY, 
+    Group_BY_ID } from "../actionKey";
 
 export const groupsCurrentQueryAction = (query: string) => {
     return {
-        type: GROUP_QUERY,
+        type: GROUPS_CURRENT_QUERY,
         payload: query,
     }
 }
 
 export const groupsByQueryFetchedAction = (groups: Group[]) =>{
     return{
-        type: GROUPS_QUERY_FINISHED,
+        type: GROUPS_BY_QUERY_FETCHED,
         payload: groups,
     }
 }
@@ -24,21 +29,21 @@ export const groupsByQueryFetchingAction = (bool: boolean) =>{
 
 export const groupByIdAction = (id: number) =>{
     return {
-        type: Group_SEARCH_BY_ID,
+        type: Group_BY_ID,
         payload: id,
     }
 }
 
 export const groupByIdFetchedAction = (group: Group) =>{
     return {
-        type: FETCH_ONE_GROUP_FINISHED,
+        type: GROUP_FETCHED,
         payload: group,
     }
 }
 
 export const groupByIdFetchingAction = (id: number) =>{
     return {
-        type: FETCH_ONE_GROUP,
+        type: GROUP_FETCHING,
         payload: id,
     }
 }

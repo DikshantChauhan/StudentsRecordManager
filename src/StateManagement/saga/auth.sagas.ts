@@ -4,7 +4,7 @@ import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { meFetchedAction, meLogedInAction } from "../actions/auth.action";
 import { Login, me, meUpdate } from "../../Components/Api/Auth";
 import { User } from "../../Components/Models/User";
-import { ME_FETCHING, ME_LOGIN_REQ, ME_UPDATE } from "../actionKey";
+import { ME_FETCHING, ME_LOGING_IN, ME_UPDATE } from "../actionKey";
 
 function* meFetching(action: AnyAction) {
     const response: User = yield call(me)
@@ -24,5 +24,5 @@ function* meLogingIn(action: AnyAction){
 export function* meSaga(){
     yield takeEvery(ME_FETCHING, meFetching)
     yield takeEvery(ME_UPDATE, meUpdating)
-    yield takeEvery(ME_LOGIN_REQ, meLogingIn)
+    yield takeEvery(ME_LOGING_IN, meLogingIn)
 }

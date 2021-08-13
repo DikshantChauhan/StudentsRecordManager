@@ -1,17 +1,17 @@
 import { LoginData, MeUpdate } from "../../Components/Api/Auth";
 import { User } from "../../Components/Models/User";
-import { ME_FETCHED, ME_FETCHING, ME_LOGIN, ME_LOGIN_REQ, ME_UPDATE } from "../actionKey";
+import { ME_FETCHED, ME_FETCHING, ME_LOGED_IN, ME_LOGING_IN, ME_UPDATE } from "../actionKey";
 
 export const meLogedInAction = (user: User) =>{
     return {
-        type: ME_LOGIN,
+        type: ME_LOGED_IN,
         payload: user,
     }
 }
 
 export const meLogingInAction = (data: LoginData) =>{
     return {
-        type: ME_LOGIN_REQ,
+        type: ME_LOGING_IN,
         payload: data,
     }
 }
