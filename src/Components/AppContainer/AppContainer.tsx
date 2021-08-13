@@ -9,15 +9,17 @@ import MenuItem from "./Navigation/MenuItem";
 import { FiHome } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { useAppSelector } from "../../StateManagement/store";
-import { uiAction } from "../../StateManagement/actions/ui.actions";
 import Groups from "../Pages/Groups";
 import Group from "../Pages/Group";
+import { sidebarOpenAction } from "../../StateManagement/actions/ui.actions";
+import { useDispatch } from "react-redux";
 
 interface Props{
 }
 
 const AppContainer: React.FC<Props> = () => {
     const state = useAppSelector((state) => state.ui.isSideBarOpen)
+    const dispatch = useDispatch()
     /* const data = useMemo(() =>{
         return {state, setState}
     }, [state]) */
@@ -66,7 +68,7 @@ const AppContainer: React.FC<Props> = () => {
                 leaveTo="opacity-0"
                 as={Fragment}
             >
-                <div onClick={() =>{uiAction.isSidebarOpen(false)}} className="absolute z-40 left-0 top-0 bottom-0 right-0 bg-opacity-30 bg-black-dark hidden lg:block"></div>
+                <div onClick={() =>{dispatch(sidebarOpenAction(false))}} className="absolute z-40 left-0 top-0 bottom-0 right-0 bg-opacity-30 bg-black-dark hidden lg:block"></div>
             </Transition.Child>
         </Transition.Root>
 

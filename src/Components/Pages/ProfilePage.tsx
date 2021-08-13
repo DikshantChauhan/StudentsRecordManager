@@ -5,9 +5,8 @@ import ButtonSolid from "../Button/ButtonSolid";
 import InputLabeled from "../Input/InputLabeled";
 import { useAppSelector } from "../../StateManagement/store";
 import { meSelector } from "../../StateManagement/selector/auth.selector";
-import { meUpdate } from "../Api/Auth";
 import { useDispatch } from "react-redux";
-import { meUpdateReq } from "../../StateManagement/actions/auth.action";
+import { meUpdating } from "../../StateManagement/actions/auth.action";
 
 interface Props{}
 
@@ -27,7 +26,7 @@ const ProfilePage: React.FC<Props> = () => {
             "phone_number": yup.string().required().min(10),
         }),
         onSubmit: (userData) =>{
-            dispatch(meUpdateReq(userData))
+            dispatch(meUpdating(userData))
         }
     })
 

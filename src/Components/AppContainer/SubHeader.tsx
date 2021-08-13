@@ -2,20 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiChevronDown } from "react-icons/bi";
-import { uiAction } from "../../StateManagement/actions/ui.actions";
 import { useAppSelector } from "../../StateManagement/store";
-import { uiSelector } from "../../StateManagement/selector/app.selector";
 import { isSidebarOpenSelector } from "../../StateManagement/selector/ui.selector";
+import { sidebarOpenAction } from "../../StateManagement/actions/ui.actions";
+import { useDispatch } from "react-redux";
 
 interface Props{}
 
 const SubHeader: React.FC<Props> = () => {
     const currentState = useAppSelector(isSidebarOpenSelector);
+    const dispatch = useDispatch()
     return(
         <div className={`bg-white`}>
             <ul className={`py-2 px-6 flex justify-between items-center max-w-8xl mx-auto relative`}>
                 <li>
-                    <button onClick={() =>{uiAction.isSidebarOpen(!currentState)}}>
+                    <button onClick={() =>{dispatch(sidebarOpenAction(!currentState))}}>
                         <GiHamburgerMenu className={`w-5 h-5 text-black-dark`} />
                     </button>
                 </li>

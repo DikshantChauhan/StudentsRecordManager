@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { AnyAction } from "redux";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { meFetchedAction, meLoginAction } from "../actions/auth.action";
+import { meFetchedAction, meLogedInAction } from "../actions/auth.action";
 import { Login, me, meUpdate } from "../../Components/Api/Auth";
 import { User } from "../../Components/Models/User";
 import { ME_FETCHING, ME_LOGIN_REQ, ME_UPDATE } from "../actionKey";
@@ -18,7 +18,7 @@ function* meUpdating(action: AnyAction){
 
 function* meLogingIn(action: AnyAction){
     const response: User = yield call(Login, action.payload)
-    yield put(meLoginAction(response))
+    yield put(meLogedInAction(response))
 }
 
 export function* meSaga(){

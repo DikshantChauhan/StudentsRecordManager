@@ -5,7 +5,7 @@ import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
 import { useAppSelector } from "./StateManagement/store";
 import { meSelector } from "./StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";
-import { meFetching } from "./StateManagement/actions/auth.action";
+import { meFetchingAction } from "./StateManagement/actions/auth.action";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )
@@ -25,7 +25,7 @@ const App: React.FC<Props> = () => {
       return;
     }
 
-    dispatch(meFetching())
+    dispatch(meFetchingAction())
   }, [])
 
   /* const data = useMemo(() =>{

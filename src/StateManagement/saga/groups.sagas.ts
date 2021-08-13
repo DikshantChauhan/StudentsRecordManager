@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import { takeEvery, put, call, takeLatest, delay } from "redux-saga/effects";
-import { fetchOneGroupFinished, groupQueryFinished } from "../actions/groups.action";
-import { fetchGroup, fetchGroups as fetchGroupsAPI } from "../../Components/Api/Groups";
+import { groupByIdFetchedAction, groupsByQueryFetchedAction } from "../actions/groups.action";
+import { fetchGroup as fetchGroupAPI, fetchGroups as fetchGroupsAPI } from "../../Components/Api/Groups";
 import { Group } from "../../Components/Models/Group";
 import { FETCH_ONE_GROUP, GROUP_QUERY } from "../actionKey";
 
@@ -11,15 +11,15 @@ function* fetchGroups(action: AnyAction): Generator<any> {
         query: action.payload,
         status: "all-groups",
     });
-    yield put(groupQueryFinished(groups.data.data))
+    yield put(groupsByQueryFetchedAction(groups.data.data))
 }
 
-function* fetchOneGroup(action: AnyAction) {
-    const response: Group = yield call(fetchGroup, action.payload)
-    yield put(fetchOneGroupFinished(response))
+function* fetchGroup(action: AnyAction) {
+    const response: Group = yield call(fetchGroupAPI, action.payload)
+    yield put(groupByIdFetchedAction(response))
 }
 
 export function* fetchGroupSaga() {
     yield takeLatest(GROUP_QUERY, fetchGroups);
-    yield takeEvery(FETCH_ONE_GROUP, fetchOneGroup);
+    yield takeEvery(FETCH_ONE_GROUP, fetchGroup);
 }

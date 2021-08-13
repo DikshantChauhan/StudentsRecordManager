@@ -4,7 +4,8 @@ import { groupQuerySelector, groupsByQuerySelector, groupsFetchingSelector } fro
 import { useAppSelector } from "../../StateManagement/store";
 import AvatarOnline from "../Avatar/Avatar"
 import { FaSpinner } from "react-icons/fa";
-import { groupsAction } from "../../StateManagement/actions/groups.bindAction";
+import { useDispatch } from "react-redux";
+import { groupsCurrentQueryAction } from "../../StateManagement/actions/groups.action";
 
 interface Props{}
 
@@ -12,6 +13,7 @@ const Groups: React.FC<Props> = () => {
     const searchKey = useAppSelector(groupQuerySelector);
     const groups = useAppSelector(groupsByQuerySelector)
     const history = useHistory()
+    const dispatch = useDispatch()
 
     const isFetching = useAppSelector(groupsFetchingSelector)
 
@@ -23,7 +25,7 @@ const Groups: React.FC<Props> = () => {
                 className={`w-full mt-2 text-black-dark p-4 max-w-4xl mx-auto mb-8 sticky top-32 z-10 border rounded-xl block hover:bg-gray-200`}
                 type="text" 
                 placeholder="Search..." 
-                onChange={(e) =>{groupsAction.query(e.target.value)}}
+                onChange={(e) =>{dispatch(groupsCurrentQueryAction(e.target.value))}}
                 value={searchKey}
             />  
             {isFetching && <FaSpinner className={`animate-spin`}></FaSpinner>}

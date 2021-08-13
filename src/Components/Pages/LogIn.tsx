@@ -8,7 +8,7 @@ import Input from "../Input/Input"
 import { IoMdMail } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../StateManagement/store";
-import { meLoginReqAction } from "../../StateManagement/actions/auth.action";
+import { meLogingInAction } from "../../StateManagement/actions/auth.action";
 import { meSelector } from "../../StateManagement/selector/auth.selector";
 
 interface Props{
@@ -61,7 +61,7 @@ const LogIn: React.FC<Props> = () => {
             password: yup.string().required().min(8)
         }),
         onSubmit: (data) =>{
-            dispatch(meLoginReqAction(data))
+            dispatch(meLogingInAction(data))
         }
     });
 
