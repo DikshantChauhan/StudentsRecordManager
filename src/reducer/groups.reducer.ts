@@ -44,7 +44,7 @@ export const groupsReducer: Reducer<GroupsState> =
             case actionKey.Group_SEARCH_BY_ID:
                 return { ...currentState, searchedId: dispatchedAction.payload }
 
-            case actionKey.GROUP_SEARCH_BY_ID_FINISHED:
+            case actionKey.FETCH_ONE_GROUP_FINISHED:
                 const group: Group = dispatchedAction.payload
                 if(group === undefined) {
                     return currentState

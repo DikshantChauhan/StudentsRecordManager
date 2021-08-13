@@ -6,27 +6,28 @@ import InputLabeled from "../Input/InputLabeled";
 import { useAppSelector } from "../../store";
 import { meSelector } from "../../selector/auth.selector";
 import { meUpdate } from "../Api/Auth";
+import { useDispatch } from "react-redux";
+import { meUpdateReq } from "../../actions/auth.action";
 
 interface Props{}
 
 const ProfilePage: React.FC<Props> = () => {
     const user = useAppSelector(meSelector)
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
             "first_name": user?.first_name,
             "last_name": user?.last_name,
             "phone_number": user?.phone_number,
-            /* "profile_pic_url": user?.profile_pic_url, */
         },
         validationSchema: yup.object().shape({
             "first_name": yup.string().required().min(2),
             "last_name": yup.string().required(),
             "phone_number": yup.string().required().min(10),
-            /* "profile_pic_url": yup.string().required(), */
         }),
         onSubmit: (userData) =>{
-            meUpdate(userData);
+            dispatch(meUpdateReq(userData))
         }
     })
 

@@ -4,9 +4,10 @@ import { Link, useParams } from "react-router-dom";
 import { groupsAction } from "../../actions/groups.bindAction";
 import { groupByIdSelector, groupSearchedIdSelector } from "../../selector/groups.selector";
 import { useAppSelector } from "../../store";
-import { fetchGroup } from "../Api/Groups";
 import image from "../../img/profile-12.jpg";
 import AvatarOnline from "../Avatar/Avatar"
+import { useDispatch } from "react-redux";
+import { fetchOneGroup } from "../../actions/groups.action";
 
 interface Props{}
 
@@ -17,11 +18,13 @@ const Group: React.FC<Props> = () => {
 
     const id = useAppSelector(groupSearchedIdSelector)
     const group = useAppSelector(groupByIdSelector)
+
+    const dispatch = useDispatch()
+
     useEffect(() =>{
-        fetchGroup(id!).then((response) =>{
-            groupsAction.SearchByIdFinished(response)
-        })
+        dispatch(fetchOneGroup(id!))
     }, [id])
+    
     if(group === undefined){
         return <h1>group with id = {id} does not exist</h1>
     }

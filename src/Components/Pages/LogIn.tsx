@@ -8,8 +8,10 @@ import Input from "../Input/Input"
 import { IoMdMail } from "react-icons/io";
 import { Login } from "../Api/Auth";
 import { useDispatch } from "react-redux";
-import { actionKey } from "../../store";
-import { authAction } from "../../actions/auth.action";
+import { actionKey, useAppSelector } from "../../store";
+import { authAction } from "../../actions/auth.bindAction";
+import { meLoginReqAction } from "../../actions/auth.action";
+import { meSelector } from "../../selector/auth.selector";
 
 interface Props{
 }
@@ -45,6 +47,9 @@ const LogIn: React.FC<Props> = () => {
         }
     }*/
 
+    const dispatch = useDispatch()
+    const user = useAppSelector(meSelector)
+
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     let history = useHistory()
 
@@ -58,12 +63,11 @@ const LogIn: React.FC<Props> = () => {
             password: yup.string().required().min(8)
         }),
         onSubmit: (data) =>{
-            Login(data).then((u) =>{
-                authAction.login(u)
-                history.push("/home")
-            })
+            dispatch(meLoginReqAction(data))
         }
     });
+
+    user && history.push("/home")
 
     return(
         <div className={`lg:w-full min-w-5 flex-1 px-3 flex justify-center items-center bg-white`}>

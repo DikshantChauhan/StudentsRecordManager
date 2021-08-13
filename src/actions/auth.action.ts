@@ -1,24 +1,39 @@
 import { bindActionCreators } from "redux";
+import { LoginData, MeUpdate } from "../Components/Api/Auth";
 import { User } from "../Components/Models/User";
 import { actionKey, store } from "../store";
 
-const meLoginAction = (user: User) =>{
+export const meLoginAction = (user: User) =>{
     return {
         type: actionKey.ME_LOGIN,
         payload: user,
     }
 }
 
-const meFetchingAction = (user: User) =>{
+export const meLoginReqAction = (data: LoginData) =>{
+    return {
+        type: actionKey.ME_LOGIN_REQ,
+        payload: data,
+    }
+}
+
+export const meFetchedAction = (user: User) =>{
     return {
         type: actionKey.ME_FETCHED,
         payload: user,
     }
 }
 
-export const authAction = bindActionCreators(
-    {
-        login: meLoginAction,
-        fetching: meFetchingAction,
-    }, 
-    store.dispatch)
+export const meFetching = () =>{
+    return {
+        type: actionKey.ME_FETCHING,
+    }
+}
+
+export const meUpdateReq = (formData: MeUpdate) =>{
+    return {
+        type: actionKey.ME_UPDATE,
+        payload: formData
+    }
+}
+

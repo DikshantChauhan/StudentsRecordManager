@@ -1,5 +1,6 @@
 import axios, { CancelToken } from "axios"
 import { Group } from "../Models/Group"
+import { get } from "./Base"
 
 interface GroupRequest {
     limit?: number 
@@ -8,18 +9,13 @@ interface GroupRequest {
     status: "all-groups"
 }
 
-/* interface GroupResponse {
+interface GroupResponse {
     data: Group[]
-} */
+}
 
-export const fetchGroups = (data: GroupRequest, token?: CancelToken) =>{
-    return axios.get("https://api-dev.domecompass.com/groups", 
-    { params: data, cancelToken: token })
-    .then((response) =>{
-        return response.data.data
-    }).catch((error) =>{
-        console.error(error)
-    })
+export const fetchGroups = (data: GroupRequest) =>{
+    const url = "https://api-dev.domecompass.com/groups"
+    return get<GroupResponse>(url, { params: data })
 }
 /* export const fetchGroups = (data: GroupRequest) =>{
     return axios.get("https://api-dev.domecompass.com/groups", 

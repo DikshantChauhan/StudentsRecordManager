@@ -1,19 +1,25 @@
 import { AnyAction } from "redux";
-import { takeEvery, put, call } from "redux-saga/effects";
-import { groupQueryFinished } from "../actions/groups.action";
-import { fetchGroups as fetchGroupsAPI } from "../Components/Api/Groups";
+import { takeEvery, put, call, takeLatest, delay } from "redux-saga/effects";
+import { fetchOneGroupFinished, groupQueryFinished } from "../actions/groups.action";
+import { fetchGroup, fetchGroups as fetchGroupsAPI } from "../Components/Api/Groups";
+import { Group } from "../Components/Models/Group";
 import { actionKey } from "../store";
 
 function* fetchGroups(action: AnyAction): Generator<any> {
-    console.log("Query Changed!");
+    yield delay(1000)
     const groups: any = yield call(fetchGroupsAPI, {
         query: action.payload,
         status: "all-groups",
     });
-    yield put(groupQueryFinished(groups));
+    yield put(groupQueryFinished(groups.data.data))
+}
+
+function* fetchOneGroup(action: AnyAction) {
+    const response: Group = yield call(fetchGroup, action.payload)
+    yield put(fetchOneGroupFinished(response))
 }
 
 export function* fetchGroupSaga() {
-    console.log("Middle-wale saga called");
-    yield takeEvery(actionKey.GROUP_QUERY, fetchGroups);
+    yield takeLatest(actionKey.GROUP_QUERY, fetchGroups);
+    yield takeEvery(actionKey.FETCH_ONE_GROUP, fetchOneGroup);
 }

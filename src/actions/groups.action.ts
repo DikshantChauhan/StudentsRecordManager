@@ -1,4 +1,4 @@
-import { Group } from "@storybook/api";
+import { Group } from "../Components/Models/Group";
 import { actionKey } from "../store";
 
 export const groupQuery = (query: string) => {
@@ -29,10 +29,17 @@ export const groupSearchById = (id: number) =>{
     }
 }
 
-export const groupSearchByIdFinished = (group: Group) =>{
+export const fetchOneGroupFinished = (group: Group) =>{
     return {
-        type: actionKey.GROUP_SEARCH_BY_ID_FINISHED,
+        type: actionKey.FETCH_ONE_GROUP_FINISHED,
         payload: group,
+    }
+}
+
+export const fetchOneGroup = (id: number) =>{
+    return {
+        type: actionKey.FETCH_ONE_GROUP,
+        payload: id,
     }
 }
 
