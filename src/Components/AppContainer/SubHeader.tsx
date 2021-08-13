@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiChevronDown } from "react-icons/bi";
-import { uiAction } from "../../actions/ui.actions";
-import { useAppSelector } from "../../store";
-import { uiSelector } from "../../selector/app.selector";
-import { isSidebarOpenSelector } from "../../selector/ui.selector";
+import { uiAction } from "../../StateManagement/actions/ui.actions";
+import { useAppSelector } from "../../StateManagement/store";
+import { uiSelector } from "../../StateManagement/selector/app.selector";
+import { isSidebarOpenSelector } from "../../StateManagement/selector/ui.selector";
 
 interface Props{}
 

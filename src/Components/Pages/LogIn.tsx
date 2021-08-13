@@ -6,12 +6,10 @@ import * as yup from "yup"
 import {  useFormik } from "formik"
 import Input from "../Input/Input"
 import { IoMdMail } from "react-icons/io";
-import { Login } from "../Api/Auth";
 import { useDispatch } from "react-redux";
-import { actionKey, useAppSelector } from "../../store";
-import { authAction } from "../../actions/auth.bindAction";
-import { meLoginReqAction } from "../../actions/auth.action";
-import { meSelector } from "../../selector/auth.selector";
+import { useAppSelector } from "../../StateManagement/store";
+import { meLoginReqAction } from "../../StateManagement/actions/auth.action";
+import { meSelector } from "../../StateManagement/selector/auth.selector";
 
 interface Props{
 }

@@ -3,11 +3,11 @@ import React from "react";
 import * as yup from "yup"
 import ButtonSolid from "../Button/ButtonSolid";
 import InputLabeled from "../Input/InputLabeled";
-import { useAppSelector } from "../../store";
-import { meSelector } from "../../selector/auth.selector";
+import { useAppSelector } from "../../StateManagement/store";
+import { meSelector } from "../../StateManagement/selector/auth.selector";
 import { meUpdate } from "../Api/Auth";
 import { useDispatch } from "react-redux";
-import { meUpdateReq } from "../../actions/auth.action";
+import { meUpdateReq } from "../../StateManagement/actions/auth.action";
 
 interface Props{}
 

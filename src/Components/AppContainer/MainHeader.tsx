@@ -7,8 +7,8 @@ import { Link, useHistory } from "react-router-dom";
 import logoImage from "../../img/logo.svg"
 import Avatar from "../Avatar/Avatar";
 import { logout } from "../Api/Auth";
-import { useAppSelector } from "../../store";
-import { meSelector } from "../../selector/auth.selector";
+import { useAppSelector } from "../../StateManagement/store";
+import { meSelector } from "../../StateManagement/selector/auth.selector";
 import image from "../../img/profile-12.jpg";
 
 

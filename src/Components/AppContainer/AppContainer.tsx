@@ -8,8 +8,8 @@ import LeftSideBar from "./Navigation/LeftSideBar";
 import MenuItem from "./Navigation/MenuItem";
 import { FiHome } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
-import { useAppSelector } from "../../store";
-import { uiAction } from "../../actions/ui.actions";
+import { useAppSelector } from "../../StateManagement/store";
+import { uiAction } from "../../StateManagement/actions/ui.actions";
 import Groups from "../Pages/Groups";
 import Group from "../Pages/Group";
 

@@ -2,10 +2,10 @@ import React, { Suspense } from "react";
 import { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
-import { useAppSelector } from "./store";
-import { meSelector } from "./selector/auth.selector";
+import { useAppSelector } from "./StateManagement/store";
+import { meSelector } from "./StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";
-import { meFetching } from "./actions/auth.action";
+import { meFetching } from "./StateManagement/actions/auth.action";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )

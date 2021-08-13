@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { groupQuerySelector, groupsByQuerySelector, groupsFetchingSelector } from "../../selector/groups.selector";
-import { useAppSelector } from "../../store";
+import { groupQuerySelector, groupsByQuerySelector, groupsFetchingSelector } from "../../StateManagement/selector/groups.selector";
+import { useAppSelector } from "../../StateManagement/store";
 import AvatarOnline from "../Avatar/Avatar"
 import { FaSpinner } from "react-icons/fa";
-import { groupsAction } from "../../actions/groups.bindAction";
+import { groupsAction } from "../../StateManagement/actions/groups.bindAction";
 
 interface Props{}
 

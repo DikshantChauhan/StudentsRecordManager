@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "redux";
-import { actionKey } from "../store";
+import { ME_FETCHED, ME_LOGIN } from "../actionKey";
 
 export interface AuthState{
     id?: number
@@ -12,8 +12,8 @@ const initialValue = {
 export const AuthReducer: Reducer<AuthState> = 
     (currentState = initialValue, dispatchedAction: AnyAction) =>{
         switch(dispatchedAction.type){
-            case actionKey.ME_LOGIN:
-            case actionKey.ME_FETCHED:
+            case ME_LOGIN:
+            case ME_FETCHED:
                 const userId = dispatchedAction.payload.id as number
                 return { ...currentState, id: userId}
             default:

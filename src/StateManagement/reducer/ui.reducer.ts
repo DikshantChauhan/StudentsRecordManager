@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "redux";
-import { actionKey } from "../store";
+import { IS_SIDEBAR_OPEN } from "../actionKey";
 
 interface UiState {
     isSideBarOpen: boolean 
@@ -11,7 +11,7 @@ const initialValue: UiState = {
 
 export const uiReducer: Reducer<UiState> = (state = initialValue, action: AnyAction) =>{
     switch(action.type){
-        case actionKey.IS_SIDEBAR_OPEN:
+        case IS_SIDEBAR_OPEN:
             return {...state, isSideBarOpen: action.payload}
         
         default:

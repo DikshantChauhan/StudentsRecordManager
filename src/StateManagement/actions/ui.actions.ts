@@ -1,9 +1,10 @@
 import { bindActionCreators } from "redux"
-import { actionKey, store } from "../store"
+import { IS_SIDEBAR_OPEN } from "../actionKey"
+import { store } from "../store"
 
-const isSidebarOpen = (state: boolean) =>{
+export const isSidebarOpen = (state: boolean) =>{
     return {
-        type: actionKey.IS_SIDEBAR_OPEN,
+        type: IS_SIDEBAR_OPEN,
         payload: state,
     }
 }

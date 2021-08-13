@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { groupsAction } from "../../actions/groups.bindAction";
-import { groupByIdSelector, groupSearchedIdSelector } from "../../selector/groups.selector";
-import { useAppSelector } from "../../store";
+import { groupsAction } from "../../StateManagement/actions/groups.bindAction";
+import { groupByIdSelector, groupSearchedIdSelector } from "../../StateManagement/selector/groups.selector";
+import { useAppSelector } from "../../StateManagement/store";
 import image from "../../img/profile-12.jpg";
 import AvatarOnline from "../Avatar/Avatar"
 import { useDispatch } from "react-redux";
-import { fetchOneGroup } from "../../actions/groups.action";
+import { fetchOneGroup } from "../../StateManagement/actions/groups.action";
 
 interface Props{}
 
