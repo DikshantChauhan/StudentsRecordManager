@@ -23,7 +23,7 @@ axios.interceptors.response.use(undefined, (error) =>{
     return Promise.reject(error)
 })
 
-export const get = <T>(url: string, config?: AxiosRequestConfig | undefined) =>{
+export const get_cancelableAPI = <T>(url: string, config?: AxiosRequestConfig | undefined) =>{
     const { cancel, token } = axios.CancelToken.source()
 
     const response = axios.get<T>(url, { ...config, cancelToken: token })
