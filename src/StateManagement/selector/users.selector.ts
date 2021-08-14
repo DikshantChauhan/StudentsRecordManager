@@ -1,6 +1,9 @@
-import { AppState } from "../store"
+import { createSelector } from "reselect";
 import { usersSelector } from "./app.selector"
 
-export const usersByIds = (state: AppState) =>{
-    return usersSelector(state).byIds
-};
+export const usersByIds = createSelector(
+    [usersSelector],
+    (users) =>{
+        return users.byIds
+    }
+)

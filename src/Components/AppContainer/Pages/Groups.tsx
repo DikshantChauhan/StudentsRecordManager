@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { groupQuerySelector, groupsByQuerySelector, groupsFetchingSelector } from "../../../StateManagement/selector/groups.selector";
+import { groupsCurrentQuerySelector, groupsByQuerySelector, groupsByQueryLoadingSelector } from "../../../StateManagement/selector/groups.selector";
 import { useAppSelector } from "../../../StateManagement/store";
 import AvatarOnline from "../../Avatar/Avatar"
 import { FaSpinner } from "react-icons/fa";
@@ -10,12 +10,12 @@ import { groupsCurrentQueryAction } from "../../../StateManagement/actions/group
 interface Props{}
 
 const Groups: React.FC<Props> = () => {
-    const searchKey = useAppSelector(groupQuerySelector);
+    const searchKey = useAppSelector(groupsCurrentQuerySelector);
     const groups = useAppSelector(groupsByQuerySelector)
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const isFetching = useAppSelector(groupsFetchingSelector)
+    const isFetching = useAppSelector(groupsByQueryLoadingSelector)
 
     const image = "https://www.pngitem.com/pimgs/m/35-350426_profile-icon-png-default-profile-picture-png-transparent.png"
 

@@ -1,6 +1,9 @@
-import { AppState } from "../store";
+import { createSelector } from "reselect";
 import { uiSelector } from "./app.selector";
 
-export const isSidebarOpenSelector = (state: AppState) =>{
-    return uiSelector(state).isSideBarOpen
-};
+export const isSidebarOpenSelector = createSelector(
+    [uiSelector],
+    (ui) =>{
+        return ui.isSideBarOpen
+    }
+)
