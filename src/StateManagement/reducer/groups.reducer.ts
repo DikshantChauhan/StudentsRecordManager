@@ -1,10 +1,10 @@
 import { AnyAction, Reducer } from "redux";
-import { EntityState } from "../../Components/Models/Entity";
-import { Group } from "../../Components/Models/Group";
+import { EntityState } from "../../Components/Models/Entity.model";
+import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHED, 
     GROUPS_BY_QUERY_FETCHED, 
     GROUPS_CURRENT_QUERY, 
-    Group_BY_ID } from "../actionKey";
+    Group_BY_ID } from "../actionKeys";
 import { normalizeMany } from "../helperFunctions";
 
 export interface GroupsState extends EntityState<Group>{

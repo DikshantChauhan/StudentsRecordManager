@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AuthHeroSection from "./AuthHeroSection";
-import LogIn from "../Pages/LogIn";
-import SignIn from "../Pages/SignIn";
+import LogIn from "./pages/LogIn";
+import SignIn from "./pages/SignIn";
 
 interface Props{
 }

@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "redux";
-import { ME_FETCHED, ME_LOGED_IN } from "../actionKey";
+import { ME_FETCHED, ME_LOGED_IN } from "../actionKeys";
 
 export interface AuthState{
     id?: number

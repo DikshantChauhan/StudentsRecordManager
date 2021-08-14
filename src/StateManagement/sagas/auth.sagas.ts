@@ -2,9 +2,9 @@ import { useHistory } from "react-router-dom";
 import { AnyAction } from "redux";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { meFetchedAction, meLogedInAction } from "../actions/auth.action";
-import {  LoginAPI, meFetchAPI, meUpdateAPI } from "../../Components/Api/Auth";
-import { User } from "../../Components/Models/User";
-import { ME_FETCHING, ME_LOGING_IN, ME_UPDATE } from "../actionKey";
+import {  LoginAPI, meFetchAPI, meUpdateAPI } from "../../Components/Api/Auth.api";
+import { User } from "../../Components/Models/User.model";
+import { ME_FETCHING, ME_LOGING_IN, ME_UPDATE } from "../actionKeys";
 
 function* meFetching(action: AnyAction) {
     const response: User = yield call(meFetchAPI)

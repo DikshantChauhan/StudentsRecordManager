@@ -1,5 +1,5 @@
-import { User } from "./User";
- import { Entity } from "./Entity";
+import { User } from "./User.model";
+ import { Entity } from "./Entity.model";
 
 export interface Group extends Entity{
     name: string;

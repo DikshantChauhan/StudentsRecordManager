@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { LS_LOGIN_TOKEN } from "./Components/Api/Base";
+import { LS_LOGIN_TOKEN } from "./Components/Api/Base.api";
 import { useAppSelector } from "./StateManagement/store";
 import { meSelector } from "./StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";

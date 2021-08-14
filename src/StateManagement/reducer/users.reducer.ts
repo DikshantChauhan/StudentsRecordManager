@@ -1,7 +1,7 @@
 import { AnyAction, Reducer } from "redux";
-import { EntityState } from "../../Components/Models/Entity";
-import { User } from "../../Components/Models/User";
-import { ME_FETCHED, ME_LOGED_IN } from "../actionKey";
+import { EntityState } from "../../Components/Models/Entity.model";
+import { User } from "../../Components/Models/User.model";
+import { ME_FETCHED, ME_LOGED_IN } from "../actionKeys";
 import { normalizeOne } from "../helperFunctions";
 
 export interface UsersState extends EntityState<User>{

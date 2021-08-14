@@ -1,10 +1,10 @@
-import { Group } from "../../Components/Models/Group";
+import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHING, 
     GROUP_FETCHED, 
     GROUPS_LOADING, 
     GROUPS_BY_QUERY_FETCHED, 
     GROUPS_CURRENT_QUERY, 
-    Group_BY_ID } from "../actionKey";
+    Group_BY_ID } from "../actionKeys";
 
 export const groupsCurrentQueryAction = (query: string) => {
     return {

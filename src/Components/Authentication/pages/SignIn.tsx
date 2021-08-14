@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup"
-import Input from "../Input/Input";
+import Input from "../../Input/Input";
 import {IoMdMail} from "react-icons/io"
 import { FaLock, FaSpinner, FaUserAlt } from "react-icons/fa";
 

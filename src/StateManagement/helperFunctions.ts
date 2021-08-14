@@ -1,4 +1,4 @@
-import { Entity, EntityState } from "../Components/Models/Entity"
+import { Entity, EntityState } from "../Components/Models/Entity.model"
 
 export const normalizeMany = (state: EntityState, arr: Entity[]) =>{
     if(arr === []){

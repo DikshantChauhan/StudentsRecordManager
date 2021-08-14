@@ -4,10 +4,10 @@ import { usersReducer } from "./reducer/users.reducer";
 import { groupsReducer } from "./reducer/groups.reducer";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { uiReducer } from "./reducer/ui.reducer";
-import { sagaMiddleware } from "./saga";
-import { fetchGroupSaga } from "./saga/groups.sagas";
+import { sagaMiddleware } from "./sagas";
+import { fetchGroupSaga } from "./sagas/groups.sagas";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { meSaga } from "./saga/auth.sagas";
+import { meSaga } from "./sagas/auth.sagas";
 
 const reducer = combineReducers({
    auth: AuthReducer,

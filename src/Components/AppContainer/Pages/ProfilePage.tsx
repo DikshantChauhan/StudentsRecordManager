@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
 import React from "react";
 import * as yup from "yup"
-import ButtonSolid from "../Button/ButtonSolid";
-import InputLabeled from "../Input/InputLabeled";
-import { useAppSelector } from "../../StateManagement/store";
-import { meSelector } from "../../StateManagement/selector/auth.selector";
+import ButtonSolid from "../../Button/ButtonSolid";
+import InputLabeled from "../../Input/InputLabeled";
+import { useAppSelector } from "../../../StateManagement/store";
+import { meSelector } from "../../../StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";
-import { meUpdating } from "../../StateManagement/actions/auth.action";
+import { meUpdating } from "../../../StateManagement/actions/auth.action";
 
 interface Props{}
 

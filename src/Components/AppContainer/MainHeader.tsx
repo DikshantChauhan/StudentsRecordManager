@@ -6,7 +6,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { Link, useHistory } from "react-router-dom";
 import logoImage from "../../img/logo.svg"
 import Avatar from "../Avatar/Avatar";
-import { logout } from "../Api/Auth";
+import { logout } from "../Api/Auth.api";
 import { useAppSelector } from "../../StateManagement/store";
 import { meSelector } from "../../StateManagement/selector/auth.selector";
 import image from "../../img/profile-12.jpg";

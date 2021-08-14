@@ -1,6 +1,6 @@
 import axios from "axios";
-import { User } from "../Models/User";
-import { BASE_URL, LS_LOGIN_TOKEN } from "./Base";
+import { User } from "../Models/User.model";
+import { BASE_URL, LS_LOGIN_TOKEN } from "./Base.api";
 
 interface LoginResponse {
     data: {

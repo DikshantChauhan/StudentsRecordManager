@@ -1,9 +1,9 @@
 import { AnyAction } from "redux";
 import { takeEvery, put, call, takeLatest, delay } from "redux-saga/effects";
 import { groupByIdFetchedAction, groupsByQueryFetchedAction } from "../actions/groups.action";
-import { groupFetchAPI, groupsFetchAPI } from "../../Components/Api/Groups";
-import { Group } from "../../Components/Models/Group";
-import { GROUP_FETCHING, GROUPS_CURRENT_QUERY } from "../actionKey";
+import { groupFetchAPI, groupsFetchAPI } from "../../Components/Api/Groups.api";
+import { Group } from "../../Components/Models/Group.model";
+import { GROUP_FETCHING, GROUPS_CURRENT_QUERY } from "../actionKeys";
 
 function* fetchGroups(action: AnyAction): Generator<any> {
     yield delay(1000)

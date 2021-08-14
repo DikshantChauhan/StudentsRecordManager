@@ -1,4 +1,4 @@
-import { Entity } from "./Entity";
+import { Entity } from "./Entity.model";
 
 export interface User extends Entity{
     first_name: string,

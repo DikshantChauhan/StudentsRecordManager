@@ -1,16 +1,16 @@
 import React, { Fragment } from "react";
 import { Link, Route, Switch } from "react-router-dom";
-import Home from "../Pages/Home";
-import Lecture from "../Pages/Lecture";
+import Home from "./Pages/Home";
+import Lecture from "./Pages/Lecture";
 import Header from "./Header";
-import ProfilePage from "../Pages/ProfilePage";
+import ProfilePage from "./Pages/ProfilePage";
 import LeftSideBar from "./Navigation/LeftSideBar";
 import MenuItem from "./Navigation/MenuItem";
 import { FiHome } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { useAppSelector } from "../../StateManagement/store";
-import Groups from "../Pages/Groups";
-import Group from "../Pages/Group";
+import Groups from "./Pages/Groups";
+import Group from "./Pages/Group";
 import { sidebarOpenAction } from "../../StateManagement/actions/ui.actions";
 import { useDispatch } from "react-redux";
 

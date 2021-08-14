@@ -1,6 +1,6 @@
 import axios, { CancelToken } from "axios"
-import { Group } from "../Models/Group"
-import { BASE_URL, get_cancelableAPI } from "./Base"
+import { Group } from "../Models/Group.model"
+import { BASE_URL, get_cancelableAPI } from "./Base.api"
 
 interface GroupRequest {
     limit?: number 

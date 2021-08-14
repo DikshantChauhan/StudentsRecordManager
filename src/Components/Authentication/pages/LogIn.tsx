@@ -4,12 +4,12 @@ import { FaLock, FaSpinner, } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup"
 import {  useFormik } from "formik"
-import Input from "../Input/Input"
+import Input from "../../Input/Input"
 import { IoMdMail } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../StateManagement/store";
-import { meLogingInAction } from "../../StateManagement/actions/auth.action";
-import { meSelector } from "../../StateManagement/selector/auth.selector";
+import { useAppSelector } from "../../../StateManagement/store";
+import { meLogingInAction } from "../../../StateManagement/actions/auth.action";
+import { meSelector } from "../../../StateManagement/selector/auth.selector";
 
 interface Props{
 }

@@ -1,4 +1,4 @@
-import { IS_SIDEBAR_OPEN } from "../actionKey"
+import { IS_SIDEBAR_OPEN } from "../actionKeys"
 
 export const sidebarOpenAction = (state: boolean) =>{
     return {

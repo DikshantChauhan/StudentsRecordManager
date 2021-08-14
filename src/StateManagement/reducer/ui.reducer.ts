@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "redux";
-import { IS_SIDEBAR_OPEN } from "../actionKey";
+import { IS_SIDEBAR_OPEN } from "../actionKeys";
 
 interface UiState {
     isSideBarOpen: boolean 

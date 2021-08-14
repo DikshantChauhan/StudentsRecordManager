@@ -1,6 +1,6 @@
-import { LoginData, MeUpdate } from "../../Components/Api/Auth";
-import { User } from "../../Components/Models/User";
-import { ME_FETCHED, ME_FETCHING, ME_LOGED_IN, ME_LOGING_IN, ME_UPDATE } from "../actionKey";
+import { LoginData, MeUpdate } from "../../Components/Api/Auth.api";
+import { User } from "../../Components/Models/User.model";
+import { ME_FETCHED, ME_FETCHING, ME_LOGED_IN, ME_LOGING_IN, ME_UPDATE } from "../actionKeys";
 
 export const meLogedInAction = (user: User) =>{
     return {
