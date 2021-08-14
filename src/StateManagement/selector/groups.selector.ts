@@ -3,11 +3,11 @@ import { AppState } from "../store";
 import { groupsSelector } from "./app.selector";
 
 export const groupQuerySelector = (state: AppState) =>{
-    return groupsSelector(state).query
+    return groupsSelector(state).currentQuery
 }
 
 export const groupQueryMapSelector = (state: AppState) =>{
-    return groupsSelector(state).queryMap
+    return groupsSelector(state).groupsIdsByQuery
 }
 
 export const groupsByIdsSelector = (state: AppState) =>{
@@ -19,10 +19,7 @@ export const groupSearchedIdSelector = (state: AppState) =>{
 }
 
 export const groupsFetchingSelector = (state: AppState) =>{
-    //multiple req
-    /* return groupsSelector(state).loading[groupsSelector(state).query] */
-
-    return groupsSelector(state).loading
+    return groupsSelector(state).groupsByQueryLoading
 }
 
 export const groupByIdSelector = (state: AppState) =>{

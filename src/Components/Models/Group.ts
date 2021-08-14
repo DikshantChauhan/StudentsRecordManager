@@ -1,6 +1,5 @@
 import { User } from "./User";
-import { State } from "./State";
-import { Entity } from "./Entity";
+ import { Entity } from "./Entity";
 
 export interface Group extends Entity{
     name: string;
@@ -18,4 +17,12 @@ export interface Group extends Entity{
     invitedMembers: User[];
     participants: User[];
     advocatePage?: string;
+}
+
+interface State{
+    id: number
+    title: string;
+    state_code: string;
+    created_at: Date;
+    updated_at: Date;
 }

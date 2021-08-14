@@ -5,5 +5,7 @@ export interface Entity{
 export interface EntityState<T extends Entity = Entity>{
     byIds: {
         [id: number]: T
-    },
+    }
+    searchedId?: number
+    loading?: boolean
 }
