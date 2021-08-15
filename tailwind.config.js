@@ -52,7 +52,11 @@ module.exports = {
 
       boxShadow: {
         'button': '3px 62px 103px -23px rgba(0,0,0,0.76);'
-      }
+      },
+
+      height: {
+        nav: `calc(100vh - 123px)`
+      },
     },
   },
   variants: {

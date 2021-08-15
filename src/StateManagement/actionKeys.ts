@@ -17,4 +17,5 @@ export const GROUP_FETCHING = "group/fetching"
 
 //UI
 export const IS_SIDEBAR_OPEN = "ui/isSideBarOpen"
-export const IS_SIDEBAR_SUBMENU_OPEN = "ui/isSideBarSubMenuOpen"
+export const IS_SUB_MENU_OPEN = "ui/whichSubMenuIsOpen"
+export const IS_SUB_MENU_ITEMS_MOUNT = "ui/sub_menu_items_mount"

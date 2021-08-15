@@ -20,9 +20,6 @@ interface Props{
 const AppContainer: React.FC<Props> = () => {
     const state = useAppSelector((state) => state.ui.isSideBarOpen)
     const dispatch = useDispatch()
-    /* const data = useMemo(() =>{
-        return {state, setState}
-    }, [state]) */
     
     return(
         <>
@@ -38,13 +35,28 @@ const AppContainer: React.FC<Props> = () => {
                 leave="duration-300 transition-transform"
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
-                className="transform absolute z-30 overflow-y-auto lg:z-50 left-0 top-0 bottom-0 bg-gray-200 border-r-2 border-gray-300"
+                className="transform absolute z-30 overflow-y-auto lg:z-50 left-0 bottom-0 bg-gray-200 border-r-2 border-gray-300"
             >
-            <LeftSideBar className={`lg:pt-6 pt-36 pb-6`}>
+            <LeftSideBar className={`pt-6 pb-6`}>
                 <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
                     <Link to="/groups">Groups</Link>
                     <Link to="/profile">Profile</Link>
                     <Link to="/lecture">Lecture</Link>
+                </MenuItem>
+                <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
+                    <h1>CHILDREN</h1>
+                    <h1>hello</h1>
+                    <h1>CHILDREN</h1>
+                </MenuItem>
+                <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
+                    <h1>CHILDREN</h1>
+                    <h1>hello</h1>
+                    <h1>CHILDREN</h1>
+                </MenuItem>
+                <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
+                    <h1>CHILDREN</h1>
+                    <h1>hello</h1>
+                    <h1>CHILDREN</h1>
                 </MenuItem>
                 <MenuItem title="Dashboard" icon={<FiHome className={`w-5 h-5 mr-3`}/>}>
                     <h1>CHILDREN</h1>
