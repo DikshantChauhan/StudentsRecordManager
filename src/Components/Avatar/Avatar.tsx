@@ -1,5 +1,6 @@
 import React from "react";
 import { IoMdRadioButtonOff } from "react-icons/io";
+import image from "../../img/default_avatar.jpg"
 
 interface Props{
     img: string;
@@ -31,7 +32,7 @@ const AvatarOnline: React.FC<Props> = ({img, theme, variant, className}) => {
 
     return(
         <div className={`relative rounded-full max-w-max ${themeClass!} ${className}`}>
-           <img className={`rounded-full w-full h-full`} src={img} onError={(e: any) => { e.target.src = "https://www.pngitem.com/pimgs/m/35-350426_profile-icon-png-default-profile-picture-png-transparent.png" }} alt="avatar" />
+           <img className={`rounded-full w-full h-full`} src={img || image} onError={(e: any) => { e.target.src = image }} alt="avatar" />
            <IoMdRadioButtonOff className={`w-1/3 h-1/3 absolute z-30 bottom-0 right-0  text-white rounded-full ${variantClass}`}/>         
         </div>
     )

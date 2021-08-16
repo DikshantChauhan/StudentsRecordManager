@@ -3,7 +3,7 @@ import { BsDot } from "react-icons/bs";
 
 interface Props{
     title: JSX.Element | string;
-    children?: any[];
+    children?: any[] | any;
     icon: any
 }
 

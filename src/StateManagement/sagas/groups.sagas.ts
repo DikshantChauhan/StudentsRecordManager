@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { takeEvery, put, call, takeLatest, delay } from "redux-saga/effects";
-import { groupByIdFetchedAction, groupsByQueryFetchedAction } from "../actions/groups.action";
+import { groupByIdFetchedAction, groupFetchingFailAction, groupLoadingAction, groupsByQueryFetchedAction } from "../actions/groups.action";
 import { groupFetchAPI, groupsFetchAPI } from "../../Components/Api/Groups.api";
 import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHING, GROUPS_CURRENT_QUERY } from "../actionKeys";
@@ -15,8 +15,15 @@ function* fetchGroups(action: AnyAction): Generator<any> {
 }
 
 function* groupFetching(action: AnyAction) {
-    const response: Group = yield call(groupFetchAPI, action.payload)
-    yield put(groupByIdFetchedAction(response))
+    try{
+        const response: Group = yield call(groupFetchAPI, action.payload)
+        yield put(groupByIdFetchedAction(response))
+        yield put(groupLoadingAction(false))
+    }
+    catch (e) {
+        yield put(groupFetchingFailAction(e.response?.data?.message || "Something went Wrong"))
+        yield put(groupLoadingAction(false))
+    }
 }
 
 export function* fetchGroupSaga() {

@@ -13,7 +13,7 @@ const SubHeader: React.FC<Props> = () => {
     const currentState = useAppSelector(isSidebarOpenSelector);
     const dispatch = useDispatch()
     return(
-        <div className={`bg-white`}>
+        <div className={`bg-white shadow-button`}>
             <ul className={`py-2 px-6 flex justify-between items-center max-w-8xl mx-auto relative`}>
                 <li>
                     <button onClick={() =>{dispatch(sidebarOpenAction(!currentState))}}>

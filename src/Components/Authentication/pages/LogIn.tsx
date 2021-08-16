@@ -9,7 +9,7 @@ import { IoMdMail } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../StateManagement/store";
 import { meLogingInAction } from "../../../StateManagement/actions/auth.action";
-import { meSelector } from "../../../StateManagement/selector/auth.selector";
+import { meLogingFailSelector, meSelector } from "../../../StateManagement/selector/auth.selector";
 
 interface Props{
 }
@@ -47,6 +47,7 @@ const LogIn: React.FC<Props> = () => {
 
     const dispatch = useDispatch()
     const user = useAppSelector(meSelector)
+    const error = useAppSelector(meLogingFailSelector)
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     let history = useHistory()
@@ -102,6 +103,7 @@ const LogIn: React.FC<Props> = () => {
                         className="mb-6"
                         Icon={FaLock}
                     />
+                    {error && <h1 className={`mb-8 text-red-600`}>{error}</h1>}
 
                     <div className={`flex justify-between items-center vsm:flex-col vsm:items-start`}>
                         <div className={`flex text-sm items-baseline justify-start`}>
@@ -121,7 +123,7 @@ const LogIn: React.FC<Props> = () => {
                 </form>
 
             </div>
-            {formik.isSubmitting && <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black-dark bg-opacity-70 flex items-center justify-around`}>
+            {(error === undefined) && formik.isSubmitting && <div className={`fixed w-screen z-50 top-0 left-0 right-0 bottom-0 h-screen bg-black-dark bg-opacity-70 flex items-center justify-around`}>
                 <FaSpinner className={`w-8 h-8 text-white animate-spin`}></FaSpinner> 
             </div>}
         </div>

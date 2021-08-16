@@ -6,6 +6,9 @@ import AvatarOnline from "../../Avatar/Avatar"
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { groupsCurrentQueryAction } from "../../../StateManagement/actions/groups.action";
+import { FiSearch } from "react-icons/fi";
+import { useEffect } from "react";
+import image from "../../../img/default_avatar.jpg"
 
 interface Props{}
 
@@ -16,50 +19,54 @@ const Groups: React.FC<Props> = () => {
     const dispatch = useDispatch()
 
     const isFetching = useAppSelector(groupsByQueryLoadingSelector)
-
-    const image = "https://www.pngitem.com/pimgs/m/35-350426_profile-icon-png-default-profile-picture-png-transparent.png"
-
+    useEffect(() =>{
+        dispatch(groupsCurrentQueryAction(""))
+    }, [])
+    
     return(
-        <div className={`w-full`}>
-            <input 
-                className={`w-full mt-2 text-black-dark p-4 max-w-4xl mx-auto mb-8 sticky top-32 z-10 border rounded-xl block hover:bg-gray-200`}
-                type="text" 
-                placeholder="Search..." 
-                onChange={(e) =>{dispatch(groupsCurrentQueryAction(e.target.value))}}
-                value={searchKey}
-            />  
-            {isFetching && <FaSpinner className={`animate-spin`}></FaSpinner>}
-            {groups.map((item, index) =>{
-                let stripClass = ""
-                if(index % 2 === 0){
-                    stripClass = "bg-gray-800 text-gray-200"
-                }else{
-                    stripClass = "bg-black-light text-gray-200"
-                }
-                return(
-                    <div onClick={() =>{history.push(`/group/${item.id}`)}} className={`flex p-8 max-w-4xl mx-auto mb-2 rounded-xl hover:bg-gray-200 hover:text-black-light ${stripClass}`}>
-                        <AvatarOnline
-                            img={item.group_image_url || image}
-                            variant="default"
-                            theme="small"
-                            className={`mr-6`}
-                        />
-                        <div>
-                            <h1 className={`font-semibold text-lg capitalize tracking-normal`}>
-                                {item.name}
-                            </h1>
-                            <p className={`max-w-md`}>
-                                {item.description}
-                            </p>
+        <div className={`w-full max-w-4xl mx-auto mt-5 mb-5`}>
+            <div className={`mb-8 sticky top-5 z-10`}>
+                <input 
+                    className={`w-full text-black-dark p-4 pl-10 border-2 rounded-xl block focus:outline-none focus:border-primary-main`}
+                    type="text" 
+                    placeholder="Search..." 
+                    onChange={(e) =>{dispatch(groupsCurrentQueryAction(e.target.value))}}
+                    value={searchKey}
+                />  
+                <FiSearch className={`absolute left-4 opacity-50 text-lg top-1/2 transform -translate-y-1/2`} />
+                {isFetching && <FaSpinner className={`animate-spin absolute right-4 text-2xl top-4 text-green-600 font-black`}></FaSpinner>}
+            </div>
+            <div className={`rounded-3xl mb-5`}>
+                {groups.map((item, index) =>{
+                    let stripClass = ""
+                    if(index % 2 === 0){
+                        stripClass = "bg-gray-300 text-black-dark"
+                    }else{
+                        stripClass = "bg-gray-200 text-black-dark"
+                    }
+                    return(
+                        <div className={`flex w-full p-8 ${stripClass}`}>
+                            <AvatarOnline
+                                img={item.group_image_url || image}
+                                variant="default"
+                                theme="small"
+                                className={`mr-6`}
+                            />
+                            <div>
+                                <h1 onClick={() =>{history.push(`/group/${item.id}`)}} className={`font-semibold text-lg underline capitalize tracking-normal cursor-pointer text-primary-main`}>
+                                    {item.name}
+                                </h1>
+                                <p className={`max-w-md`}>
+                                    {item.description}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
-            <h1>
-                <Link to="/lecture" className={`text-green-700`}>
-                    go to lecture recording page
-                </Link>
-            </h1>
+                    )
+                })}
+            </div>
+            <Link to="/lecture" className={`text-primary-main underline`}>
+                Go to lecture recording page
+            </Link>
         </div>
     )
 };

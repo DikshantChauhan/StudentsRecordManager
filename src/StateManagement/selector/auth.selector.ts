@@ -1,9 +1,9 @@
 import { createSelector } from "reselect";
 import { authSelector } from "./app.selector";
-import { usersByIds } from "./users.selector";
+import { usersByIdsSelector } from "./users.selector";
 
 export const meSelector = createSelector(
-    [authSelector, usersByIds],
+    [authSelector, usersByIdsSelector],
     (auth, users) =>{
         const userId = auth.id
         const user = (userId === undefined) ? undefined : users[userId]
@@ -11,3 +11,10 @@ export const meSelector = createSelector(
         return user
     }
 );
+
+export const meLogingFailSelector = createSelector(
+    [authSelector],
+    (auth) =>{
+        return auth.logingFail
+    }
+)

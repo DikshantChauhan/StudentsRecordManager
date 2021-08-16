@@ -36,10 +36,24 @@ export const groupsByQueryLoadingSelector = createSelector(
     }
 )
 
+export const groupLoadingSelector = createSelector(
+    [groupsSelector],
+    (groups) =>{
+        return groups.loading
+    }
+)
+
 export const groupByIdSelector = createSelector(
     [groupsByIdsSelector, groupSearchedIdSelector],
     (byIds, id) =>{
         return byIds[id!]
+    }
+)
+
+export const groupFetchingfailSelector = createSelector(
+    [groupsSelector],
+    (groups) =>{
+        return groups.groupFetchingFail
     }
 )
 

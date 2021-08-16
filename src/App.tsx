@@ -6,6 +6,7 @@ import { useAppSelector } from "./StateManagement/store";
 import { meSelector } from "./StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";
 import { meFetchingAction } from "./StateManagement/actions/auth.action";
+import { ImSpinner2 } from "react-icons/im";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )
@@ -33,11 +34,17 @@ const App: React.FC<Props> = () => {
   }, [user]) */
 
   if (!user && token) {
-    return <div>Loading....</div>
+    return (
+      <div className="relative flex flex-col justify-center items-center h-screen">
+        <ImSpinner2 className="animate-spin absolute text-primary-main w-6 h-6 " />
+        <ImSpinner2 className="animate-spin absolute text-primary-main w-8 h-8 " />
+        <ImSpinner2 className="animate-spin absolute text-primary-main w-10 h-10 " />
+    </div>
+    )
   }
   
     return(
-      <div className={`font-sans w-full h-screen overflow-y-auto`}>
+      <div className={`font-sans`}>
         <BrowserRouter>
         <Switch>
           <Route path="/" exact>
@@ -46,12 +53,24 @@ const App: React.FC<Props> = () => {
           <Route path={["/login", "/signup"]} exact>
             {user ? 
               <Redirect to="/home"></Redirect>:
-              <Suspense fallback={<div>Loading....</div>}><AuthenticationLazy /></Suspense>
+              <Suspense fallback={
+                <div className="bg-indigoish relative flex flex-col justify-center items-center h-screen">
+                 <ImSpinner2 className="animate-spin absolute text-primary-main w-6 h-6 " />
+                 <ImSpinner2 className="animate-spin absolute text-primary-main w-8 h-8 " />
+                 <ImSpinner2 className="animate-spin absolute text-primary-main w-10 h-10 " />
+                </div>
+              }><AuthenticationLazy /></Suspense>
             }
           </Route>
-          <Route path={["/home", "/lecture", "/group/:id", "/profile", "/groups"]} exact>
+          <Route path={["/home", "/lecture", "/group/:id", "/profile", "/groups", "/users", "/user/:id"]} exact>
             {user ? 
-              <Suspense fallback={<div>Loading....</div>}><AppContainerLazy /></Suspense>:
+              <Suspense fallback={
+                <div className="bg-indigoish relative flex flex-col justify-center items-center h-screen">
+                 <ImSpinner2 className="animate-spin absolute text-primary-main w-6 h-6 " />
+                 <ImSpinner2 className="animate-spin absolute text-primary-main w-8 h-8 " />
+                 <ImSpinner2 className="animate-spin absolute text-primary-main w-10 h-10 " />
+                </div>
+              }><AppContainerLazy /></Suspense>:
               <Redirect to="/login"></Redirect>
             }
           </Route>

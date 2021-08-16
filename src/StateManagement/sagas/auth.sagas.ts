@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { AnyAction } from "redux";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { meFetchedAction, meLogedInAction } from "../actions/auth.action";
+import { meFetchedAction, meLogedInAction, meLogingFailAction } from "../actions/auth.action";
 import {  LoginAPI, meFetchAPI, meUpdateAPI } from "../../Components/Api/Auth.api";
 import { User } from "../../Components/Models/User.model";
 import { ME_FETCHING, ME_LOGING_IN, ME_UPDATE } from "../actionKeys";
@@ -17,8 +17,13 @@ function* meUpdating(action: AnyAction){
 }
 
 function* meLogingIn(action: AnyAction){
-    const response: User = yield call(LoginAPI, action.payload)
-    yield put(meLogedInAction(response))
+    try{
+        const response: User = yield call(LoginAPI, action.payload)
+        yield put(meLogedInAction(response))
+    }
+    catch (e){
+        yield put(meLogingFailAction(e.response?.data?.message || "Something went Wrong"))
+    }
 }
 
 export function* meSaga(){

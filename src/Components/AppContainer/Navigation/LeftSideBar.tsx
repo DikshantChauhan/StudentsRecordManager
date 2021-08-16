@@ -33,20 +33,26 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                 }
 
                 return(
-                <div className={`relative transform transition-all duration-300 ${isOpen ? "mb-40":"mb-0"}`}>
-                    <button onClick={handelClick} type="button" className={`w-48 flex justify-between items-center bg-white py-3 px-3 rounded-lg`}>
+                <div className={`relative transform transition-all duration-300 ${isOpen ? "mb-48":"mb-0"}`}>
+                    {item.props.children && <button onClick={handelClick} type="button" className={`w-48 flex justify-between items-center bg-white py-3 px-3 rounded-lg`}>
                         {item?.props.icon}
                         <span className={`flex-1 text-left text-sm tracking-wide`}>{item?.props.title}</span>
                         <BiChevronDown />
-                    </button>
-                    {<div className={`${subMenuClasses} transition-all absolute flex flex-col rounded-lg w-full bottom-0 transform translate-y-full left-0 right-0`}>
-                        {item?.props.children.map((item: any) => {
+                    </button>}
+                    {item.props.children && <div className={`${subMenuClasses} transition-all absolute flex flex-col rounded-lg w-full bottom-0 transform translate-y-full left-0 right-0`}>
+                        {(item.props.children.length >= 1) && item.props.children.map((item: any) => {
                             return(
-                            <button className="flex pl-8 py-3 items-center text-gray-500 hover:text-primary-main">
+                            <div className="flex pl-8 py-3 items-center">
                                 <BsDot className={`w-3 h-3`}></BsDot>
-                                {item}
-                            </button>
+                                <h1 className={`text-gray-700 hover:text-primary-main font-semibold`}>{item}</h1>
+                            </div>
                         )})}
+                        {(item.props.children.length === undefined) && 
+                            <div className="flex pl-8 py-3 items-center">
+                                <BsDot className={`w-3 h-3`}></BsDot>
+                                <h1 className={`text-gray-700 hover:text-primary-main font-semibold`}>{item.props.children}</h1>
+                            </div>
+                        }
                     </div>}
                 </div>
             )})}     

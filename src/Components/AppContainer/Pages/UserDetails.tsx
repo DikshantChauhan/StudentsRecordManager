@@ -1,40 +1,38 @@
 import React from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { groupByIdSelector, groupFetchingfailSelector, groupLoadingSelector, groupSearchedIdSelector } from "../../../StateManagement/selector/groups.selector";
+import { searchedUserIdAction, userFetchingAction, userLoadingAction } from "../../../StateManagement/actions/users.action";
+import { searchedUserSelector, userFetchingfailSelector, userLoadingSelector } from "../../../StateManagement/selector/users.selector";
 import { useAppSelector } from "../../../StateManagement/store";
 import image from "../../../img/default_avatar.jpg";
 import AvatarOnline from "../../Avatar/Avatar"
-import { useDispatch } from "react-redux";
-import { groupByIdFetchingAction, groupByIdAction, groupLoadingAction } from "../../../StateManagement/actions/groups.action";
 
 interface Props{}
 
-const Group: React.FC<Props> = () => {
+const UserDetails: React.FC<Props> = () => {
     console.log("rendering")
-    const param: any = useParams()
+    const params: any = useParams()
     const dispatch = useDispatch()
+    dispatch(searchedUserIdAction(params.id))
 
-    dispatch(groupByIdAction(param.id))
-
-    const id = useAppSelector(groupSearchedIdSelector)
-    const group = useAppSelector(groupByIdSelector)
-    const loading = useAppSelector(groupLoadingSelector)
-    const error = useAppSelector(groupFetchingfailSelector)
+    const user = useAppSelector(searchedUserSelector)
+    const loading = useAppSelector(userLoadingSelector)
+    const error = useAppSelector(userFetchingfailSelector)
 
     useEffect(() =>{
-        dispatch(groupLoadingAction(true))
-        dispatch(groupByIdFetchingAction(id!))
-    }, [id])
+        dispatch(userLoadingAction(true))
+        dispatch(userFetchingAction(params.id))
+    }, [])
 
-    if(loading || group || error){
+    if(loading || user || error){
         return(
             <div className={`max-w-4xl mx-auto mt-5`}>
                 <div className={`bg-gray-200 p-2 rounded-lg shadow-sm mb-5`}>
                     {error && <h1 className={`text-red-600`}>{error}</h1>}
-                    {(loading || group) && <div className={`flex p-8 mx-auto mb-2`}>
+                    {(loading || user) && <div className={`flex p-8 mx-auto mb-2`}>
                         <AvatarOnline
-                            img={loading ? image : (group.group_image_url || image)}
+                            img={loading ? image : (user.profile_pic_url || image)}
                             variant="default"
                             theme="small"
                             className={`mr-6`}
@@ -42,17 +40,17 @@ const Group: React.FC<Props> = () => {
                         <div>
                             {loading ? <h1>____________</h1> : 
                                 <h1 className={`font-semibold text-lg capitalize tracking-normal`}>
-                                    {group.name}
+                                    {user.first_name + " " + user.last_name}
                                 </h1>}
                             {loading ? <h1>_______________________</h1> : 
                                 <p className={`max-w-md`}>
-                                    {group.description}
+                                    {user.email}
                                 </p>}
                         </div>
                     </div>}
                 </div>
-                <Link to="/groups" className={`underline text-primary-main`}>
-                    Back to Groups Page
+                <Link to="/users" className={`underline text-primary-main`}>
+                    Back to Users Page
                 </Link>
             </div>
         )
@@ -61,8 +59,8 @@ const Group: React.FC<Props> = () => {
     return (<></>)
 };
 
-Group.defaultProps = {
+UserDetails.defaultProps = {
     
 }
 
-export default React.memo(Group)
+export default React.memo(UserDetails);

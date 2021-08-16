@@ -4,13 +4,16 @@ import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHED, 
     GROUPS_BY_QUERY_FETCHED, 
     GROUPS_CURRENT_QUERY, 
-    Group_BY_ID } from "../actionKeys";
+    SEARCHED_GROUP_ID, 
+    GROUP_LOADING,
+    GROUP_FETCHING_FAIL} from "../actionKeys";
 import { normalizeMany } from "../helperFunctions";
 
 export interface GroupsState extends EntityState<Group>{
     currentQuery: string;
     groupsIdsByQuery: { [query: string]: number[] }
     groupsByQueryLoading: boolean
+    groupFetchingFail?: string
 }
 
 const initialValue: GroupsState = {
@@ -20,6 +23,7 @@ const initialValue: GroupsState = {
     searchedId: undefined,
     groupsByQueryLoading: false,
     loading: false,
+    groupFetchingFail: undefined,
 }
 
 export const groupsReducer: Reducer<GroupsState> = 
@@ -41,7 +45,7 @@ export const groupsReducer: Reducer<GroupsState> =
                     groupsByQueryLoading: false
                 };
 
-            case Group_BY_ID:
+            case SEARCHED_GROUP_ID:
                 return { ...currentState, searchedId: dispatchedAction.payload }
 
             case GROUP_FETCHED:
@@ -51,7 +55,13 @@ export const groupsReducer: Reducer<GroupsState> =
                 }
                 return { ...currentState, byIds: {...currentState.byIds, [group.id]: group} }
             
-            default:
+            case GROUP_LOADING:
+                return { ...currentState, loading: dispatchedAction.payload }
+            
+            case GROUP_FETCHING_FAIL:
+                return { ...currentState, groupFetchingFail: dispatchedAction.payload }
+            
+                default:
                 return currentState;
         }
     }

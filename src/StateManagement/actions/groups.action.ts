@@ -4,7 +4,9 @@ import { GROUP_FETCHING,
     GROUPS_LOADING, 
     GROUPS_BY_QUERY_FETCHED, 
     GROUPS_CURRENT_QUERY, 
-    Group_BY_ID } from "../actionKeys";
+    SEARCHED_GROUP_ID, 
+    GROUP_LOADING,
+    GROUP_FETCHING_FAIL} from "../actionKeys";
 
 export const groupsCurrentQueryAction = (query: string) => {
     return {
@@ -29,7 +31,7 @@ export const groupsByQueryFetchingAction = (bool: boolean) =>{
 
 export const groupByIdAction = (id: number) =>{
     return {
-        type: Group_BY_ID,
+        type: SEARCHED_GROUP_ID,
         payload: id,
     }
 }
@@ -45,6 +47,20 @@ export const groupByIdFetchingAction = (id: number) =>{
     return {
         type: GROUP_FETCHING,
         payload: id,
+    }
+}
+
+export const groupLoadingAction = (bool: boolean) =>{
+    return {
+        type: GROUP_LOADING,
+        payload: bool
+    }
+}
+
+export const groupFetchingFailAction = (reason: string | undefined) =>{
+    return {
+        type: GROUP_FETCHING_FAIL,
+        payload: reason,
     }
 }
 

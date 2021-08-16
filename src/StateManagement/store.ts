@@ -8,6 +8,7 @@ import { sagaMiddleware } from "./sagas";
 import { fetchGroupSaga } from "./sagas/groups.sagas";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { meSaga } from "./sagas/auth.sagas";
+import { usersSaga } from "./sagas/users.sagas";
 
 const reducer = combineReducers({
    auth: AuthReducer,
@@ -23,6 +24,7 @@ export const store = createStore(
 
 sagaMiddleware.run(fetchGroupSaga);
 sagaMiddleware.run(meSaga);
+sagaMiddleware.run(usersSaga);
 
 export type AppState = ReturnType<typeof reducer>
 
