@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 import { groupsSelector } from "./app.selector";
+import { usersByIdsSelector } from "./users.selector";
 
 export const groupsCurrentQuerySelector = createSelector(
     [groupsSelector],
@@ -26,6 +27,45 @@ export const groupSearchedIdSelector = createSelector(
     [groupsSelector],
     (groups) =>{
         return groups.searchedId
+    }
+)
+export const groupsCreatersSelector = createSelector(
+    [groupsSelector],
+    (groupsState) =>{
+        return groupsState.groupsCreaters
+    }
+)
+
+export const groupCreatorSelector = createSelector(
+    [groupSearchedIdSelector, groupsCreatersSelector, usersByIdsSelector],
+    (groupId, groups, users) =>{
+        const creatorId = groups[groupId!]
+        const creator = users[creatorId]
+        return creator
+    }
+)
+
+export const groupsMemberssSelector = createSelector(
+    [groupsSelector],
+    (groupsState) =>{
+        return groupsState.groupsMembers
+    }
+)
+
+export const groupMembersSelector = createSelector(
+    [groupsMemberssSelector, groupSearchedIdSelector, usersByIdsSelector],
+    (groupsMembers, groupId, users) =>{
+
+        const groupMembersIds = groupsMembers[groupId!]
+        console.log(groupMembersIds)
+        if(groupMembersIds === undefined){
+            return []
+        }
+        const members = groupMembersIds.map((id) =>{
+            return users[id]
+        })
+
+        return members
     }
 )
 

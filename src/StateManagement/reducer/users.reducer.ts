@@ -1,7 +1,8 @@
 import { AnyAction, Reducer } from "redux";
 import { EntityState } from "../../Components/Models/Entity.model";
+import { Group } from "../../Components/Models/Group.model";
 import { User } from "../../Components/Models/User.model";
-import { ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
+import { GROUP_FETCHED, ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
 import { normalizeMany, normalizeOne } from "../helperFunctions";
 
 export interface UsersState extends EntityState<User>{
@@ -55,7 +56,24 @@ export const usersReducer: Reducer<UsersState> =
                 return { ...currentState, usersLoading: dispatchedAction.payload }
             
             case USER_FETCHING_FAIL:
-                return { ...currentState, userFatchingFail: dispatchedAction.payload}    
+                return { ...currentState, userFatchingFail: dispatchedAction.payload}
+                
+            case GROUP_FETCHED:
+                const group: Group = dispatchedAction.payload
+                if(group === undefined){
+                    return currentState
+                }
+                const creator = group.creator
+                const participants = group.participants
+                const invitedMembers = group.invitedMembers
+                const members = [...participants, ...invitedMembers]
+                const normalizedMembers = members.reduce((pre, curr) =>{
+                    return { ...pre, [curr.id]: curr }
+                }, {})
+
+                return { ...currentState, 
+                    byIds: { ...currentState.byIds, [creator.id]: creator, ...normalizedMembers } 
+                }
                 
             default:
                 return currentState

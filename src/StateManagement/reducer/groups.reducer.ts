@@ -14,6 +14,8 @@ export interface GroupsState extends EntityState<Group>{
     groupsIdsByQuery: { [query: string]: number[] }
     groupsByQueryLoading: boolean
     groupFetchingFail?: string
+    groupsCreaters: { [id: number]: number }
+    groupsMembers: { [gId: number]: number[] }
 }
 
 const initialValue: GroupsState = {
@@ -24,6 +26,8 @@ const initialValue: GroupsState = {
     groupsByQueryLoading: false,
     loading: false,
     groupFetchingFail: undefined,
+    groupsCreaters: {},
+    groupsMembers: {},
 }
 
 export const groupsReducer: Reducer<GroupsState> = 
@@ -53,7 +57,20 @@ export const groupsReducer: Reducer<GroupsState> =
                 if(group === undefined) {
                     return currentState
                 }
-                return { ...currentState, byIds: {...currentState.byIds, [group.id]: group} }
+                const groupId = group.id
+                const createrId = group.creator.id
+                const participants = group.participants
+                const invitedMembers = group.invitedMembers
+                const members = [...participants, ...invitedMembers]
+                const membersIds = members.map((user) =>{
+                    return user.id
+                })
+
+                return { ...currentState, 
+                    byIds: { ...currentState.byIds, [group.id]: group },
+                    groupsCreaters: { ...currentState.groupsCreaters, [groupId]: createrId },
+                    groupsMembers: { ...currentState.groupsMembers, [groupId]: membersIds }
+                }
             
             case GROUP_LOADING:
                 return { ...currentState, loading: dispatchedAction.payload }
