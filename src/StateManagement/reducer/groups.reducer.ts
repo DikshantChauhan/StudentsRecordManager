@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "redux";
-import { EntityState } from "../../Components/Models/Entity.model";
+import { EntityState, entityStateInitialValue } from "../../Components/Models/Entity.model";
 import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHED, 
     GROUPS_BY_QUERY_FETCHED, 
@@ -7,7 +7,6 @@ import { GROUP_FETCHED,
     SEARCHED_GROUP_ID, 
     GROUP_LOADING,
     GROUP_FETCHING_FAIL} from "../actionKeys";
-import { normalizeMany } from "../helperFunctions";
 
 export interface GroupsState extends EntityState<Group>{
     currentQuery: string;
@@ -15,19 +14,19 @@ export interface GroupsState extends EntityState<Group>{
     groupsByQueryLoading: boolean
     groupFetchingFail?: string
     groupsCreaters: { [id: number]: number }
-    groupsMembers: { [gId: number]: number[] }
+    participants: { [id: number]: number[] },
+    invitedMembers: { [id: number]: number[] },
 }
 
 const initialValue: GroupsState = {
+    ...entityStateInitialValue,
     currentQuery: "",
-    byIds: {},
     groupsIdsByQuery: {},
-    searchedId: undefined,
     groupsByQueryLoading: false,
-    loading: false,
     groupFetchingFail: undefined,
     groupsCreaters: {},
-    groupsMembers: {},
+    participants: {},
+    invitedMembers: {},
 }
 
 export const groupsReducer: Reducer<GroupsState> = 
@@ -38,13 +37,12 @@ export const groupsReducer: Reducer<GroupsState> =
                 return {...currentState, currentQuery: dispatchedAction.payload, groupsByQueryLoading: true};
             
             case GROUPS_BY_QUERY_FETCHED:
-                const groups: Group[] = dispatchedAction.payload;
-
-                const newState = normalizeMany(currentState ,groups) as GroupsState
-                const ids = groups.map((item) => item.id);
+                const normalizedGroups = dispatchedAction.payload as typeof currentState.byIds ;
+                const ids = Object.keys(normalizedGroups).map((i) => (+i))
 
                 return {
-                    ...newState,
+                    ...currentState,
+                    byIds: { ...currentState.byIds, ...normalizedGroups },
                     groupsIdsByQuery: {...currentState.groupsIdsByQuery, [currentState.currentQuery]: ids },
                     groupsByQueryLoading: false
                 };
@@ -57,19 +55,25 @@ export const groupsReducer: Reducer<GroupsState> =
                 if(group === undefined) {
                     return currentState
                 }
-                const groupId = group.id
-                const createrId = group.creator.id
-                const participants = group.participants
-                const invitedMembers = group.invitedMembers
-                const members = [...participants, ...invitedMembers]
-                const membersIds = members.map((user) =>{
-                    return user.id
-                })
 
-                return { ...currentState, 
-                    byIds: { ...currentState.byIds, [group.id]: group },
-                    groupsCreaters: { ...currentState.groupsCreaters, [groupId]: createrId },
-                    groupsMembers: { ...currentState.groupsMembers, [groupId]: membersIds }
+                return { 
+                    ...currentState, 
+                    byIds: { 
+                        ...currentState.byIds, 
+                        [group.id]: group 
+                        },
+                    participants: { 
+                        ...currentState.participants, 
+                        [group.id]: group.participants 
+                        },
+                    invitedMembers: { 
+                        ...currentState.participants, 
+                        [group.id]: group.invitedMembers 
+                        },
+                    groupsCreaters: {
+                        ...currentState.groupsCreaters,
+                        [group.id]: group.creator
+                    }
                 }
             
             case GROUP_LOADING:

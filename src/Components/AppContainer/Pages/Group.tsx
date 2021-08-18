@@ -5,8 +5,9 @@ import { groupByIdSelector,
     groupCreatorSelector, 
     groupFetchingfailSelector, 
     groupLoadingSelector, 
-    groupMembersSelector, 
-    groupSearchedIdSelector } from "../../../StateManagement/selector/groups.selector";
+    groupInvitedMembersSelector, 
+    groupSearchedIdSelector, 
+    grouParticipentsSelector} from "../../../StateManagement/selector/groups.selector";
 import { useAppSelector } from "../../../StateManagement/store";
 import image from "../../../img/default_avatar.jpg";
 import AvatarOnline from "../../Avatar/Avatar"
@@ -16,7 +17,6 @@ import { groupByIdFetchingAction, groupByIdAction, groupLoadingAction } from "..
 interface Props{}
 
 const Group: React.FC<Props> = () => {
-    console.log("rendering")
     const param: any = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
@@ -28,10 +28,10 @@ const Group: React.FC<Props> = () => {
     const loading = useAppSelector(groupLoadingSelector)
     const error = useAppSelector(groupFetchingfailSelector)
     const creator = useAppSelector(groupCreatorSelector)
-    const members = useAppSelector(groupMembersSelector)
+    const invitedMembers = useAppSelector(groupInvitedMembersSelector)
+    const participents = useAppSelector(grouParticipentsSelector)
 
     useEffect(() =>{
-        dispatch(groupLoadingAction(true))
         dispatch(groupByIdFetchingAction(id!))
     }, [id])
 
@@ -44,38 +44,60 @@ const Group: React.FC<Props> = () => {
                         <div>
                             <div className={`flex p-8 mx-auto mb-2`}>
                                 <AvatarOnline
-                                    img={loading ? image : (group.group_image_url || image)}
+                                    img={loading ? image : group.group_image_url || image}
                                     variant="default"
                                     theme="small"
                                     className={`mr-6`}
                                 />
                                 <div>
-                                    {loading ? <h1>____________</h1> : 
+                                    {loading ? <hr /> : 
                                         <h1 className={`font-semibold text-lg capitalize tracking-normal`}>
                                             {group.name}
-                                        </h1>}
-                                    {loading ? <h1>_______________________</h1> : 
+                                        </h1>
+                                    }
+                                    {loading ? <hr /> : 
                                         <p className={`max-w-md`}>
                                             {group.description}
-                                        </p>}
+                                        </p>
+                                    }
                                 </div>
                             </div>
-                            {creator && 
-                                <div className={`px-9 py-5`}>
-                                    <h5 className={`font-medium text-gray-500`}>CREATOR :</h5>
-                                    <button onClick={() =>{history.push(`/user/${creator.id}`)}} className={`text-primary-main`}>{creator.first_name + " " + creator.middle_name + " " + creator.last_name}</button>
-                                </div>
-                            }
-                            {members && 
-                                <div className={`px-9 py-5`}>
-                                    <h5 className={`font-medium text-gray-500`}>MEMBERS :</h5>
-                                    {members.map((user) =>{
-                                        return(
-                                            <button onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main`}>{user.first_name}</button>
-                                        )
-                                    })}
-                                </div>
-                            }
+
+                            <div className={`px-9 py-5`}>
+                                <h5 className={`font-medium text-gray-500`}>CREATOR :</h5>
+                                {creator && <button onClick={() =>{history.push(`/user/${creator.id}`)}} className={`text-primary-main`}>
+                                {creator.first_name} {creator.middle_name} {creator.last_name}
+                                </button>}
+                            </div>
+
+                            <div className={`px-9 py-5`}>
+                                <h5 className={`font-medium text-gray-500`}>INVITEDMEMBERS :</h5>
+                                {invitedMembers.map((user) =>{
+                                    if(user === undefined){
+                                        return
+                                    }
+                                    return(
+                                        <button onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main`}>
+                                            {user.first_name} {user.middle_name} {user.last_name}
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                             
+                            <div className={`px-9 py-5`}>
+                                <h5 className={`font-medium text-gray-500`}>PARTICIPENTS :</h5>
+                                {participents.map((user) =>{
+                                    if(user === undefined){
+                                        return
+                                    }
+                                    return(
+                                        <button onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main`}>
+                                            {user.first_name} {user.middle_name} {user.last_name}
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                            
                         </div>
                     }
                 </div>

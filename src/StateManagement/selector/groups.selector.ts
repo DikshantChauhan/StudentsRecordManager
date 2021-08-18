@@ -29,7 +29,7 @@ export const groupSearchedIdSelector = createSelector(
         return groups.searchedId
     }
 )
-export const groupsCreatersSelector = createSelector(
+export const groupsCreatorsSelector = createSelector(
     [groupsSelector],
     (groupsState) =>{
         return groupsState.groupsCreaters
@@ -37,7 +37,7 @@ export const groupsCreatersSelector = createSelector(
 )
 
 export const groupCreatorSelector = createSelector(
-    [groupSearchedIdSelector, groupsCreatersSelector, usersByIdsSelector],
+    [groupSearchedIdSelector, groupsCreatorsSelector, usersByIdsSelector],
     (groupId, groups, users) =>{
         const creatorId = groups[groupId!]
         const creator = users[creatorId]
@@ -45,27 +45,45 @@ export const groupCreatorSelector = createSelector(
     }
 )
 
-export const groupsMemberssSelector = createSelector(
+export const groupsInvitedMembersSelector = createSelector(
     [groupsSelector],
     (groupsState) =>{
-        return groupsState.groupsMembers
+        return groupsState.invitedMembers
     }
 )
 
-export const groupMembersSelector = createSelector(
-    [groupsMemberssSelector, groupSearchedIdSelector, usersByIdsSelector],
-    (groupsMembers, groupId, users) =>{
-
-        const groupMembersIds = groupsMembers[groupId!]
-        console.log(groupMembersIds)
-        if(groupMembersIds === undefined){
+export const groupInvitedMembersSelector = createSelector(
+    [groupsInvitedMembersSelector, groupSearchedIdSelector, usersByIdsSelector],
+    (groupsInvitedMembers, id, users) =>{
+        const invitedMembersIds =  groupsInvitedMembers[id!]
+        if(invitedMembersIds === undefined){
             return []
         }
-        const members = groupMembersIds.map((id) =>{
+        const invitedMembers = invitedMembersIds.map((id) =>{
             return users[id]
         })
+        return invitedMembers
+    }
+)
 
-        return members
+export const groupsParticipentsSelector = createSelector(
+    [groupsSelector],
+    (groupsState) =>{
+        return groupsState.participants
+    }
+)
+
+export const grouParticipentsSelector = createSelector(
+    [groupsParticipentsSelector, groupSearchedIdSelector, usersByIdsSelector],
+    (groupsParticipents, id, users) =>{
+        const invitedMembersIds =  groupsParticipents[id!]
+        if(invitedMembersIds === undefined){
+            return []
+        }
+        const participents = invitedMembersIds.map((id) =>{
+            return users[id]
+        })
+        return participents
     }
 )
 
@@ -79,7 +97,7 @@ export const groupsByQueryLoadingSelector = createSelector(
 export const groupLoadingSelector = createSelector(
     [groupsSelector],
     (groups) =>{
-        return groups.loading
+        return groups.loadingOne
     }
 )
 

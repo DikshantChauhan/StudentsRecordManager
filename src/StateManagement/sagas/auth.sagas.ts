@@ -1,6 +1,5 @@
-import { useHistory } from "react-router-dom";
 import { AnyAction } from "redux";
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import { meFetchedAction, meLogedInAction, meLogingFailAction } from "../actions/auth.action";
 import {  LoginAPI, meFetchAPI, meUpdateAPI } from "../../Components/Api/Auth.api";
 import { User } from "../../Components/Models/User.model";

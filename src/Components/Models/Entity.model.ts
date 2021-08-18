@@ -7,5 +7,11 @@ export interface EntityState<T extends Entity = Entity>{
         [id: number]: T
     }
     searchedId?: number
-    loading?: boolean
+    loadingOne?: boolean
+}
+
+export const entityStateInitialValue = {
+    byIds: {},
+    searchedId: undefined,
+    loadingOne: undefined,
 }

@@ -48,7 +48,7 @@ export const usersLoadingSelector = createSelector(
 export const userLoadingSelector = createSelector(
     [usersSelector],
     (users) =>{
-        return users.loading
+        return users.loadingOne
     }
 )
 

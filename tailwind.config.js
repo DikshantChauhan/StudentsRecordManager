@@ -51,7 +51,7 @@ module.exports = {
       }, 
 
       boxShadow: {
-        'button': '0px 8px 18px -4px rgba(105,105,105,1)'
+        'button': '0px 8px 18px -4px rgba(105,105,105,0.4)'
       },
 
       height: {
