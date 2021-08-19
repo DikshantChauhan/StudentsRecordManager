@@ -23,6 +23,13 @@ export const groupsByIdsSelector = createSelector(
     }
 )
 
+export const groupsIdsByCurrentQuerySelector = createSelector(
+    [groupsIdsByQuerySelector, groupsCurrentQuerySelector],
+    (groupsIds, query) =>{
+        return groupsIds[query]
+    }
+)
+
 export const groupSearchedIdSelector = createSelector(
     [groupsSelector],
     (groups) =>{
@@ -98,6 +105,13 @@ export const groupLoadingSelector = createSelector(
     [groupsSelector],
     (groups) =>{
         return groups.loadingOne
+    }
+)
+
+export const groupIndexSelector = createSelector(
+    [groupsSelector],
+    (groups) =>{
+        return groups.index
     }
 )
 

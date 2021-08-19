@@ -15,6 +15,7 @@ export const GROUPS_LOADING = "groups/loading"
 export const GROUP_LOADING = "group/loading"
 export const GROUP_FETCHING = "group/fetching"
 export const GROUP_FETCHING_FAIL = "group/fetching_fail"
+export const GROUP_INDEX = "group/index"
 
 //Users
 export const USERS_FETCHING = "users/fetching"

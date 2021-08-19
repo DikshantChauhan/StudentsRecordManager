@@ -6,7 +6,8 @@ import { GROUP_FETCHING,
     GROUPS_CURRENT_QUERY, 
     SEARCHED_GROUP_ID, 
     GROUP_LOADING,
-    GROUP_FETCHING_FAIL} from "../actionKeys";
+    GROUP_FETCHING_FAIL,
+    GROUP_INDEX} from "../actionKeys";
 
 export const groupsCurrentQueryAction = (query: string) => {
     return {
@@ -54,6 +55,13 @@ export const groupLoadingAction = (bool: boolean) =>{
     return {
         type: GROUP_LOADING,
         payload: bool
+    }
+}
+
+export const groupIndexAction = (index: number) =>{
+    return {
+        type: GROUP_INDEX,
+        payload: index
     }
 }
 

@@ -20,7 +20,7 @@ const Groups: React.FC<Props> = () => {
     const isFetching = useAppSelector(groupsByQueryLoadingSelector)
     
     useEffect(() =>{
-        dispatch(groupsCurrentQueryAction(""))
+        dispatch(groupsCurrentQueryAction(searchKey))
     }, [])
     
     return(
