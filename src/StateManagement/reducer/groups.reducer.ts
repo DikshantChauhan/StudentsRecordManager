@@ -77,7 +77,7 @@ export const groupsReducer: Reducer<GroupsState> =
                 }
             
             case GROUP_LOADING:
-                return { ...currentState, loading: dispatchedAction.payload }
+                return { ...currentState, loadingOne: dispatchedAction.payload }
             
             case GROUP_FETCHING_FAIL:
                 return { ...currentState, groupFetchingFail: dispatchedAction.payload }

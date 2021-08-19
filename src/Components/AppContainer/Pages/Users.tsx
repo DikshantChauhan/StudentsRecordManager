@@ -23,7 +23,11 @@ const Users: React.FC<Props> = () => {
 
     return(
         <div className={`w-full max-w-4xl mx-auto mt-5 mb-5`}>
-            {loading && <h1>loading...</h1>}
+            {loading && 
+                <div className={`flex items-center`}>
+                    <FaSpinner className={`text-primary-main animate-spin mr-2`} />
+                    <p>Loading...</p>
+                </div>}
             {users && <div className={`rounded-3xl mb-5`}>
                 {users.map((item, index) =>{
                     let stripClass = ""

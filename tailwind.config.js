@@ -39,7 +39,12 @@ module.exports = {
       },
 
       minWidth: {
-        '5': '20rem'
+        '5': '20rem',
+        '4': '16rem',
+        '1.25': '5rem',
+        '1': '4rem',
+        '0.68': '2.75rem',
+        '0.62': '2.5rem',
        },
 
       backgroundImage: theme => ({

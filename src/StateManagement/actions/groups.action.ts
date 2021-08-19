@@ -15,7 +15,7 @@ export const groupsCurrentQueryAction = (query: string) => {
     }
 }
 
-export const groupsByQueryFetchedAction = (groups: Group[]) =>{
+export const groupsByQueryFetchedAction = (groups: { [id: number]: Group }) =>{
     return{
         type: GROUPS_BY_QUERY_FETCHED,
         payload: groups,

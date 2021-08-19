@@ -17,8 +17,8 @@ const Groups: React.FC<Props> = () => {
     const groups = useAppSelector(groupsByQuerySelector)
     const history = useHistory()
     const dispatch = useDispatch()
-
     const isFetching = useAppSelector(groupsByQueryLoadingSelector)
+    
     useEffect(() =>{
         dispatch(groupsCurrentQueryAction(""))
     }, [])
@@ -45,7 +45,7 @@ const Groups: React.FC<Props> = () => {
                         stripClass = "bg-gray-200 text-black-dark"
                     }
                     return(
-                        <div className={`flex w-full p-8 ${stripClass}`}>
+                        <div className={`flex w-full p-8 sm:px-1 ${stripClass}`}>
                             <AvatarOnline
                                 img={item.group_image_url || image}
                                 variant="default"

@@ -30,7 +30,7 @@ const UserDetails: React.FC<Props> = () => {
             <div className={`max-w-4xl mx-auto mt-5`}>
                 <div className={`bg-gray-200 p-2 rounded-lg shadow-sm mb-5`}>
                     {error && <h1 className={`text-red-600`}>{error}</h1>}
-                    {(loading || user) && <div className={`flex p-8 mx-auto mb-2`}>
+                    {(loading || user) && <div className={`flex p-8 sm:px-3 mx-auto mb-2`}>
                         <AvatarOnline
                             img={loading ? image : (user.profile_pic_url || image)}
                             variant="default"

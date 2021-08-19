@@ -21,13 +21,13 @@ const AvatarOnline: React.FC<Props> = ({img, theme, variant, className}) => {
 
     let themeClass: string;
     if(theme === "large"){
-        themeClass = "w-20 h-20"
+        themeClass = "min-w-1.25 h-20"
     }else if(theme === "medium"){
-        themeClass = "w-16 h-16"
+        themeClass = "min-w-1 h-16"
     }else if(theme === "small"){
-        themeClass = "w-11 h-11"
+        themeClass = "min-w-0.68 h-11"
     }else if(theme === "varySmall"){
-        themeClass = "w-10 h-10"
+        themeClass = "min-w-0.62 h-10"
     }
 
     return(

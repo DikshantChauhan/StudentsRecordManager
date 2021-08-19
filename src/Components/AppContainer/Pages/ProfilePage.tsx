@@ -34,7 +34,7 @@ const ProfilePage: React.FC<Props> = () => {
     return(
         <div className={`bg-gray-200 mt-5 p-2 rounded-lg max-w-4xl mx-auto shadow-sm relative`}>
             <h5 className={`text-lg mt-1 mx-2 mb-16 font-medium text-gray-600`}>GENERAL INFORMATION</h5>
-            <form onSubmit={formik.handleSubmit} className={`m-5`}>
+            <form onSubmit={formik.handleSubmit} className={`m-5 sm:m-0`}>
                 <div className={`mx-4 mb-4 pt-36 relative`}>
                     <img className={`w-36 h-36 absolute top-0 left-0 rounded-full`} src={user?.profile_pic_url || image} onError={(e: any) => { e.target.onerror = null; e.target.src = image }} alt="Avatar" />
                     <p className={`text-primary-main my-2`}>Upload Picture</p>

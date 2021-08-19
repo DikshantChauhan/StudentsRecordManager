@@ -55,7 +55,7 @@ function* fetchGroups(action: AnyAction): Generator<any> {
 
         return { ...pre, [group.id]: group }
     }, {})
-    yield put(groupsByQueryFetchedAction(normalizedGroups as any))
+    yield put(groupsByQueryFetchedAction(normalizedGroups))
 }
 
 function* groupFetching(action: AnyAction) {
