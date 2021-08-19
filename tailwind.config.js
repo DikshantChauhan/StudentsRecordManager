@@ -35,7 +35,11 @@ module.exports = {
 
     extend: {
       maxWidth: {
-        '8xl': '90rem'
+        '8xl': '90rem',
+        '1.25': '5rem',
+        '1': '4rem',
+        '0.68': '2.75rem',
+        '0.62': '2.5rem',
       },
 
       minWidth: {
