@@ -6,7 +6,7 @@ import { GroupResponse } from "../../Components/Models/Group.model";
 import { GROUP_FETCHING, GROUPS_CURRENT_QUERY } from "../actionKeys";
 import { usersFetchedAction } from "../actions/users.action";
 import { normalize } from "normalizr";
-import { group } from "../helperFunctions";
+import { groupSchema } from "../helperFunctions";
 
 function* fetchGroups(action: AnyAction): Generator<any> {
     yield delay(1000)
@@ -17,7 +17,7 @@ function* fetchGroups(action: AnyAction): Generator<any> {
     });
 
     const response: GroupResponse[] = rawResponse.data.data
-    const normalizedData = normalize(response, [group])
+    const normalizedData = normalize(response, [groupSchema])
     const users = Object.values(normalizedData.entities.users!)
 
     yield put(usersFetchedAction(users))
@@ -31,7 +31,7 @@ function* groupFetching(action: AnyAction) {
         yield put(groupFetchingFailAction(undefined))
         const response: GroupResponse = yield call(groupFetchAPI, action.payload)
 
-        const normalizedData = normalize(response, group)
+        const normalizedData = normalize(response, groupSchema)
 
         const creator = response.creator
         const invitedMembers = response.invitedMembers

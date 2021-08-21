@@ -1,25 +1,22 @@
 import { schema } from "normalizr"
 import { Entity, EntityState } from "../Components/Models/Entity.model"
 
-export const normalizeMany = (state: EntityState, arr: Entity[]) =>{
-    if(arr === []){
-        return state
-    }
 
-    const normalizedArr = arr.reduce((pre, curr) =>{
-        return { ...pre, [curr.id]: curr }
-    }, {})
-
-    return { ...state, byIds: {...state.byIds ,...normalizedArr},}
+export const getItem = (id: number, byIds: { [id: number]: Entity }) =>{
+    const item = byIds[id]
+    return item
 }
 
-export const normalizeOne = (state: EntityState, entity: Entity) =>{
-    return { ...state, byIds: {...state.byIds, [entity.id]: entity }}
+export const getItemsArray = (ids: number[], byIds: { [id: number]: Entity }) =>{
+    const items = ids.map((id) =>{
+        return byIds[id]
+    })
+    return items
 }
 
-export const user = new schema.Entity('users');
-export const group = new schema.Entity('groups', {
-    creator: user,
-    participants: [user],
-    invitedMembers: [user]
+export const userSchema = new schema.Entity('users');
+export const groupSchema = new schema.Entity('groups', {
+    creator: userSchema,
+    participants: [userSchema],
+    invitedMembers: [userSchema]
 });

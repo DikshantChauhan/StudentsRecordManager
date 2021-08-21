@@ -1,9 +1,9 @@
+import { normalize } from "normalizr";
 import { AnyAction, Reducer } from "redux";
 import { EntityState, entityStateInitialValue } from "../../Components/Models/Entity.model";
-import { Group } from "../../Components/Models/Group.model";
 import { User } from "../../Components/Models/User.model";
-import { GROUP_FETCHED, ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
-import { normalizeMany, normalizeOne } from "../helperFunctions";
+import { userSchema } from "../helperFunctions";
+import { ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
 
 export interface UsersState extends EntityState<User>{
     usersIds: number[]
@@ -23,19 +23,25 @@ export const usersReducer: Reducer<UsersState> =
         switch(dispatchedAction.type){
             case ME_LOGED_IN:
             case ME_FETCHED:{
-                const newState = 
-                    normalizeOne(currentState, dispatchedAction.payload) as UsersState
-                return { ...newState }
+                const response = dispatchedAction.payload
+                const normalizedData = normalize(response, userSchema)
+                const user = normalizedData.entities.users
+
+                return { ...currentState, byIds: {...currentState.byIds, ...user} }
             }
 
             case USERS_FETCHED:
                 const response = dispatchedAction.payload as User[]
-                const newState = normalizeMany(currentState, dispatchedAction.payload) as UsersState
-                const ids = response.map((item) =>{
-                    return item.id
-                })
+                const normalizedData = normalize(response, [userSchema])
+                const users = normalizedData.entities.users
+                const ids = normalizedData.result
 
-                return { ...newState, usersIds: ids, usersLoading: false }
+                return { 
+                    ...currentState,
+                    byIds: { ...currentState.byIds, ...users },
+                    usersIds: ids,
+                    usersLoading: false 
+                    }
 
             case SEARCHED_USER_ID:
                 return { ...currentState, searchedId: dispatchedAction.payload }
