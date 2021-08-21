@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "redux";
-import { EntityState, entityStateInitialValue } from "../../Components/Models/Entity.model";
+import { EntityState, entityStateInitialValue, NormalizrData } from "../../Components/Models/Entity.model";
 import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHED, 
     GROUPS_BY_QUERY_FETCHED, 
@@ -40,13 +40,41 @@ export const groupsReducer: Reducer<GroupsState> =
                 return {...currentState, currentQuery: dispatchedAction.payload, groupsByQueryLoading: true};
             
             case GROUPS_BY_QUERY_FETCHED:
-                const normalizedGroups = dispatchedAction.payload as typeof currentState.byIds ;
-                const ids = Object.keys(normalizedGroups).map((i) => (+i))
+                const normalizedData = dispatchedAction.payload as NormalizrData ;
+                const normalizedGroups = normalizedData.entities?.groups as typeof currentState.byIds
+                const ids = normalizedData.result as number[]
+
+                const creaters = ids.reduce((pre, curr) =>{
+                    const group = normalizedGroups[curr]
+                    const creater = group.creator
+                    if(creater === null){
+                        return { ...pre }
+                    }
+
+                    return { ...pre, [curr]: creater }
+                }, {})
+
+                const invitedMembers = ids.reduce((pre, curr) =>{
+                    const group = normalizedGroups[curr]
+                    const invitedMembers = group.invitedMembers
+
+                    return { ...pre, [curr]: invitedMembers }
+                }, {})
+
+                const participants = ids.reduce((pre, curr) =>{
+                    const group = normalizedGroups[curr]
+                    const participants = group.participants
+
+                    return { ...pre, [curr]: participants }
+                }, {})
 
                 return {
                     ...currentState,
                     byIds: { ...currentState.byIds, ...normalizedGroups },
                     groupsIdsByQuery: {...currentState.groupsIdsByQuery, [currentState.currentQuery]: ids },
+                    groupsCreaters: { ...currentState.groupsCreaters, ...creaters },
+                    invitedMembers: { ...currentState.invitedMembers, ...invitedMembers },
+                    participants: { ...currentState.participants, ...participants },
                     groupsByQueryLoading: false
                 };
 
@@ -69,31 +97,31 @@ export const groupsReducer: Reducer<GroupsState> =
                 return { ...currentState, index: dispatchedAction.payload }
             }
 
-            case GROUP_FETCHED:
-                const group: Group = dispatchedAction.payload
-                if(group === undefined) {
-                    return currentState
-                }
+            case GROUP_FETCHED:{
+                const normalizedData = dispatchedAction.payload as NormalizrData
+                const groupId = normalizedData.result as any
+                const normalizedGroup = normalizedData.entities?.groups[groupId]
 
                 return { 
                     ...currentState, 
                     byIds: { 
                         ...currentState.byIds, 
-                        [group.id]: group 
+                        [groupId]: normalizedGroup, 
                         },
                     participants: { 
                         ...currentState.participants, 
-                        [group.id]: group.participants 
+                        [groupId]: normalizedGroup.participants 
                         },
                     invitedMembers: { 
                         ...currentState.participants, 
-                        [group.id]: group.invitedMembers 
+                        [groupId]: normalizedGroup.invitedMembers 
                         },
                     groupsCreaters: {
                         ...currentState.groupsCreaters,
-                        [group.id]: group.creator
+                        [groupId]: normalizedGroup.creator
                     }
                 }
+            }
             
             case GROUP_LOADING:
                 return { ...currentState, loadingOne: dispatchedAction.payload }

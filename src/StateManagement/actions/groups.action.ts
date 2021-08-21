@@ -1,3 +1,4 @@
+import { NormalizrData } from "../../Components/Models/Entity.model";
 import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHING, 
     GROUP_FETCHED, 
@@ -16,10 +17,10 @@ export const groupsCurrentQueryAction = (query: string) => {
     }
 }
 
-export const groupsByQueryFetchedAction = (groups: { [id: number]: Group }) =>{
+export const groupsByQueryFetchedAction = (data: NormalizrData) =>{
     return{
         type: GROUPS_BY_QUERY_FETCHED,
-        payload: groups,
+        payload: data,
     }
 }
 
@@ -37,10 +38,10 @@ export const groupByIdAction = (id: number) =>{
     }
 }
 
-export const groupByIdFetchedAction = (group: Group) =>{
+export const groupByIdFetchedAction = (data: NormalizrData) =>{
     return {
         type: GROUP_FETCHED,
-        payload: group,
+        payload: data,
     }
 }
 

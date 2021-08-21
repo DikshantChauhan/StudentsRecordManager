@@ -15,3 +15,10 @@ export const entityStateInitialValue = {
     searchedId: undefined,
     loadingOne: undefined,
 }
+
+
+export interface NormalizrData{
+    [key: string]: {
+        [key: string]: any;
+    } | undefined;
+}
