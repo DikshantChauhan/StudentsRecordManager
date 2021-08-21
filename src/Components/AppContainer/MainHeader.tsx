@@ -9,7 +9,6 @@ import Avatar from "../Avatar/Avatar";
 import { logout } from "../Api/Auth.api";
 import { useAppSelector } from "../../StateManagement/store";
 import { meSelector } from "../../StateManagement/selector/auth.selector";
-import image from "../../img/profile-12.jpg";
 
 
 interface Props{}

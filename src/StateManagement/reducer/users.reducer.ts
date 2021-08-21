@@ -3,7 +3,7 @@ import { AnyAction, Reducer } from "redux";
 import { EntityState, entityStateInitialValue } from "../../Components/Models/Entity.model";
 import { User } from "../../Components/Models/User.model";
 import { userSchema } from "../helperFunctions";
-import { ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
+import { ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
 
 export interface UsersState extends EntityState<User>{
     usersIds: number[]

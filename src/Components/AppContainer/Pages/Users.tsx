@@ -19,7 +19,7 @@ const Users: React.FC<Props> = () => {
     useEffect(() =>{
         dispatch(usersLoadingAction(true))
         dispatch(usersFetchingAction())
-    }, [])   
+    }, [])  //eslint-disable-line 
 
     return(
         <div className={`w-full max-w-4xl mx-auto mt-5 mb-5`}>
@@ -37,7 +37,7 @@ const Users: React.FC<Props> = () => {
                         stripClass = "bg-gray-200 text-black-dark"
                     }
                     return(
-                        <div className={`flex w-full p-8 ${stripClass}`}>
+                        <div key={item.id} className={`flex w-full p-8 ${stripClass}`}>
                             <AvatarOnline
                                 img={item.profile_pic_url || image}
                                 variant="default"

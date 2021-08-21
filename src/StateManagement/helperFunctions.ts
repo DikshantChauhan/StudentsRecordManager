@@ -1,5 +1,5 @@
 import { schema } from "normalizr"
-import { Entity, EntityState } from "../Components/Models/Entity.model"
+import { Entity } from "../Components/Models/Entity.model"
 
 
 export const getItem = (id: number, byIds: { [id: number]: Entity }) =>{

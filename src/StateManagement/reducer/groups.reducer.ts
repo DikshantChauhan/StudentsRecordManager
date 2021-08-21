@@ -85,7 +85,7 @@ export const groupsReducer: Reducer<GroupsState> =
                 let currentIndex
                 if(ids !== undefined){
                     for(let i = 0; i < ids.length; i++){
-                        if(id == ids[i]){
+                        if(id == ids[i]){ //eslint-disable-line
                             currentIndex = i
                         }
                     }

@@ -51,7 +51,7 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                 
                 const Icon = item.props.icon
                 return(
-                <div style={{marginBottom: `calc(3rem * ${marginBottom} * ${isOpen})`}} className={`relative transform transition-all mt-1 duration-300`}>
+                <div key={`id${index}`} style={{marginBottom: `calc(3rem * ${marginBottom} * ${isOpen})`}} className={`relative transform transition-all mt-1 duration-300`}>
                     {item.props.children && 
                     <>
                         <button onClick={() =>{handelClick(index)}} type="button" className={`w-48 flex justify-between items-center bg-white hover:bg-gray-300 py-3 px-3 rounded-lg`}>
@@ -62,10 +62,10 @@ const LeftSideBar: React.FC<Props> = ({children, className}) => {
                             <BiChevronDown className={`duration-300 transform ${isOpen ? "rotate-180":"rotate-0"}`}/>
                         </button>
                         <div className={`${subMenuClasses} transition-all duration-200 absolute flex flex-col rounded-lg w-full bottom-0 transform translate-y-full left-0 right-0`}>
-                            {item.props.children.map((item: any) => {
+                            {item.props.children.map((item: any, index: number) => {
                                 return(
-                                <div className="flex pl-8 py-3 items-center">
-                                    <h1 className={`text-gray-700 hover:text-primary-main font-semibold`}>{item}</h1>
+                                <div key={`${index}${index}`} className="flex pl-8 py-3 items-center">
+                                    <span className={`text-gray-700 hover:text-primary-main font-semibold`}>{item}</span>
                                 </div>
                             )})}
                         </div>

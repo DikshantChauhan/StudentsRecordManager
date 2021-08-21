@@ -1,5 +1,4 @@
 import { NormalizrData } from "../../Components/Models/Entity.model";
-import { Group } from "../../Components/Models/Group.model";
 import { GROUP_FETCHING, 
     GROUP_FETCHED, 
     GROUPS_LOADING, 

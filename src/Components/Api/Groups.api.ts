@@ -1,4 +1,4 @@
-import axios, { CancelToken } from "axios"
+import axios from "axios"
 import { Group } from "../Models/Group.model"
 import { BASE_URL, get_cancelableAPI } from "./Base.api"
 

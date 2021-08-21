@@ -55,8 +55,8 @@ const AppContainer: React.FC<Props> = () => {
             >
                 <div className={`h-nav`}></div>
             </Transition>
+            <div className={`px-3 transition-all flex-1`}>
             <Switch>
-                <div className={`px-3 transition-all flex-1`}>
                     <Route path="/home">
                         <Home/>      
                     </Route>
@@ -78,8 +78,8 @@ const AppContainer: React.FC<Props> = () => {
                     <Route path="/user/:id">
                         <UserDetails />
                     </Route>
-                </div>
             </Switch>
+            </div>
         </div>
         </div>
     )

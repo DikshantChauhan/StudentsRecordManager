@@ -23,7 +23,7 @@ const UserDetails: React.FC<Props> = () => {
     useEffect(() =>{
         dispatch(userLoadingAction(true))
         dispatch(userFetchingAction(params.id))
-    }, [])
+    }, []) //eslint-disable-line
 
     if(loading || user || error){
         return(

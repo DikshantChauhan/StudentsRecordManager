@@ -9,7 +9,6 @@ import { groupByIdSelector,
     groupSearchedIdSelector, 
     grouParticipentsSelector,
     groupIndexSelector,
-    groupsIdsByQuerySelector,
     groupsIdsByCurrentQuerySelector} from "../../../StateManagement/selector/groups.selector";
 import { useAppSelector } from "../../../StateManagement/store";
 import image from "../../../img/default_avatar.jpg";
@@ -39,7 +38,7 @@ const Group: React.FC<Props> = () => {
 
     useEffect(() =>{
         dispatch(groupByIdFetchingAction(id!))
-    }, [id])
+    }, [id])//eslint-disable-line
 
     
     return(
@@ -80,10 +79,10 @@ const Group: React.FC<Props> = () => {
                         <h5 className={`font-medium text-gray-500`}>INVITEDMEMBERS :</h5>
                         {invitedMembers.map((user) =>{
                             if(user === undefined){
-                                return 
+                                return //eslint-disable-line
                             }
                             return(
-                                <button onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main`}>
+                                <button key={user.id} onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main block`}>
                                     {user.first_name} {user.middle_name} {user.last_name}
                                 </button>
                             )
@@ -94,10 +93,10 @@ const Group: React.FC<Props> = () => {
                         <h5 className={`font-medium text-gray-500`}>PARTICIPENTS :</h5>
                         {participents.map((user) =>{
                             if(user === undefined){
-                                return
+                                return //eslint-disable-line
                             }
                             return(
-                                <button onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main`}>
+                                <button key={user.id} onClick={() =>{history.push(`/user/${user.id}`)}} className={`text-primary-main block`}>
                                     {user.first_name} {user.middle_name} {user.last_name}
                                 </button>
                             )
@@ -130,7 +129,7 @@ const Group: React.FC<Props> = () => {
         </div>
     )
 
-    return (<></>)
+    return (<></>) //eslint-disable-line
 };
 
 Group.defaultProps = {

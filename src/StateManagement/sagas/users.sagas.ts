@@ -2,7 +2,7 @@ import { AnyAction } from "redux";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { userFetchAPI, usersFetchAPI } from "../../Components/Api/Users.api";
 import { User } from "../../Components/Models/User.model";
-import { USERS_FETCHING, USER_FETCHING, USER_LOADING } from "../actionKeys";
+import { USERS_FETCHING, USER_FETCHING } from "../actionKeys";
 import { userFetchedAction, userFetchingFailAction, userLoadingAction, usersFetchedAction } from "../actions/users.action";
 
 function* usersFetching(action: AnyAction){

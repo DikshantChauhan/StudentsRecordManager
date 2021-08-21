@@ -21,7 +21,7 @@ const Groups: React.FC<Props> = () => {
     
     useEffect(() =>{
         dispatch(groupsCurrentQueryAction(searchKey))
-    }, [])
+    }, []) //eslint-disable-line
     
     return(
         <div className={`w-full max-w-4xl mx-auto mt-5 mb-5`}>
@@ -45,7 +45,7 @@ const Groups: React.FC<Props> = () => {
                         stripClass = "bg-gray-200 text-black-dark"
                     }
                     return(
-                        <div className={`flex w-full p-8 sm:px-1 ${stripClass}`}>
+                        <div key={item.id} className={`flex w-full p-8 sm:px-1 ${stripClass}`}>
                             <AvatarOnline
                                 img={item.group_image_url || image}
                                 variant="default"

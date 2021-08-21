@@ -27,7 +27,7 @@ const App: React.FC<Props> = () => {
     }
 
     dispatch(meFetchingAction())
-  }, [])
+  }, []) //eslint-disable-line
 
   /* const data = useMemo(() =>{
     return { user, setUser }
