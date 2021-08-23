@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { usersFetchingAction, usersLoadingAction } from "../../../StateManagement/actions/users.action";
-import { usersArrSelector, usersLoadingSelector } from "../../../StateManagement/selector/users.selector";
+import { usersFetchingAction } from "../../../StateManagement/actions/users.action";
+import { usersArrSelector, usersFetchErrorSelector, usersLoadingSelector } from "../../../StateManagement/selector/users.selector";
 import { useAppSelector } from "../../../StateManagement/store";
 import image from "../../../img/default_avatar.jpg";
 import AvatarOnline from "../../Avatar/Avatar"
@@ -15,9 +15,9 @@ const Users: React.FC<Props> = () => {
     const users = useAppSelector(usersArrSelector) 
     const history = useHistory()
     const loading = useAppSelector(usersLoadingSelector)
+    const error = useAppSelector(usersFetchErrorSelector)
 
     useEffect(() =>{
-        dispatch(usersLoadingAction(true))
         dispatch(usersFetchingAction())
     }, [])  //eslint-disable-line 
 
@@ -27,7 +27,11 @@ const Users: React.FC<Props> = () => {
                 <div className={`flex items-center`}>
                     <FaSpinner className={`text-primary-main animate-spin mr-2`} />
                     <p>Loading...</p>
-                </div>}
+                </div>
+            }
+            {error && 
+                <p className={`text-red-500`}>{error}</p>
+            }
             {users && <div className={`rounded-3xl mb-5`}>
                 {users.map((item, index) =>{
                     let stripClass = ""

@@ -122,10 +122,17 @@ export const groupByIdSelector = createSelector(
     }
 )
 
-export const groupFetchingfailSelector = createSelector(
+export const groupFetchErrorSelector = createSelector(
     [groupsSelector],
     (groups) =>{
-        return groups.groupFetchingFail
+        return groups.groupFetchError
+    }
+)
+
+export const groupsFetchErrorSelector = createSelector(
+    [groupsSelector],
+    (groups) =>{
+        return groups.groupsFetchError
     }
 )
 

@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { LS_LOGIN_TOKEN } from "./Components/Api/Base.api";
 import { useAppSelector } from "./StateManagement/store";
-import { meSelector } from "./StateManagement/selector/auth.selector";
+import { meFetchErrorSelector, meSelector } from "./StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";
 import { meFetchingAction } from "./StateManagement/actions/auth.action";
 import { ImSpinner2 } from "react-icons/im";
+import ButtonSolid from "./Components/Button/ButtonSolid";
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )
@@ -16,10 +17,9 @@ interface Props{
 
 const App: React.FC<Props> = () => {
   const token = localStorage.getItem(LS_LOGIN_TOKEN)
-
   const user = useAppSelector(meSelector);
-
   const dispatch = useDispatch()
+  const meFetchError = useAppSelector(meFetchErrorSelector)
 
   useEffect(() => {
     if (!token || user) {
@@ -32,6 +32,15 @@ const App: React.FC<Props> = () => {
   /* const data = useMemo(() =>{
     return { user, setUser }
   }, [user]) */
+
+  if(token && meFetchError){
+    return(
+      <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
+        <p className={`text-red-500 text-2xl mb-2`}>{meFetchError}</p>
+        <ButtonSolid onClick={() =>{window.location.reload()}} theme="blue">Reload</ButtonSolid>
+      </div>
+    )
+  }
 
   if (!user && token) {
     return (

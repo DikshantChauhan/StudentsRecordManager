@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{
-    children: string;
+    children: string | JSX.Element;
     theme: "blue" | "black" | "red";
     className?: string
 }

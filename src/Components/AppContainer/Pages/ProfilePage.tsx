@@ -4,15 +4,22 @@ import * as yup from "yup"
 import ButtonSolid from "../../Button/ButtonSolid";
 import InputLabeled from "../../Input/InputLabeled";
 import { useAppSelector } from "../../../StateManagement/store";
-import { meSelector } from "../../../StateManagement/selector/auth.selector";
+import { meSelector, meUpdateErrorSelector, meUpdateSuccessSelector, meUpdatingSelector } from "../../../StateManagement/selector/auth.selector";
 import { useDispatch } from "react-redux";
 import { meUpdating } from "../../../StateManagement/actions/auth.action";
 import image from "../../../img/default_avatar.jpg"
+import { Transition } from "@headlessui/react";
+import { FaSpinner } from "react-icons/fa";
+import { useState } from "react";
 
 interface Props{}
 
 const ProfilePage: React.FC<Props> = () => {
     const user = useAppSelector(meSelector)
+    const updateError = useAppSelector(meUpdateErrorSelector)
+    const updateSuccess = useAppSelector(meUpdateSuccessSelector)
+    const loading = useAppSelector(meUpdatingSelector)
+    const [abc, setabc] = useState(false)
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -27,7 +34,17 @@ const ProfilePage: React.FC<Props> = () => {
             "phone_number": yup.string().required().min(10),
         }),
         onSubmit: (userData) =>{
-            dispatch(meUpdating(userData))
+            const preUser = user
+            const currUser = {...user, ...userData}
+            const isUserChanged = JSON.stringify(preUser) === JSON.stringify(currUser)
+
+            setabc(isUserChanged)
+            setTimeout(() => {
+                setabc(false)
+            }, 1000);
+            if(isUserChanged === false){
+                dispatch(meUpdating(userData))
+            }
         }
     })
 
@@ -60,17 +77,7 @@ const ProfilePage: React.FC<Props> = () => {
                         label="Last Name"
                         className={`mx-4 mb-5 w-full text-gray-700`}
                     />
-                </div>{/* 
-                <InputLabeled 
-                    type="text"
-                    placeholder="profile_pic_url"
-                    required
-                    {...formik.getFieldProps("profile_pic_url")}
-                    touched={formik.touched["profile_pic_url"]}
-                    error={formik.errors["profile_pic_url"]}
-                    label="profile_pic_url"
-                    className={`mx-4 mb-5`}
-                /> */}
+                </div>
                 <InputLabeled 
                     type="text"
                     placeholder="Phone Number"
@@ -81,8 +88,45 @@ const ProfilePage: React.FC<Props> = () => {
                     label="Phone Number"
                     className={`mx-4 mb-5 text-gray-700`}
                 />
-                { <ButtonSolid className={`mt-8`} theme="blue" type="submit">Done</ButtonSolid>}
+                {updateError && <p className={`text-red-500 mb-2`}>{updateError}</p>}
+                { <ButtonSolid disabled={loading === true ? true:false} className={`mt-8 relative`} theme="blue" type="submit">
+                    <div>
+                        {
+                            loading === true ? 
+                            <div className={`absolute left-1/2 z-10 w-full h-full p-2 bg-primary-main rounded-lg top-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
+                                <FaSpinner className={`animate-spin mx-auto text-2xl`} />
+                            </div> : ""
+                        }
+                        <span>Done</span>
+                    </div>
+                </ButtonSolid>}
             </form>
+            <Transition
+                show={updateSuccess || false}
+                enter="duration-100"
+                enterFrom="translate-y-0 opacity-0"
+                enterTo="-translate-y-full opacity-100"
+                entered="-translate-y-full opacity-100"
+                leave="duration-100"
+                leaveFrom="-translate-y-full opacity-100"
+                leaveTo="translate-x-0 opacity-0"
+                className={`fixed left-1/2 bottom-0 lg:-translate-x-1/2 transform py-2 px-3 bg-gray-200 tracking-wide font-semibold rounded-lg border border-green-500 text-green-500`}
+            >
+                <h1>Edit Successfull</h1>
+            </Transition>
+            <Transition
+                show={abc}
+                enter="duration-100"
+                enterFrom="translate-y-0 opacity-0"
+                enterTo="-translate-y-full opacity-100"
+                entered="-translate-y-full opacity-100"
+                leave="duration-100"
+                leaveFrom="-translate-y-full opacity-100"
+                leaveTo="translate-x-0 opacity-0"
+                className={`fixed left-1/2 bottom-0 lg:-translate-x-1/2 transform py-2 px-2 bg-gray-200 tracking-wide font-semibold rounded-lg border border-red-500 text-red-500`}
+            >
+                <h1>Nothing to Edit</h1>
+            </Transition>
         </div>
     )
 };

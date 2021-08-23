@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { groupByIdSelector, 
     groupCreatorSelector, 
-    groupFetchingfailSelector, 
+    groupFetchErrorSelector, 
     groupLoadingSelector, 
     groupInvitedMembersSelector, 
     groupSearchedIdSelector, 
@@ -30,7 +30,7 @@ const Group: React.FC<Props> = () => {
     const id = useAppSelector(groupSearchedIdSelector)
     const group = useAppSelector(groupByIdSelector)
     const loading = useAppSelector(groupLoadingSelector)
-    const error = useAppSelector(groupFetchingfailSelector)
+    const error = useAppSelector(groupFetchErrorSelector)
     const creator = useAppSelector(groupCreatorSelector)
     const invitedMembers = useAppSelector(groupInvitedMembersSelector)
     const participents = useAppSelector(grouParticipentsSelector)
@@ -42,7 +42,7 @@ const Group: React.FC<Props> = () => {
 
     
     return(
-        <div className={`max-w-4xl mx-auto mt-5 relative`}>
+        <div className={`max-w-4xl mx-auto mt-5`}>
         <div className={`shadow-2xl mb-6 relative`}>
             <div className={`bg-gray-200 p-8 sm:px-3 rounded-lg shadow-sm mb-5 relative`}>
                 {loading && 

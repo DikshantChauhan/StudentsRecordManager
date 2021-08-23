@@ -3,19 +3,21 @@ import { AnyAction, Reducer } from "redux";
 import { EntityState, entityStateInitialValue } from "../../Components/Models/Entity.model";
 import { User } from "../../Components/Models/User.model";
 import { userSchema } from "../helperFunctions";
-import { ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_LOADING, USER_FETCHED, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys";
+import { ME_FETCHED, ME_LOGED_IN, SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCH_ERROR, USERS_LOADING, USER_FETCHED, USER_FETCH_ERROR, USER_LOADING } from "../actionKeys";
 
 export interface UsersState extends EntityState<User>{
     usersIds: number[]
     usersLoading: boolean
-    userFatchingFail?: string
+    userFatchError?: string
+    usersFatchError?: string
 }
 
 const initialValue: UsersState = {
     ...entityStateInitialValue,
     usersIds: [],
     usersLoading: true,
-    userFatchingFail: undefined
+    userFatchError: undefined,
+    usersFatchError: undefined,
 }
 
 export const usersReducer: Reducer<UsersState> = 
@@ -40,7 +42,6 @@ export const usersReducer: Reducer<UsersState> =
                     ...currentState,
                     byIds: { ...currentState.byIds, ...users },
                     usersIds: ids,
-                    usersLoading: false 
                     }
 
             case SEARCHED_USER_ID:
@@ -54,14 +55,16 @@ export const usersReducer: Reducer<UsersState> =
                 return { ...currentState, byIds: { ...currentState.byIds, [user.id]: user } }
 
             case USER_LOADING:
-                return { ...currentState, loading: dispatchedAction.payload }
+                return { ...currentState, loadingOne: dispatchedAction.payload }
 
             case USERS_LOADING:
                 return { ...currentState, usersLoading: dispatchedAction.payload }
             
-            case USER_FETCHING_FAIL:
-                return { ...currentState, userFatchingFail: dispatchedAction.payload}
+            case USER_FETCH_ERROR:
+                return { ...currentState, userFatchError: dispatchedAction.payload}
                 
+            case USERS_FETCH_ERROR:
+                return { ...currentState, usersFatchError: dispatchedAction.payload}
                 
             default:
                 return currentState

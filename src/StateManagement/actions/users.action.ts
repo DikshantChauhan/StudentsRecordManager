@@ -1,5 +1,5 @@
 import { User } from "../../Components/Models/User.model"
-import { SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_LOADING, USER_FETCHED, USER_FETCHING, USER_FETCHING_FAIL, USER_LOADING } from "../actionKeys"
+import { SEARCHED_USER_ID, USERS_FETCHED, USERS_FETCHING, USERS_FETCH_ERROR, USERS_LOADING, USER_FETCHED, USER_FETCHING, USER_FETCH_ERROR, USER_LOADING } from "../actionKeys"
 
 export const usersFetchingAction = () =>{
     return {
@@ -49,9 +49,16 @@ export const usersLoadingAction = (bool: boolean) =>{
     }
 }
 
-export const userFetchingFailAction = (reason: string | undefined) =>{
+export const userFetchErrorAction = (reason: string | undefined) =>{
     return {
-        type: USER_FETCHING_FAIL,
+        type: USER_FETCH_ERROR,
+        payload: reason,
+    }
+}
+
+export const usersFetchErrorAction = (reason: string | undefined) =>{
+    return {
+        type: USERS_FETCH_ERROR,
         payload: reason,
     }
 }

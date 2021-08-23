@@ -6,18 +6,21 @@ import { GROUP_FETCHED,
     GROUPS_CURRENT_QUERY, 
     SEARCHED_GROUP_ID, 
     GROUP_LOADING,
-    GROUP_FETCHING_FAIL,
-    GROUP_INDEX} from "../actionKeys";
+    GROUP_FETCH_ERROR,
+    GROUP_INDEX,
+    GROUPS_FETCH_ERROR,
+    GROUPS_BY_QUERY_LOADING} from "../actionKeys";
 
 export interface GroupsState extends EntityState<Group>{
     currentQuery: string;
     groupsIdsByQuery: { [query: string]: number[] }
     groupsByQueryLoading: boolean
-    groupFetchingFail?: string
+    groupFetchError?: string
     groupsCreaters: { [id: number]: number }
     participants: { [id: number]: number[] },
     invitedMembers: { [id: number]: number[] },
     index?: number,
+    groupsFetchError?: string
 }
 
 const initialValue: GroupsState = {
@@ -25,11 +28,12 @@ const initialValue: GroupsState = {
     currentQuery: "",
     groupsIdsByQuery: {},
     groupsByQueryLoading: false,
-    groupFetchingFail: undefined,
+    groupFetchError: undefined,
     groupsCreaters: {},
     participants: {},
     invitedMembers: {},
     index: undefined,
+    groupsFetchError: undefined
 }
 
 export const groupsReducer: Reducer<GroupsState> = 
@@ -37,7 +41,7 @@ export const groupsReducer: Reducer<GroupsState> =
         switch(dispatchedAction.type){
 
             case GROUPS_CURRENT_QUERY:
-                return {...currentState, currentQuery: dispatchedAction.payload, groupsByQueryLoading: true};
+                return {...currentState, currentQuery: dispatchedAction.payload };
             
             case GROUPS_BY_QUERY_FETCHED:
                 const normalizedData = dispatchedAction.payload as NormalizrData ;
@@ -75,8 +79,10 @@ export const groupsReducer: Reducer<GroupsState> =
                     groupsCreaters: { ...currentState.groupsCreaters, ...creaters },
                     invitedMembers: { ...currentState.invitedMembers, ...invitedMembers },
                     participants: { ...currentState.participants, ...participants },
-                    groupsByQueryLoading: false
                 };
+
+            case GROUPS_BY_QUERY_LOADING:
+                return { ...currentState, groupsByQueryLoading: dispatchedAction.payload }
 
             case SEARCHED_GROUP_ID:{
                 const id = dispatchedAction.payload
@@ -126,8 +132,11 @@ export const groupsReducer: Reducer<GroupsState> =
             case GROUP_LOADING:
                 return { ...currentState, loadingOne: dispatchedAction.payload }
             
-            case GROUP_FETCHING_FAIL:
-                return { ...currentState, groupFetchingFail: dispatchedAction.payload }
+            case GROUP_FETCH_ERROR:
+                return { ...currentState, groupFetchError: dispatchedAction.payload }
+            
+            case GROUPS_FETCH_ERROR:
+                return { ...currentState, groupsFetchError: dispatchedAction.payload }
             
                 default:
                 return currentState;

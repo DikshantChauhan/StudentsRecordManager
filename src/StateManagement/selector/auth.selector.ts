@@ -12,9 +12,38 @@ export const meSelector = createSelector(
     }
 );
 
-export const meLogingFailSelector = createSelector(
+export const meLoginErrorSelector = createSelector(
     [authSelector],
     (auth) =>{
-        return auth.logingFail
+        return auth.loginError
     }
 )
+
+export const meUpdateErrorSelector = createSelector(
+    [authSelector],
+    (auth) =>{
+        return auth.updateError
+    }
+)
+
+export const meUpdateSuccessSelector = createSelector(
+    [authSelector],
+    (auth) =>{
+        return auth.updateSuccess
+    }
+)
+
+export const meUpdatingSelector = createSelector(
+    [authSelector],
+    (auth) =>{
+        return auth.updating
+    }
+)
+
+export const meFetchErrorSelector = createSelector(
+    [authSelector],
+    (auth) =>{
+        return auth.fetchError
+    }
+)
+

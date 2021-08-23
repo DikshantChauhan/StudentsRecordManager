@@ -9,7 +9,7 @@ import { IoMdMail } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../StateManagement/store";
 import { meLogingInAction } from "../../../StateManagement/actions/auth.action";
-import { meLogingFailSelector, meSelector } from "../../../StateManagement/selector/auth.selector";
+import { meLoginErrorSelector, meSelector } from "../../../StateManagement/selector/auth.selector";
 
 interface Props{
 }
@@ -47,7 +47,7 @@ const LogIn: React.FC<Props> = () => {
 
     const dispatch = useDispatch()
     const user = useAppSelector(meSelector)
-    const error = useAppSelector(meLogingFailSelector)
+    const error = useAppSelector(meLoginErrorSelector)
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
     let history = useHistory()

@@ -6,8 +6,10 @@ import { GROUP_FETCHING,
     GROUPS_CURRENT_QUERY, 
     SEARCHED_GROUP_ID, 
     GROUP_LOADING,
-    GROUP_FETCHING_FAIL,
-    GROUP_INDEX} from "../actionKeys";
+    GROUP_FETCH_ERROR,
+    GROUP_INDEX,
+    GROUPS_FETCH_ERROR,
+    GROUPS_BY_QUERY_LOADING} from "../actionKeys";
 
 export const groupsCurrentQueryAction = (query: string) => {
     return {
@@ -65,10 +67,24 @@ export const groupIndexAction = (index: number) =>{
     }
 }
 
-export const groupFetchingFailAction = (reason: string | undefined) =>{
+export const groupFetchErrorAction = (reason: string | undefined) =>{
     return {
-        type: GROUP_FETCHING_FAIL,
+        type: GROUP_FETCH_ERROR,
         payload: reason,
+    }
+}
+
+export const groupsFetchErrorAction = (reason: string | undefined) =>{
+    return {
+        type: GROUPS_FETCH_ERROR,
+        payload: reason,
+    }
+}
+
+export const groupsByQueryLoadingAction = (bool: boolean) =>{
+    return {
+        type: GROUPS_BY_QUERY_LOADING,
+        payload: bool,
     }
 }
 

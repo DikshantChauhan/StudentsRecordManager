@@ -52,9 +52,16 @@ export const userLoadingSelector = createSelector(
     }
 )
 
-export const userFetchingfailSelector = createSelector(
+export const userFetchErrorSelector = createSelector(
     [usersSelector],
     (users) =>{
-        return users.userFatchingFail
+        return users.userFatchError
+    }
+)
+
+export const usersFetchErrorSelector = createSelector(
+    [usersSelector],
+    (users) =>{
+        return users.usersFatchError
     }
 )

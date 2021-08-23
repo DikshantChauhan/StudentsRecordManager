@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { groupsCurrentQuerySelector, groupsByQuerySelector, groupsByQueryLoadingSelector } from "../../../StateManagement/selector/groups.selector";
+import { groupsCurrentQuerySelector, groupsByQuerySelector, groupsByQueryLoadingSelector, groupsFetchErrorSelector } from "../../../StateManagement/selector/groups.selector";
 import { useAppSelector } from "../../../StateManagement/store";
 import AvatarOnline from "../../Avatar/Avatar"
 import { FaSpinner } from "react-icons/fa";
@@ -17,6 +17,7 @@ const Groups: React.FC<Props> = () => {
     const groups = useAppSelector(groupsByQuerySelector)
     const history = useHistory()
     const dispatch = useDispatch()
+    const error = useAppSelector(groupsFetchErrorSelector)
     const isFetching = useAppSelector(groupsByQueryLoadingSelector)
     
     useEffect(() =>{
@@ -36,6 +37,8 @@ const Groups: React.FC<Props> = () => {
                 <FiSearch className={`absolute left-4 opacity-50 text-lg top-1/2 transform -translate-y-1/2`} />
                 {isFetching && <FaSpinner className={`animate-spin absolute right-4 text-2xl top-4 text-green-600 font-black`}></FaSpinner>}
             </div>
+            
+            {error && <p className={`text-red-500`}>{error}</p>}
             <div className={`rounded-3xl mb-5`}>
                 {groups.map((item, index) =>{
                     let stripClass = ""

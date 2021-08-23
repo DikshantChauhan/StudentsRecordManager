@@ -1,18 +1,37 @@
 import { AnyAction } from "redux";
-import { call, put, takeEvery } from "redux-saga/effects";
-import { meFetchedAction, meLogedInAction, meLogingFailAction } from "../actions/auth.action";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
+import { meFetchedAction, meFetchErrorAction, meLogedInAction, meLoginErrorAction, meUpdateErrorAction, meUpdateSuccessAction, meUpdatingAction } from "../actions/auth.action";
 import {  LoginAPI, meFetchAPI, meUpdateAPI } from "../../Components/Api/Auth.api";
 import { User } from "../../Components/Models/User.model";
 import { ME_FETCHING, ME_LOGING_IN, ME_UPDATE } from "../actionKeys";
 
-function* meFetching(action: AnyAction) {
-    const response: User = yield call(meFetchAPI)
-    yield put(meFetchedAction(response))
+function* meFetching() {
+    try{
+        const response: User = yield call(meFetchAPI)
+        yield put(meFetchedAction(response))
+    }
+    catch (e){
+        console.log(e)
+        yield put(meFetchErrorAction(e.response?.data?.message || "Something went Wrong"))
+    }
 }
 
 function* meUpdating(action: AnyAction){
-    const response: User = yield call(meUpdateAPI, action.payload)
-    yield put(meFetchedAction(response))
+    try{
+        yield put(meUpdateErrorAction(undefined))
+        yield put(meUpdatingAction(true))
+        const response: User = yield call(meUpdateAPI, action.payload)
+        yield put(meFetchedAction(response))
+        yield put(meUpdateSuccessAction(true))
+        yield put(meUpdatingAction(false))
+        yield delay(1000)
+        yield put(meUpdateSuccessAction(false))
+    }
+    catch (e){
+        console.log(e)
+        yield put(meUpdatingAction(false))
+        yield put(meUpdateErrorAction(e.response?.data?.message || "Something went Wrong, unable to update"))
+    }
 }
 
 function* meLogingIn(action: AnyAction){
@@ -21,7 +40,8 @@ function* meLogingIn(action: AnyAction){
         yield put(meLogedInAction(response))
     }
     catch (e){
-        yield put(meLogingFailAction(e.response?.data?.message || "Something went Wrong"))
+        console.log(e)
+        yield put(meLoginErrorAction(e.response?.data?.message || "Something went Wrong"))
     }
 }
 

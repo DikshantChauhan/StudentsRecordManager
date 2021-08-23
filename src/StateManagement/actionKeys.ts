@@ -1,20 +1,26 @@
 //Auth (me)
 export const ME_LOGING_IN =  "me/loging_in"
-export const ME_LOGING_FAIL =  "me/loging_FAIL"
+export const ME_LOGIN_ERROR =  "me/loging_error"
+export const ME_UPDATE_ERROR =  "me/update_error"
+export const ME_FETCH_ERROR =  "me/fetching_error"
 export const ME_LOGED_IN = "me/loged_in"
 export const ME_FETCHED = "me/fetched"
 export const ME_FETCHING = "me/fetching"
 export const ME_UPDATE = "me/update"
+export const ME_UPDATING = "me/updating"
+export const ME_UPDATE_SUCCESS = "me/updateSuccess"
 
 //Groups
 export const GROUPS_CURRENT_QUERY = "groups/current_query"
 export const GROUPS_BY_QUERY_FETCHED = "groups/by_query_fetched"
+export const GROUPS_BY_QUERY_LOADING = "groups/by_query_loading"
 export const SEARCHED_GROUP_ID = "group/id"
 export const GROUP_FETCHED = "group/fetched"
 export const GROUPS_LOADING = "groups/loading"
 export const GROUP_LOADING = "group/loading"
 export const GROUP_FETCHING = "group/fetching"
-export const GROUP_FETCHING_FAIL = "group/fetching_fail"
+export const GROUP_FETCH_ERROR = "group/fetch_error"
+export const GROUPS_FETCH_ERROR = "groups/fetch_error"
 export const GROUP_INDEX = "group/index"
 
 //Users
@@ -24,7 +30,8 @@ export const SEARCHED_USER_ID = "user/id"
 export const USER_FETCHING = "user/fetching"
 export const USER_FETCHED = "user/fetched"
 export const USER_LOADING = "user/loading"
-export const USER_FETCHING_FAIL = "user/fetching_fail"
+export const USER_FETCH_ERROR = "user/fetch_error"
+export const USERS_FETCH_ERROR = "users/fetch_error"
 export const USERS_LOADING = "users/loading"
 
 //UI
