@@ -42,7 +42,7 @@ const Group: React.FC<Props> = () => {
 
     
     return(
-        <div className={`max-w-4xl mx-auto mt-5`}>
+        <div className={`max-w-4xl mx-auto mt-5 relative`}>
         <div className={`shadow-2xl mb-6 relative`}>
             <div className={`bg-gray-200 p-8 sm:px-3 rounded-lg shadow-sm mb-5 relative`}>
                 {loading && 
@@ -111,7 +111,7 @@ const Group: React.FC<Props> = () => {
                     dispatch(groupIndexAction(index! - 1))
                     history.push(`/group/${ids[index! - 1]}`)
                 }}>
-                    <GrLinkPrevious className={`text-4xl mr-2 border p-2 rounded-full bg-gray-200 transform scale-100 hover:bg-gray-200 hover:scale-90 border-black-light`} />
+                    <GrLinkPrevious className={`text-4xl mr-2 border p-2 rounded-full bg-gray-200 transform scale-100 hover:bg-white hover:scale-90 border-black-light`} />
                 </button>
             }
             {ids && (index! < ids.length - 1) &&
