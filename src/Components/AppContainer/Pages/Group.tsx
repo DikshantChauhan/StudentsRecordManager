@@ -17,15 +17,20 @@ import { useDispatch } from "react-redux";
 import { groupByIdFetchingAction, groupByIdAction, groupIndexAction } from "../../../StateManagement/actions/groups.action";
 import { FaSpinner } from "react-icons/fa";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
+import { useMemo } from "react";
 
 interface Props{}
 
 const Group: React.FC<Props> = () => {
+    console.log("rendering")
     const index = useAppSelector(groupIndexSelector)
     const param: any = useParams()
     const dispatch = useDispatch()
     const history = useHistory();
-    dispatch(groupByIdAction(param.id))    
+    useMemo(() =>{
+        dispatch(groupByIdAction(param.id))
+        return 1
+    }, [param.id])//eslint-disable-line
 
     const id = useAppSelector(groupSearchedIdSelector)
     const group = useAppSelector(groupByIdSelector)

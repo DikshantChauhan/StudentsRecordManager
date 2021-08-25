@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useHistory } from "react-router-dom";
 import Home from "./Pages/Home";
 import Lecture from "./Pages/Lecture";
 import Header from "./Header";
@@ -13,15 +13,38 @@ import Groups from "./Pages/Groups";
 import Group from "./Pages/Group";
 import Users from "./Pages/Users";
 import UserDetails from "./Pages/UserDetails";
+import { useState } from "react";
+import { HiOutlineChevronDoubleUp } from "react-icons/hi";
+import { useCallback } from "react";
 
 interface Props{
 }
 
 const AppContainer: React.FC<Props> = () => {
     const state = useAppSelector((state) => state.ui.isSideBarOpen)
+    const [percentage, setPercentage] = useState<number | undefined>(undefined)
+    const history = useHistory()
+    const container = document.getElementById("container")
+    const Top = document.getElementById("Top")
+
+    history.listen(() =>{
+        setPercentage(undefined)
+        Top?.scrollIntoView({behavior: 'smooth'})
+    })
+
+    const handelScroll = () =>{
+        const scrollHeight = (container?.scrollHeight)! - (container?.getBoundingClientRect().height)!;
+        const scrolled = (container?.scrollTop)
+        setPercentage((scrolled! / scrollHeight))
+    }
+
+    const handelClick = useCallback(() =>{
+        Top?.scrollIntoView({behavior: 'smooth'})
+    }, [Top]) 
     
     return(
-        <div className={` w-full h-nav mt-32 overflow-y-auto`}>
+        <div onScroll={handelScroll} id="container" className={` w-full h-nav mt-32 overflow-y-auto`}>
+        <div id="Top" className={`not-sr-only`}></div>
         <Header ></Header>
         <LeftSideBar className={`pt-6 pb-6`}>
             <MenuItem title="Dashboard" icon={FiHome}>
@@ -81,6 +104,13 @@ const AppContainer: React.FC<Props> = () => {
             </Switch>
             </div>
         </div>
+            {percentage && <div className={`fixed right-10 bottom-4 w-10 h-10 rounded-full bg-gray-300 border border-gray-400 flex justify-center items-center`}>
+                <div style={{transform: `scale(${percentage})`}} className={`bg-primary-main rounded-full w-10 h-10 z-40 flex justify-center items-center`}>
+                    {(percentage === 1) && 
+                    <HiOutlineChevronDoubleUp onClick={handelClick} className={`text-2xl cursor-pointer text-white`} />
+                    }
+                </div>
+            </div>}
         </div>
     )
 };
