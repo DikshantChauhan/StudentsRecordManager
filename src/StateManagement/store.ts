@@ -7,12 +7,17 @@ import { uiReducer } from "./reducer/ui.reducer";
 import { sagaMiddleware } from "./sagas";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { rootSaga } from "./sagas/root.sagas";
+import { createBrowserHistory } from 'history'
+import { connectRouter } from 'connected-react-router'
+
+export const history = createBrowserHistory()
 
 const reducer = combineReducers({
    auth: AuthReducer,
    users: usersReducer,
    groups: groupsReducer, 
    ui: uiReducer,
+   router: connectRouter(history),
 })
 
 export const store = createStore(

@@ -1,12 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { groupByIdSelector, 
     groupCreatorSelector, 
     groupFetchErrorSelector, 
     groupLoadingSelector, 
     groupInvitedMembersSelector, 
-    groupSearchedIdSelector, 
     grouParticipentsSelector,
     groupIndexSelector,
     groupsIdsByCurrentQuerySelector} from "../../../StateManagement/selector/groups.selector";
@@ -14,25 +12,17 @@ import { useAppSelector } from "../../../StateManagement/store";
 import image from "../../../img/default_avatar.jpg";
 import AvatarOnline from "../../Avatar/Avatar"
 import { useDispatch } from "react-redux";
-import { groupByIdFetchingAction, groupByIdAction, groupIndexAction } from "../../../StateManagement/actions/groups.action";
+import { groupIndexAction } from "../../../StateManagement/actions/groups.action";
 import { FaSpinner } from "react-icons/fa";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import { useMemo } from "react";
 
 interface Props{}
 
 const Group: React.FC<Props> = () => {
-    console.log("rendering")
     const index = useAppSelector(groupIndexSelector)
-    const param: any = useParams()
     const dispatch = useDispatch()
     const history = useHistory();
-    useMemo(() =>{
-        dispatch(groupByIdAction(param.id))
-        return 1
-    }, [param.id])//eslint-disable-line
 
-    const id = useAppSelector(groupSearchedIdSelector)
     const group = useAppSelector(groupByIdSelector)
     const loading = useAppSelector(groupLoadingSelector)
     const error = useAppSelector(groupFetchErrorSelector)
@@ -40,10 +30,6 @@ const Group: React.FC<Props> = () => {
     const invitedMembers = useAppSelector(groupInvitedMembersSelector)
     const participents = useAppSelector(grouParticipentsSelector)
     const ids = useAppSelector(groupsIdsByCurrentQuerySelector)
-
-    useEffect(() =>{
-        dispatch(groupByIdFetchingAction(id!))
-    }, [id])//eslint-disable-line
 
     
     return(
@@ -114,7 +100,7 @@ const Group: React.FC<Props> = () => {
             {ids && (index! > 0) &&
                 <button onClick={() =>{
                     dispatch(groupIndexAction(index! - 1))
-                    history.push(`/group/${ids[index! - 1]}`)
+                    history.push(`/groups/${ids[index! - 1]}`)
                 }}>
                     <GrLinkPrevious className={`text-4xl mr-2 border p-2 rounded-full bg-gray-200 transform scale-100 hover:bg-white hover:scale-90 border-black-light`} />
                 </button>
@@ -122,7 +108,7 @@ const Group: React.FC<Props> = () => {
             {ids && (index! < ids.length - 1) &&
                 <button className={`ml-auto`} onClick={() =>{
                     dispatch(groupIndexAction(index! + 1))
-                    history.push(`/group/${ids[index! + 1]}`)
+                    history.push(`/groups/${ids[index! + 1]}`)
                 }}>
                     <GrLinkNext className={`text-4xl border p-2 rounded-full bg-gray-200 transform scale-100 hover:bg-white hover:scale-90 border-black-light`} />
                 </button>

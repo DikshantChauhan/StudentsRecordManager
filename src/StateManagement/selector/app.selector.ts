@@ -15,3 +15,7 @@ export const groupsSelector = (state: AppState) =>{
 export const uiSelector = (state: AppState) =>{
     return state.ui
 };
+
+export const routerSelector = (state: AppState) =>{
+    return state.router
+};

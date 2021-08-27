@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { takeEvery, put, call, takeLatest, delay } from "redux-saga/effects";
-import { groupByIdFetchedAction, groupFetchErrorAction, groupLoadingAction, groupsByQueryFetchedAction, groupsByQueryLoadingAction, groupsFetchErrorAction } from "../actions/groups.action";
+import { groupByIdAction, groupByIdFetchedAction, groupFetchErrorAction, groupLoadingAction, groupsByQueryFetchedAction, groupsByQueryLoadingAction, groupsFetchErrorAction } from "../actions/groups.action";
 import { groupFetchAPI, groupsFetchAPI } from "../../Components/Api/Groups.api";
 import { GroupResponse } from "../../Components/Models/Group.model";
 import { GROUP_FETCHING, GROUPS_CURRENT_QUERY } from "../actionKeys";
@@ -34,11 +34,13 @@ function* fetchGroups(action: AnyAction): Generator<any> {
     }
 }
 
-function* groupFetching(action: AnyAction) {
+export function* groupFetchingSaga(match: any) {
+    const id: any = +(match.params.id)
     yield put(groupLoadingAction(true))
     try{
         yield put(groupFetchErrorAction(undefined))
-        const response: GroupResponse = yield call(groupFetchAPI, action.payload)
+        yield put(groupByIdAction(id))
+        const response: GroupResponse = yield call(groupFetchAPI, id)
 
         const normalizedData = normalize(response, groupSchema)
 
@@ -61,5 +63,5 @@ function* groupFetching(action: AnyAction) {
 
 export function* groupsSaga() {
     yield takeLatest(GROUPS_CURRENT_QUERY, fetchGroups);
-    yield takeEvery(GROUP_FETCHING, groupFetching);
+    yield takeEvery(GROUP_FETCHING, groupFetchingSaga);
 }

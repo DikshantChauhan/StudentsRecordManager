@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { useEffect } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { LS_LOGIN_TOKEN } from "./Components/Api/Base.api";
 import { useAppSelector } from "./StateManagement/store";
 import { meFetchErrorSelector, meSelector } from "./StateManagement/selector/auth.selector";
@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { meFetchingAction } from "./StateManagement/actions/auth.action";
 import { ImSpinner2 } from "react-icons/im";
 import ButtonSolid from "./Components/Button/ButtonSolid";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./StateManagement/store"
 
 const AppContainerLazy = React.lazy(() =>import("./Components/AppContainer/AppContainer") )
 const AuthenticationLazy = React.lazy(() =>import("./Components/Authentication/Authentication") )
@@ -54,7 +56,7 @@ const App: React.FC<Props> = () => {
   
     return(
       <div className={`font-sans`}>
-        <BrowserRouter>
+        <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact>
             {user ? <Redirect to="/home"></Redirect>:<Redirect to="/login"></Redirect>}
@@ -71,7 +73,7 @@ const App: React.FC<Props> = () => {
               }><AuthenticationLazy /></Suspense>
             }
           </Route>
-          <Route path={["/home", "/lecture", "/group/:id", "/profile", "/groups", "/users", "/user/:id"]} exact>
+          <Route path={["/home", "/lecture", "/groups/:id", "/profile", "/groups", "/users", "/user/:id"]} exact>
             {user ? 
               <Suspense fallback={
                 <div className="bg-indigoish relative flex flex-col justify-center items-center h-screen">
@@ -87,7 +89,7 @@ const App: React.FC<Props> = () => {
             <Redirect to="/login"></Redirect>
           </Route>
         </Switch>
-      </BrowserRouter> 
+      </ConnectedRouter> 
       </div>       
     );
 };

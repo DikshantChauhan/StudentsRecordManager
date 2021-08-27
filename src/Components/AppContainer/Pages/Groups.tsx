@@ -56,7 +56,7 @@ const Groups: React.FC<Props> = () => {
                                 className={`mr-6`}
                             />
                             <div>
-                                <h1 onClick={() =>{history.push(`/group/${item.id}`)}} className={`font-semibold text-lg underline capitalize tracking-normal cursor-pointer text-primary-main`}>
+                                <h1 onClick={() =>{history.push(`/groups/${item.id}`)}} className={`font-semibold text-lg underline capitalize tracking-normal cursor-pointer text-primary-main`}>
                                     {item.name}
                                 </h1>
                                 <p className={`max-w-md`}>

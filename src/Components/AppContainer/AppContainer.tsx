@@ -83,7 +83,7 @@ const AppContainer: React.FC<Props> = () => {
                     <Route path="/home">
                         <Home/>      
                     </Route>
-                    <Route path="/group/:id">
+                    <Route path="/groups/:id">
                         <Group />
                     </Route>
                     <Route path="/profile">
